@@ -1,498 +1,165 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Hackathon Slides – EFP Slider</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hackathon Projects</title>
 <style>
-    body {
-        margin: 0;
-        font-family: "Inter", Arial, sans-serif;
-        background: #f0f2f5;
-    }
-
-    /* --- SLIDER CONTAINER --- */
-    .slider {
-        position: relative;
-        width: 100%;
-        max-width: 1100px;
-        margin: 40px auto;
-        overflow: hidden;
-        border-radius: 14px;
-        background: white;
-        box-shadow: 0 4px 25px rgba(0,0,0,0.12);
-    }
-
-    /* --- ALL SLIDES WRAPPED IN FLEX --- */
-    .slides {
-        display: flex;
-        transition: transform 0.6s ease;
-    }
-
-    /* --- INDIVIDUAL SLIDE --- */
-    .slide {
-        min-width: 100%;
-        padding: 40px 60px;
-        box-sizing: border-box;
-        color: #222;
-    }
-
-    .slide h2 {
-        margin: 0 0 10px;
-        font-size: 32px;
-        color: #005BBB;
-        font-weight: 800;
-    }
-
-    .url {
-        font-size: 16px;
-        margin-bottom: 20px;
-        color: #003F7F;
-        font-weight: 600;
-    }
-
-    .section-title {
-        margin-top: 25px;
-        font-weight: 700;
-        color: #005BBB;
-        font-size: 18px;
-        text-transform: uppercase;
-    }
-
-    .block {
-        margin: 10px 0 20px;
-        line-height: 1.55;
-        font-size: 16px;
-    }
-
-    /* NAV ARROWS */
-    .nav {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 48px;
-        color: #005BBB;
-        cursor: pointer;
-        padding: 10px;
-        user-select: none;
-        font-weight: 900;
-    }
-
-    .nav:hover { opacity: 0.6; }
-
-    .prev { left: 15px; }
-    .next { right: 15px; }
-
-    /* DOTS */
-    .dots {
-        text-align: center;
-        margin-top: 15px;
-    }
-
-    .dot {
-        height: 12px;
-        width: 12px;
-        margin: 0 5px;
-        background: #c8d9ea;
-        border-radius: 50%;
-        display: inline-block;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .dot.active {
-        background: #005BBB;
-    }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Inter", Arial, sans-serif; background: #f0f2f5; padding: 40px 20px; }
+.container { max-width: 1200px; margin: 0 auto; }
+h1 { color: #005BBB; margin-bottom: 12px; font-size: 32px; }
+.intro { color: #555; margin-bottom: 40px; max-width: 700px; line-height: 1.6; }
+.projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 28px; }
+.project { background: white; border-radius: 10px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.project h2 { font-size: 22px; color: #005BBB; margin-bottom: 4px; }
+.url { font-size: 13px; color: #003F7F; margin-bottom: 20px; font-family: monospace; }
+.section-title { font-weight: 700; color: #005BBB; font-size: 12px; text-transform: uppercase; margin: 20px 0 8px; letter-spacing: 0.5px; }
+.block { font-size: 14px; line-height: 1.6; color: #444; }
+.tags { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { background: #e8f0f8; color: #005BBB; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; }
 </style>
 </head>
-
 <body>
+<div class="container">
+<h1>Hackathon Projects</h1>
+<p class="intro">Une collection de projets web variés : sites associatifs, portfolios d'artistes, outils professionnels et plateformes e-commerce. Chaque projet combine design réfléchi et développement pragmatique.</p>
 
-<!-- SLIDER STRUCTURE -->
-<div class="slider">
+<div class="projects">
 
-    <div class="slides">
-
-        <!-- ===================================================== -->
-        <!-- =============== SLIDE 1 — INVISIBLE ================= -->
-        <!-- ===================================================== -->
-        <div class="slide">
-            <h2>SLIDE 1 — (In)visible</h2>
-            <div class="url">URL : invisibles.be (non existant)</div>
-
-            <div class="section-title">🎯 Pitch</div>
-            <div class="block">
-                (In)visible est une ASBL active dans la santé mentale, en Belgique et au Pérou.
-                Elle transforme des méthodologies complexes, des rapports institutionnels
-                et des témoignages sensibles en outils audio, vidéo, narratifs et visuels
-                faciles à comprendre et faciles à utiliser par tous : public vulnérable,
-                travailleurs sociaux, enseignants, institutions.
-                <br><br>
-                Le site devient un point d’entrée unique : comprendre, agir, se former,
-                collaborer et découvrir les initiatives locales.
-            </div>
-
-            <div class="section-title">🎨 Design</div>
-            <div class="block">
-                • Créer une atmosphère douce, humaine, calme (verts/bleus doux).<br>
-                • Structurer des parcours narratifs (témoignages, projets, partenaires).<br>
-                • Cartes claires pour types de contenus : Podcast / Vidéo / Méthodologie.<br>
-                • Identité visuelle légère → lisibilité, accessibilité, sobriété.<br>
-                • Design de la “Triple Porte d’Entrée” : Grand Public / Acteurs / Bénévoles.<br>
-                • Composants modulaires : cartes, blocs témoignages, bannières simples.
-            </div>
-
-            <div class="section-title">🧑‍💻 Dev</div>
-            <div class="block">
-                • Galerie filtrable (JS) avec filtres multi-tags.<br>
-                • Fiches ressources standardisées (template HTML).<br>
-                • Navigation accessible clavier + aria-label.<br>
-                • Pagination ou lazy-loading.<br>
-                • Architecture simple → extensible en CMS plus tard.
-            </div>
-        </div>
-
-
-        <!-- ===================================================== -->
-        <!-- =============== SLIDE 2 — SPOKENWORD =============== -->
-        <!-- ===================================================== -->
-        <div class="slide">
-            <h2>SLIDE 2 — Dans! Dichter! Dans!</h2>
-            <div class="url">URL : spokenword.be</div>
-
-            <div class="section-title">🎯 Pitch</div>
-            <div class="block">
-                Événement littéraire et musical belge où poètes, musiciens et performeurs
-                présentent leurs créations originales.  
-                Le site reflète cette énergie scénique : spontanéité, voix, émotion,
-                dynamiques collectives.
-            </div>
-
-            <div class="section-title">🎨 Design</div>
-            <div class="block">
-                • Identité poétique : typographies expressives, contrastées.<br>
-                • Page artiste : portrait, poème, extrait audio.<br>
-                • Ambiance scénique : couleurs saturées + fonds sombres.<br>
-                • Organisation type “programme de festival”.
-            </div>
-
-            <div class="section-title">🧑‍💻 Dev</div>
-            <div class="block">
-                • Lecteur audio simple (HTML5 + JS minimal).<br>
-                • Page artiste dynamique (modèle répété).<br>
-                • Petites animations légères (fade-in).
-            </div>
-        </div>
-
-
-        <!-- ===================================================== -->
-        <!-- =============== SLIDE 3 — LaReponse ================= -->
-        <!-- ===================================================== -->
-        <div class="slide">
-            <h2>SLIDE 3 — LaReponse.org</h2>
-            <div class="url">URL : lareponse.org</div>
-
-            <div class="section-title">🎯 Pitch</div>
-            <div class="block">
-                Site professionnel synthétisant philosophie, pédagogie, tech et art,
-                avec une vocation sociale claire : transmettre, enseigner, accompagner,
-                créer des systèmes accessibles et intelligibles.
-            </div>
-
-            <div class="section-title">🎨 Design</div>
-            <div class="block">
-                • Micro design system (couleurs, typographies, composants).<br>
-                • Blocs modulaires pour projets.<br>
-                • Mise en page manifeste (long scroll).<br>
-                • Style minimaliste, lignes nettes, contraste élevé.
-            </div>
-
-            <div class="section-title">🧑‍💻 Dev</div>
-            <div class="block">
-                • Filtre projets full JS.<br>
-                • Pages modulaires (templates + JSON).<br>
-                • Navigation ancrée fluide.
-            </div>
-        </div>
-
-
-        <!-- ===================================================== -->
-        <!-- =============== SLIDE 4 — BadHat.dev ================= -->
-        <!-- ===================================================== -->
-        <div class="slide">
-            <h2>SLIDE 4 — BadHat.dev</h2>
-            <div class="url">URL : badhat.dev</div>
-
-            <div class="section-title">🎯 Pitch</div>
-            <div class="block">
-                Site-manifeste du moteur BadHat : zéro superflu, full performance, vérité brute.
-                Documenter sans décorer.
-            </div>
-
-            <div class="section-title">🎨 Design</div>
-            <div class="block">
-                • Style brutaliste noir/blanc.<br>
-                • Manifeste numéroté (chapitres BADHAT/001...).<br>
-                • Typographie monospaced.<br>
-                • Blocs documentation simples et structurés.
-            </div>
-
-            <div class="section-title">🧑‍💻 Dev</div>
-            <div class="block">
-                • Navigation clavier (↑ ↓).<br>
-                • Génération automatique d’un sommaire.<br>
-                • Scroll fluide.
-            </div>
-        </div>
-
-
-        <!-- ===================================================== -->
-        <!-- =========== SLIDE 5 — Cinergie.be ==================== -->
-        <!-- ===================================================== -->
-        <div class="slide">
-            <h2>SLIDE 5 — Cinergie.be</h2>
-            <div class="url">URL : cinergie.be</div>
-
-            <div class="section-title">🎯 Pitch</div>
-            <div class="block">
-                Nouvelle page d’accueil basée sur un concept cinématographique :  
-                **24 images par minute** pour refléter la lenteur analytique du travail critique.
-            </div>
-
-            <div class="section-title">🎨 Design</div>
-            <div class="block">
-                • Film-strip avec photogrammes.<br>
-                • Grain pellicule + perforations.<br>
-                • Typo “sous-titres”.<br>
-                • Cartes éditoriales élégantes.
-            </div>
-
-            <div class="section-title">🧑‍💻 Dev</div>
-            <div class="block">
-                • Carrousel ultra-lent (CSS/JS).<br>
-                • Pause au hover.<br>
-                • Clic → article.
-            </div>
-        </div>
-
-
-        <!-- ===================================================== -->
-        <!-- =========== SLIDE 6 — Dogitech ======================= -->
-        <!-- ===================================================== -->
-        <div class="slide">
-            <h2>SLIDE 6 — Dogitech.be</h2>
-            <div class="url">URL : dogitech.be</div>
-
-            <div class="section-title">🎯 Pitch</div>
-            <div class="block">
-                Artisan pragmatique : travail bien fait, honnête, sans chichi.
-            </div>
-
-            <div class="section-title">🎨 Design</div>
-            <div class="block">
-                • Style atelier : textures bois/métal.<br>
-                • Typographie robuste.<br>
-                • Avant/après visuels.
-            </div>
-
-            <div class="section-title">🧑‍💻 Dev</div>
-            <div class="block">
-                • Simulateur “cheap / fast / good”.<br>
-                • Formulaire contact ergonomique.<br>
-                • Pages services simples.
-            </div>
-        </div>
-
-
-        <!-- ===================================================== -->
-        <!-- =========== SLIDE 7 — Lion Pacifique ================= -->
-        <!-- ===================================================== -->
-        <div class="slide">
-            <h2>SLIDE 7 — Le Lion Pacifique</h2>
-            <div class="url">URL : non défini</div>
-
-            <div class="section-title">🎯 Pitch</div>
-            <div class="block">
-                Galerie pour un artiste de rue vibrant, doux, humain, enseignant aux enfants,
-                vivant en marge mais créant avec générosité.
-            </div>
-
-            <div class="section-title">🎨 Design</div>
-            <div class="block">
-                • Style carnet d’artiste.<br>
-                • Couleurs vibrantes tirées de ses peintures.<br>
-                • Layout épuré pour laisser l’œuvre respirer.
-            </div>
-
-            <div class="section-title">🧑‍💻 Dev</div>
-            <div class="block">
-                • Galerie responsive.<br>
-                • Fiches œuvres détaillées.<br>
-                • Formulaire commande personnalisée.
-            </div>
-        </div>
-
-
-        <!-- ===================================================== -->
-        <!-- =========== SLIDE 8 — Louis Klus ===================== -->
-        <!-- ===================================================== -->
-        <div class="slide">
-            <h2>SLIDE 8 — Doctor Louis Klus</h2>
-            <div class="url">URL : non défini</div>
-
-            <div class="section-title">🎯 Pitch</div>
-            <div class="block">
-                Artisan multi-services qui fait tout ce que personne ne veut faire.
-                Philosophie : efficacité, intelligence du terrain, honnêteté.
-            </div>
-
-            <div class="section-title">🎨 Design</div>
-            <div class="block">
-                • Style flyer bricolé années 90.<br>
-                • Palette bleu/rouge/noir.<br>
-                • Listes de services très visibles.
-            </div>
-
-            <div class="section-title">🧑‍💻 Dev</div>
-            <div class="block">
-                • Formulaire express avec upload photo.<br>
-                • Résumé automatique de la demande.<br>
-                • Option compression image JS.
-            </div>
-        </div>
-
-
-        <!-- ===================================================== -->
-        <!-- =========== SLIDE 9 — Ile aux enfants =============== -->
-        <!-- ===================================================== -->
-        <div class="slide">
-            <h2>SLIDE 9 — ileauxenfants.be</h2>
-            <div class="url">URL : ileauxenfants.be</div>
-
-            <div class="section-title">🎯 Pitch</div>
-            <div class="block">
-                Site d’e-commerce ludique, artisanal, accessible, dédié aux jouets en bois
-                et aux jeux d’éveil. Deux modes : classique + exploration interactive.
-            </div>
-
-            <div class="section-title">🎨 Design</div>
-            <div class="block">
-                • Univers au crayon (croquis, fusain, charbon).<br>
-                • Personnages esquissés + décors abstraits.<br>
-                • Icônes dessinées à la main.<br>
-                • Palette pastels + contrastes WCAG.
-            </div>
-
-            <div class="section-title">🧑‍💻 Dev</div>
-            <div class="block">
-                • Mini scène interactive avec éléments cliquables.<br>
-                • Mode “besoin spécifique” → suggestions produits.<br>
-                • Effets crayon + musique optionnelle.
-            </div>
-        </div>
-
-
-        <!-- ===================================================== -->
-        <!-- =========== SLIDE 10 — JBRManagement ================= -->
-        <!-- ===================================================== -->
-        <div class="slide">
-            <h2>SLIDE 10 — jbrmanagement.be</h2>
-            <div class="url">URL : jbrmanagement.be</div>
-
-            <div class="section-title">🎯 Pitch</div>
-            <div class="block">
-                Site professionnel de Jean-Pierre Lannoy, expert de la copropriété :
-                parcours, ouvrages, ressources, formation, conférences.
-            </div>
-
-            <div class="section-title">🎨 Design</div>
-            <div class="block">
-                • Style institutionnel : sobriété, élégance, bleu/gris.<br>
-                • Timeline biographique.<br>
-                • Cartes publications + ouvrages.<br>
-                • Mise en page magazine.
-            </div>
-
-            <div class="section-title">🧑‍💻 Dev</div>
-            <div class="block">
-                • Bibliothèque filtrable (JS).<br>
-                • Pages ressources uniformisées.<br>
-                • Navigation simple et claire.
-            </div>
-        </div>
-
-
-        <!-- ===================================================== -->
-        <!-- =========== SLIDE 11 — CLEA VINCENT ================= -->
-        <!-- ===================================================== -->
-        <div class="slide">
-            <h2>SLIDE 11 — Cléa Vincent</h2>
-            <div class="url">URL : non défini</div>
-
-            <div class="section-title">🎯 Pitch</div>
-            <div class="block">
-                Site officiel d’une figure lumineuse de la pop française :
-                univers pastel, rêveur, dansant, électro-pop.
-            </div>
-
-            <div class="section-title">🎨 Design</div>
-            <div class="block">
-                • Univers pastel rétro années 80/90.<br>
-                • Typographies pop et arrondies.<br>
-                • Page artiste immersive : portrait, clips, bio.<br>
-                • Iconographie inspirée de Tropi-Cléa & Nuits sans sommeil.
-            </div>
-
-            <div class="section-title">🧑‍💻 Dev</div>
-            <div class="block">
-                • Discographie interactive (cartes + popup).<br>
-                • Intégration propre des clips YouTube.<br>
-                • Sections animées (fade, slide).
-            </div>
-        </div>
-
-    </div>
-    <!-- NAV ARROWS -->
-    <div class="nav prev" onclick="moveSlide(-1)">&#10094;</div>
-    <div class="nav next" onclick="moveSlide(1)">&#10095;</div>
+<div class="project">
+    <h2>(In)visible</h2>
+    <div class="url">invisibles.be</div>
+    <div class="section-title">Pitch</div>
+    <div class="block">ASBL belge active dans la santé mentale, présente en Belgique et au Pérou. L'organisation transforme des méthodologies complexes, des rapports institutionnels et des témoignages sensibles en outils accessibles : podcasts, vidéos explicatives, guides narratifs et supports visuels. Le public cible inclut les personnes vulnérables, les travailleurs sociaux, les enseignants et les institutions. Le site devient un point d'entrée unique permettant de comprendre les enjeux, d'agir concrètement, de se former et de découvrir les initiatives locales.</div>
+    <div class="section-title">Design</div>
+    <div class="block">Atmosphère douce et humaine avec une palette de verts et bleus apaisants. La structure repose sur des parcours narratifs clairs (témoignages, projets, partenaires) et des cartes distinctes par type de contenu (Podcast, Vidéo, Méthodologie). Un concept de "Triple Porte d'Entrée" oriente les visiteurs selon leur profil : Grand Public, Acteurs professionnels ou Bénévoles. L'identité visuelle privilégie la lisibilité et l'accessibilité.</div>
+    <div class="section-title">Dev</div>
+    <div class="block">Galerie de ressources filtrable avec système multi-tags en JavaScript vanilla. Templates HTML standardisés pour les fiches ressources. Navigation entièrement accessible au clavier avec attributs ARIA. Pagination ou lazy-loading selon le volume. Architecture modulaire prête pour une migration CMS ultérieure.</div>
+    <div class="tags"><span class="tag">Accessibilité</span><span class="tag">Filtrage JS</span><span class="tag">ASBL</span><span class="tag">Santé mentale</span></div>
 </div>
 
-<!-- DOTS -->
-<div class="dots">
-    <script>
-        // generate 11 dots dynamically
-        for(let i=0;i<11;i++){
-            document.write(`<span class="dot ${i===0?'active':''}" onclick="goToSlide(${i})"></span>`);
-        }
-    </script>
+<div class="project">
+    <h2>Dans! Dichter! Dans!</h2>
+    <div class="url">spokenword.be</div>
+    <div class="section-title">Pitch</div>
+    <div class="block">Événement littéraire et musical belge réunissant poètes, musiciens et performeurs autour de créations originales. Le site doit capturer l'énergie scénique de ces soirées : la spontanéité des performances, la puissance des voix, l'émotion brute et les dynamiques collectives qui émergent entre artistes et public. C'est un espace de célébration de la parole vivante, du spoken word à la poésie chantée.</div>
+    <div class="section-title">Design</div>
+    <div class="block">Identité visuelle poétique et expressive avec des typographies contrastées, parfois manuscrites. Chaque page artiste présente un portrait, un poème signature et un extrait audio. L'ambiance générale évoque la scène : couleurs saturées sur fonds sombres, éclairages dramatiques suggérés. L'organisation du contenu s'inspire des programmes de festival avec une navigation par date, artiste ou genre.</div>
+    <div class="section-title">Dev</div>
+    <div class="block">Lecteur audio HTML5 minimaliste avec contrôles personnalisés. Système de templates pour générer les pages artistes de manière cohérente. Animations légères au scroll (fade-in progressif) pour accompagner la découverte sans alourdir l'expérience.</div>
+    <div class="tags"><span class="tag">Audio HTML5</span><span class="tag">Poésie</span><span class="tag">Festival</span><span class="tag">Bilingue</span></div>
 </div>
 
-<script>
-    let index = 0;
-    const slides = document.querySelector('.slides');
-    const dots = document.querySelectorAll('.dot');
-    const totalSlides = 11;
+<div class="project">
+    <h2>LaReponse.org</h2>
+    <div class="url">lareponse.org</div>
+    <div class="section-title">Pitch</div>
+    <div class="block">Site professionnel personnel qui synthétise plusieurs domaines d'expertise : philosophie, pédagogie, technologie et art. La vocation est sociale et humaniste : transmettre des savoirs, enseigner avec clarté, accompagner des projets et créer des systèmes accessibles et intelligibles pour tous. Le site fonctionne comme un manifeste vivant et une vitrine de projets réalisés.</div>
+    <div class="section-title">Design</div>
+    <div class="block">Micro design system cohérent définissant couleurs, typographies et composants réutilisables. Les projets sont présentés dans des blocs modulaires avec image, description et liens. La mise en page adopte un format manifeste en long scroll, permettant une lecture continue et immersive. Style minimaliste avec lignes nettes et contraste élevé pour une lisibilité optimale.</div>
+    <div class="section-title">Dev</div>
+    <div class="block">Système de filtrage des projets en JavaScript pur avec catégories multiples. Pages construites de manière modulaire via templates HTML alimentés par données JSON. Navigation ancrée avec scroll fluide entre les sections. Architecture légère, sans dépendances externes.</div>
+    <div class="tags"><span class="tag">Portfolio</span><span class="tag">Design system</span><span class="tag">JSON data</span><span class="tag">Manifeste</span></div>
+</div>
 
-    function updateSlider() {
-        slides.style.transform = `translateX(${-index * 100}%)`;
-        dots.forEach(d => d.classList.remove("active"));
-        dots[index].classList.add("active");
-    }
+<div class="project">
+    <h2>BadHat.dev</h2>
+    <div class="url">badhat.dev</div>
+    <div class="section-title">Pitch</div>
+    <div class="block">Site-manifeste dédié au moteur BadHat, un framework développé avec une philosophie radicale : zéro superflu, performance maximale, vérité brute. L'objectif est de documenter sans décorer, d'expliquer sans embellir. Le site lui-même incarne ces principes : pas d'ornement inutile, juste l'information nécessaire présentée de manière directe et efficace.</div>
+    <div class="section-title">Design</div>
+    <div class="block">Esthétique brutaliste stricte en noir et blanc uniquement. Le contenu est organisé comme un manifeste numéroté (BADHAT/001, BADHAT/002...) évoquant une documentation technique ou un texte fondateur. Typographie monospace exclusive renforçant l'aspect code et terminal. Blocs de documentation structurés avec hiérarchie visuelle claire sans fioritures.</div>
+    <div class="section-title">Dev</div>
+    <div class="block">Navigation au clavier complète avec raccourcis (flèches ↑ ↓ pour naviguer entre sections). Génération automatique d'un sommaire interactif à partir des titres. Scroll fluide natif via CSS scroll-behavior. Code source minimal et lisible, servant lui-même d'exemple des principes BadHat.</div>
+    <div class="tags"><span class="tag">Brutaliste</span><span class="tag">Documentation</span><span class="tag">Clavier nav</span><span class="tag">Monospace</span></div>
+</div>
 
-    function moveSlide(step) {
-        index += step;
-        if (index < 0) index = totalSlides - 1;
-        if (index >= totalSlides) index = 0;
-        updateSlider();
-    }
+<div class="project">
+    <h2>Cinergie.be</h2>
+    <div class="url">cinergie.be</div>
+    <div class="section-title">Pitch</div>
+    <div class="block">Refonte de la page d'accueil du site de critique cinématographique Cinergie, basée sur un concept fort : 24 images par minute (et non par seconde). Cette lenteur volontaire reflète l'approche analytique du travail critique — prendre le temps de regarder, de comprendre, de décortiquer chaque image. Le site devient une expérience de visionnage ralenti, invitant à la contemplation.</div>
+    <div class="section-title">Design</div>
+    <div class="block">Interface inspirée de la pellicule cinématographique : bandeau film-strip horizontal présentant des photogrammes extraits des films critiqués. Texture grain de pellicule et perforations latérales évoquant le 35mm. Typographie style sous-titres de cinéma. Cartes éditoriales élégantes pour les articles, avec mise en page magazine haut de gamme.</div>
+    <div class="section-title">Dev</div>
+    <div class="block">Carrousel automatique ultra-lent (une image toutes les 2.5 secondes) réalisé en CSS animations avec fallback JS. Pause automatique au survol pour permettre la lecture des informations. Chaque photogramme est cliquable et mène directement à l'article correspondant. Performance optimisée pour le chargement des images.</div>
+    <div class="tags"><span class="tag">Cinéma</span><span class="tag">Carrousel CSS</span><span class="tag">Editorial</span><span class="tag">Concept fort</span></div>
+</div>
 
-    function goToSlide(n) {
-        index = n;
-        updateSlider();
-    }
+<div class="project">
+    <h2>Dogitech.be</h2>
+    <div class="url">dogitech.be</div>
+    <div class="section-title">Pitch</div>
+    <div class="block">Site vitrine pour un artisan du numérique pragmatique et honnête. La philosophie Dogitech : travail bien fait, prix juste, pas de promesses creuses. Le positionnement assume une approche terre-à-terre du développement web — pas de jargon marketing, pas de technologies à la mode pour le plaisir, juste des solutions qui fonctionnent et qui durent.</div>
+    <div class="section-title">Design</div>
+    <div class="block">Esthétique atelier inspirée du travail manuel : textures bois et métal, outils suggérés, ambiance garage créatif. Typographie robuste et lisible, sans serif. Sections avant/après montrant des transformations concrètes de sites. Palette de couleurs industrielles (gris, orange, noir) évoquant la fiabilité et le savoir-faire.</div>
+    <div class="section-title">Dev</div>
+    <div class="block">Outil interactif "cheap / fast / good" illustrant le triangle des contraintes projet — l'utilisateur peut sélectionner deux options et voir laquelle est sacrifiée. Formulaire de contact ergonomique avec validation temps réel. Pages services épurées avec tarification transparente et exemples concrets.</div>
+    <div class="tags"><span class="tag">Artisan</span><span class="tag">Simulateur</span><span class="tag">Formulaire</span><span class="tag">Transparence</span></div>
+</div>
 
-</script>
+<div class="project">
+    <h2>Le Lion Pacifique</h2>
+    <div class="url">URL à définir</div>
+    <div class="section-title">Pitch</div>
+    <div class="block">Galerie en ligne pour un artiste de rue au parcours singulier. Ses œuvres sont vibrantes, colorées, profondément humaines. Il vit en marge des circuits traditionnels mais enseigne la peinture aux enfants des quartiers et crée avec une générosité rare. Le site doit honorer cette démarche : montrer l'art sans le commercialiser de manière agressive, raconter l'histoire sans la romancer.</div>
+    <div class="section-title">Design</div>
+    <div class="block">Esthétique carnet d'artiste avec pages qui semblent dessinées, annotées, vivantes. La palette de couleurs est extraite directement de ses peintures : jaunes solaires, bleus profonds, rouges chaleureux. Le layout reste épuré pour laisser les œuvres respirer — grands espaces blancs, une œuvre à la fois quand possible.</div>
+    <div class="section-title">Dev</div>
+    <div class="block">Galerie responsive avec grille adaptative selon la taille d'écran. Fiches œuvres détaillées incluant dimensions, technique, histoire de création et disponibilité. Formulaire de commande personnalisée permettant de décrire un projet (fresque, portrait, atelier) avec upload de photos de référence.</div>
+    <div class="tags"><span class="tag">Galerie</span><span class="tag">Art de rue</span><span class="tag">Commandes</span><span class="tag">Responsive</span></div>
+</div>
 
+<div class="project">
+    <h2>Doctor Louis Klus</h2>
+    <div class="url">URL à définir</div>
+    <div class="section-title">Pitch</div>
+    <div class="block">Site pour un artisan multi-services qui a fait de la polyvalence sa spécialité. Doctor Louis Klus intervient là où les autres refusent : petits travaux, dépannages urgents, missions inclassables. Sa philosophie repose sur l'efficacité, l'intelligence du terrain et l'honnêteté absolue. Pas de devis gonflés, pas de travaux inventés — juste le nécessaire, bien fait.</div>
+    <div class="section-title">Design</div>
+    <div class="block">Esthétique flyer bricolé des années 90, assumant un côté "fait maison" authentique. Palette primaire bleu/rouge/noir rappelant les prospectus de dépannage. Les listes de services sont ultra-visibles, presque criées. Pas de stock photos corporate — photos réelles de chantiers et interventions.</div>
+    <div class="section-title">Dev</div>
+    <div class="block">Formulaire de demande express en trois étapes : description du problème, upload photo optionnel, coordonnées. Génération automatique d'un résumé de demande envoyé par email. Compression d'image côté client en JavaScript pour réduire le poids des uploads sans perte visible de qualité.</div>
+    <div class="tags"><span class="tag">Multi-services</span><span class="tag">Upload image</span><span class="tag">Compression JS</span><span class="tag">Rétro</span></div>
+</div>
+
+<div class="project">
+    <h2>L'Île aux Enfants</h2>
+    <div class="url">ileauxenfants.be</div>
+    <div class="section-title">Pitch</div>
+    <div class="block">Plateforme e-commerce artisanale dédiée aux jouets en bois et jeux d'éveil pour enfants. Le site propose deux modes de navigation : un parcours classique par catégories pour les achats rapides, et un mode exploration interactive où l'enfant (accompagné) découvre les jouets dans une scène illustrée. L'accent est mis sur le ludique, l'artisanat et l'accessibilité.</div>
+    <div class="section-title">Design</div>
+    <div class="block">Univers visuel entièrement dessiné au crayon : croquis, fusain, traits de charbon. Les personnages sont esquissés avec douceur, les décors restent abstraits et suggestifs. Chaque icône est dessinée à la main. La palette utilise des tons pastels chaleureux tout en respectant les contrastes WCAG pour l'accessibilité. Ambiance conte illustré.</div>
+    <div class="section-title">Dev</div>
+    <div class="block">Mini scène interactive SVG avec éléments cliquables révélant les produits. Mode "besoin spécifique" proposant des suggestions basées sur l'âge, le type de jeu ou les compétences à développer. Effets visuels légers simulant le trait de crayon. Musique d'ambiance douce optionnelle avec contrôle utilisateur.</div>
+    <div class="tags"><span class="tag">E-commerce</span><span class="tag">SVG interactif</span><span class="tag">Illustration</span><span class="tag">Enfants</span></div>
+</div>
+
+<div class="project">
+    <h2>JBR Management</h2>
+    <div class="url">jbrmanagement.be</div>
+    <div class="section-title">Pitch</div>
+    <div class="block">Site professionnel de Jean-Pierre Lannoy, expert reconnu de la copropriété en Belgique. Le site présente son parcours de plusieurs décennies, ses nombreux ouvrages de référence, ses ressources pédagogiques, ses formations et ses interventions en conférence. C'est à la fois un CV augmenté, une bibliothèque de ressources et une plateforme de contact professionnel.</div>
+    <div class="section-title">Design</div>
+    <div class="block">Style institutionnel sobre et élégant avec palette bleu marine et gris. Timeline biographique interactive retraçant les étapes clés de la carrière. Cartes publications présentant couvertures, résumés et liens d'achat des ouvrages. Mise en page inspirée des magazines professionnels avec colonnes et encadrés.</div>
+    <div class="section-title">Dev</div>
+    <div class="block">Bibliothèque de ressources filtrable par type (article, livre, vidéo), par thème et par année. Templates uniformisés pour les pages ressources garantissant cohérence et maintenabilité. Navigation claire avec structure hiérarchique simple. Optimisation SEO pour les recherches liées à la copropriété.</div>
+    <div class="tags"><span class="tag">Institutionnel</span><span class="tag">Bibliothèque</span><span class="tag">Timeline</span><span class="tag">Expert</span></div>
+</div>
+
+<div class="project">
+    <h2>Cléa Vincent</h2>
+    <div class="url">URL à définir</div>
+    <div class="section-title">Pitch</div>
+    <div class="block">Site officiel de Cléa Vincent, figure lumineuse de la pop française contemporaine. Son univers musical mêle électro-pop dansante, textes poétiques et esthétique rétro assumée. Les albums Tropi-Cléa et Nuits sans sommeil ont défini un style reconnaissable : pastel, rêveur, solaire même dans la mélancolie. Le site doit être une extension de cet univers.</div>
+    <div class="section-title">Design</div>
+    <div class="block">Palette pastel rétro inspirée des années 80/90 : roses poudrés, bleus lavande, jaunes doux. Typographies pop aux formes arrondies et friendly. Page artiste immersive avec portrait grand format, biographie narrative et accès aux clips. Iconographie cohérente avec les visuels des albums, notamment les motifs tropicaux et les couchers de soleil stylisés.</div>
+    <div class="section-title">Dev</div>
+    <div class="block">Discographie interactive présentée en cartes cliquables ouvrant des popups détaillés avec tracklist, crédits et liens streaming. Intégration propre des clips YouTube via API avec lazy-loading. Sections animées subtilement au scroll (fade, slide latéral) pour accompagner la navigation sans distraire.</div>
+    <div class="tags"><span class="tag">Artiste</span><span class="tag">Discographie</span><span class="tag">YouTube API</span><span class="tag">Pop française</span></div>
+</div>
+
+</div>
+</div>
 </body>
 </html>
