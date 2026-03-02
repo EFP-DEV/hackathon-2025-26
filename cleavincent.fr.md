@@ -1,3 +1,5 @@
+# hackathon-2025-26 — CleaVincent.fr
+
 ## Contexte
 
 Ce dossier porte sur Cléa Vincent, auteure-compositrice-interprète française (clavier/piano), associée à une pop francophone indépendante, souvent décrite comme dansante, mélodique, avec une culture pop marquée (dont une forte affinité années 80), et une approche “DIY” sur une partie de son parcours.
