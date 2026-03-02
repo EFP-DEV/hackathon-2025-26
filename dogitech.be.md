@@ -1,3 +1,5 @@
+# hackathon-2025-26 — dogitech.be
+
 ## Contexte du site actuel
 
 Le hackathon porte sur Dogitech.be, site vitrine d’une entreprise locale (plomberie, électricité, petits travaux). Le cœur du projet n’est pas une plateforme complexe mais un outil de conversion et de confiance : rassurer, clarifier l’offre, et faciliter la prise de contact.
