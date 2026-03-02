@@ -1,3 +1,4 @@
+# hackathon-2025-26 — spokenword.be (Dans! Dichter! Dans!)
 ## Contexte du site actuel
 
 Le site est actuellement publié sur le domaine `https://www.spokenword.be/` et fonctionne sur WordPress (API visible via `wp-json`). ([Dans! Dichter! Dans! - ...][1]) Les contenus et libellés sont majoritairement en néerlandais (ex. “Over ons”, “Alle deelnemers”, “Gesprekken”), et la navigation n’est pas uniforme selon les pages, ce qui correspond au constat du client (“logo/newsletter/réseaux sociaux pas visibles partout”). ([Dans! Dichter! Dans! - ...][2])
