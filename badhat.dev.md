@@ -1,3 +1,5 @@
+# hackathon-2025-26 — badhat
+
 ## Contexte du projet
 
 BADHAT (Bits As Decision. HTTP As Terminal.) est un micro-toolkit PHP orienté “request-lifecycle programming”. Ce n’est pas un framework : il fournit un noyau très réduit (environ 100 lignes de cœur) qui fait trois choses, sans ontologie imposée ni “magie” d’architecture : résoudre une URL en fichier, exécuter ce fichier, émettre une réponse HTTP. L’architecture n’est pas décrite par une configuration ou un conteneur : elle émerge du système de fichiers et de PHP lui-même.
