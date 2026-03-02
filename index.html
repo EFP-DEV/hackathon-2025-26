@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
-  <title>Quality Checklist — Hackathon Frontend</title>
+  <title>Hackathon Projects</title>
 
   <style>
     :root{
@@ -19,13 +19,6 @@
       --soft: #e8f0f8;
       --border: #b6c6da;
 
-      --ok: #166534;
-      --ok-bg: #dcfce7;
-      --warn: #92400e;
-      --warn-bg: #fef3c7;
-      --fail: #991b1b;
-      --fail-bg: #fee2e2;
-
       --focus-outline: #111827;
       --focus-bg: #fffbcc;
 
@@ -38,12 +31,12 @@
       --space-4: 1.5rem;
       --space-5: 2rem;
 
-      --maxw: 900px;
+      --maxw: 1200px;
       --reading: 70ch;
     }
 
     * { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     body {
       margin: 0;
       font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -54,6 +47,88 @@
     }
 
     .container { max-width: var(--maxw); margin: 0 auto; }
+
+    .skip-link {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--focus-bg);
+      color: var(--text);
+      border: 2px solid var(--focus-outline);
+      border-radius: 0.5rem;
+      z-index: 1000;
+      transform: translateY(-200%);
+      transition: transform 120ms linear;
+    }
+    .skip-link:focus,
+    .skip-link:focus-visible {
+      transform: translateY(0);
+      outline: none;
+    }
+
+    header.page-header { margin-bottom: 2rem; }
+    h1 {
+      margin: 0 0 var(--space-1);
+      font-size: clamp(1.75rem, 2.8vw, 2.25rem);
+      line-height: 1.2;
+      color: var(--accent);
+    }
+    .intro {
+      margin: 0;
+      max-width: var(--reading);
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    main { margin-top: var(--space-4); }
+
+    .projects {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+      gap: 1.75rem;
+    }
+
+    .project {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: var(--space-5);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .project h2 {
+      margin: 0 0 var(--space-2);
+      font-size: 1.375rem;
+      line-height: 1.25;
+      color: var(--accent);
+    }
+
+    .meta {
+      margin: 0 0 var(--space-3);
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      font-size: 0.875rem;
+      color: var(--accent-ink);
+      background: var(--soft);
+      padding: 0.45rem 0.65rem;
+      border-radius: 0.5rem;
+      line-height: 1.35;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+    .badge-label { font-weight: 700; }
 
     a {
       color: var(--accent);
@@ -69,75 +144,8 @@
       border-radius: 0.25rem;
     }
 
-    .skip-link {
-      position: absolute; top: 0.5rem; left: 0.5rem;
-      padding: 0.75rem 1rem; background: var(--focus-bg); color: var(--text);
-      border: 2px solid var(--focus-outline); border-radius: 0.5rem; z-index: 1000;
-      transform: translateY(-200%); transition: transform 120ms linear;
-    }
-    .skip-link:focus, .skip-link:focus-visible { transform: translateY(0); outline: none; }
-
-    header.page-header { margin-bottom: 2rem; }
-    h1 {
-      margin: 0 0 var(--space-1);
-      font-size: clamp(1.75rem, 0.9rem + 2.8vi, 2.25rem);
-      line-height: 1.2;
-      color: var(--accent);
-    }
-    .intro {
-      margin: 0;
-      max-width: var(--reading);
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    nav { margin: var(--space-4) 0; }
-    nav ol {
-      margin: 0; padding: 0; list-style: none;
-      display: flex; flex-wrap: wrap; gap: 0.5rem;
-    }
-    nav li a {
-      display: inline-block;
-      font-size: 0.875rem; font-weight: 700;
-      color: var(--accent-ink); background: var(--soft);
-      padding: 0.45rem 0.75rem; border-radius: 0.5rem;
-      border: 1px solid rgba(0,0,0,0.08);
-      text-decoration: none;
-    }
-    nav li a:hover { background: var(--border); }
-
-    main { margin-top: var(--space-4); }
-
-    section {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: var(--space-5);
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      margin-bottom: 1.75rem;
-    }
-
-    h2 {
-      margin: 0 0 var(--space-2);
-      font-size: 1.375rem;
-      line-height: 1.25;
-      color: var(--accent);
-    }
-    h2 .num {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      font-size: 0.8rem;
-      width: 1.6rem; height: 1.6rem;
-      line-height: 1.6rem;
-      text-align: center;
-      border-radius: 50%;
-      margin-right: 0.5rem;
-      vertical-align: middle;
-    }
-
-    h3 {
-      margin: 1.25rem 0 0.5rem;
+    .section-title {
+      margin: 1.125rem 0 0.5rem;
       font-weight: 800;
       color: var(--accent);
       font-size: 0.875rem;
@@ -145,120 +153,71 @@
       text-transform: uppercase;
     }
 
-    p, li { max-width: var(--reading); }
-
-    .tool {
-      margin: var(--space-3) 0;
-      padding: var(--space-3) var(--space-4);
-      border-left: 4px solid var(--accent);
-      background: var(--soft);
-      border-radius: 0 var(--radius) var(--radius) 0;
-    }
-    .tool-name {
-      font-weight: 800;
+    .block {
       font-size: 1rem;
-      margin: 0 0 0.25rem;
-    }
-    .tool-url {
-      font-size: 0.875rem;
-      word-break: break-all;
-    }
-    .tool-desc {
-      margin: 0.5rem 0 0;
-      font-size: 0.9375rem;
+      color: var(--text);
     }
 
-    .thresholds {
-      margin: var(--space-3) 0 0;
-      padding: 0;
+    .block ul { margin: 0.5rem 0 0; padding-left: 1.125rem; }
+    .block li { margin: 0.4rem 0; }
+
+    details { margin-top: var(--space-3); }
+    summary {
+      cursor: pointer;
+      font-weight: 800;
+      color: var(--accent);
+      padding: 0.5rem 0;
       list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
     }
-    .th {
-      font-size: 0.8125rem;
-      font-weight: 700;
-      padding: 0.35rem 0.65rem;
-      border-radius: 0.5rem;
-      border: 1px solid transparent;
-    }
-    .th--ok   { background: var(--ok-bg);   color: var(--ok);   border-color: var(--ok); }
-    .th--warn { background: var(--warn-bg); color: var(--warn); border-color: var(--warn); }
-    .th--fail { background: var(--fail-bg); color: var(--fail); border-color: var(--fail); }
+    summary::-webkit-details-marker { display: none; }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9375rem;
-      margin: var(--space-3) 0;
+    summary::before{
+      content: "▸";
+      display: inline-block;
+      margin-right: 0.5rem;
+      transform: translateY(-1px);
     }
-    th, td {
-      text-align: left;
-      padding: 0.5rem 0.75rem;
-      border-bottom: 1px solid var(--border);
-    }
-    th {
-      font-weight: 800;
-      font-size: 0.8125rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--accent);
-      background: var(--soft);
-    }
-    td code {
-      font-size: 0.8125rem;
-      background: var(--soft);
-      padding: 0.15rem 0.4rem;
+    details[open] summary::before{ content: "▾"; }
+
+    summary:focus-visible {
+      outline: 3px solid var(--focus-outline);
+      outline-offset: 4px;
+      background: var(--focus-bg);
       border-radius: 0.25rem;
     }
 
-    code {
-      font-family: "Fira Code", "SF Mono", "Cascadia Code", monospace;
-      font-size: 0.875rem;
+    details[open] summary { margin-bottom: 0.25rem; }
+    details .block { padding-top: 0.25rem; }
+
+    .tags {
+      margin-top: var(--space-4);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
     }
-    pre {
-      background: #1e293b;
-      color: #e2e8f0;
-      padding: var(--space-3);
+    .tag {
+      background: var(--soft);
+      color: var(--accent);
+      padding: 0.35rem 0.65rem;
       border-radius: 0.5rem;
-      overflow-x: auto;
-      font-size: 0.8125rem;
-      line-height: 1.5;
-    }
-    pre code { background: none; padding: 0; color: inherit; }
-
-    .callout {
-      margin: var(--space-3) 0;
-      padding: var(--space-3) var(--space-4);
-      border-radius: var(--radius);
-      font-size: 0.9375rem;
-    }
-    .callout--pass  { background: var(--ok-bg);   border-left: 4px solid var(--ok); }
-    .callout--target { background: var(--soft);    border-left: 4px solid var(--accent); }
-    .callout--warn  { background: var(--warn-bg); border-left: 4px solid var(--warn); }
-    .callout strong { display: block; margin-bottom: 0.25rem; }
-
-    .approach-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
-      gap: 1rem;
-      margin: var(--space-3) 0;
+      font-size: 0.875rem;
+      font-weight: 700;
+      border: 1px solid rgba(0,0,0,0.08);
     }
 
-    .top-link {
-      display: inline-block;
-      margin-top: var(--space-3);
-      font-size: 0.8125rem;
-      text-decoration: none;
-      color: var(--muted);
-    }
-    .top-link:hover { color: var(--accent); }
-
-    @media (max-width: 420px) {
-      body { padding: 1.5rem 0.875rem; }
-      section { padding: 1.25rem; }
-      .tool { padding: var(--space-2) var(--space-3); }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -266,11 +225,17 @@
     }
 
     @media (forced-colors: active) {
-      section, .tool, .th, .callout {
+      .project, .badge, .tag {
         forced-color-adjust: auto;
         border: 1px solid CanvasText;
         box-shadow: none;
       }
+      a { forced-color-adjust: auto; }
+    }
+
+    @media (max-width: 420px) {
+      body { padding: 1.5rem 0.875rem; }
+      .project { padding: 1.25rem; }
     }
   </style>
 </head>
@@ -279,697 +244,477 @@
   <a class="skip-link" href="#main">Aller au contenu principal</a>
 
   <div class="container">
-<header class="page-header">
-  <h1>Hackathon Projects</h1>
-  <p class="intro">
-    Un hackathon sert à simuler une situation réelle&nbsp;: découvrir ensemble un problème, explorer des pistes, se tromper, corriger, et produire une solution compréhensible par l’équipe. L’objectif n’est pas d’aller “vite”, mais d’apprendre en fabriquant.
-  </p>
-
-      <p>
-        L’IA peut aider sur la copie (orthographe, reformulation, traduction). Elle ne doit pas fournir la réponse au problème.
-        Les questions d’architecture, de conception UI/UX, de debug, ou d’optimisation automatique (a11y/perf/SEO/i18n) sont hors périmètre&nbsp;: ce sont précisément les sujets du hackathon.
-        Le code (HTML/CSS/JS) est écrit à la main par l’équipe.
+    <header class="page-header">
+      <h1>Hackathon Projects</h1>
+      <p class="intro">
+        Une collection de projets web variés : sites associatifs, portfolios d'artistes, outils professionnels et plateformes e-commerce.
+        Chaque projet combine design réfléchi et développement pragmatique.
       </p>
-
-      <p>
-        La génération d’images par IA est interdite pour des raisons écologiques&nbsp;: on privilégie des images et des fontes existantes, sourcées.
-      </p>
-
-      <p>
-        Vos formateurs lisent et écrivent du code depuis des décennies&nbsp;: le style de code généré par IA est extrêmement reconnaissable.
-        En cas de suspicion d’usage de code IA (non assumé ou dissimulé), le projet est considéré non conforme.
-      </p>
-
-      <h2 class="section-title">Modèles autorisés (si accès contrôlé)</h2>
-      <ul>
-        <li><strong>OpenAI</strong>&nbsp;: gpt-5-nano, gpt-5-mini</li>
-        <li><strong>Anthropic</strong>&nbsp;: claude-haiku</li>
-        <li><strong>Google</strong>&nbsp;: gemini-flash-lite</li>
-        <li><strong>DeepSeek</strong>&nbsp;: deepseek-chat</li>
-        <li><strong>Mistral</strong>&nbsp;: ministral, mistral-small</li>
-      </ul>
-</header>
-
-    <nav aria-label="Sommaire">
-      <ol>
-        <li><a href="#validation">Validation HTML</a></li>
-        <li><a href="#a11y">Accessibilité</a></li>
-        <li><a href="#perf">Performance</a></li>
-        <li><a href="#seo">SEO technique</a></li>
-        <li><a href="#i18n">Internationalisation</a></li>
-        <li><a href="#css">CSS &amp; layout</a></li>
-        <li><a href="#js">JavaScript</a></li>
-        <li><a href="#checklist">Checklist finale</a></li>
-        <li><a href="#coordination">Guide coordination</a></li>
-
-      </ol>
-    </nav>
-
+    </header>
+    <!--
+<nav aria-label="Ressources partagées" style="margin-top:var(--space-3);">
+  <a href="./quality-checklist.html" style="
+    display:inline-flex;align-items:center;gap:0.4rem;
+    font-size:0.875rem;font-weight:700;
+    color:var(--accent-ink);background:var(--soft);
+    padding:0.45rem 0.75rem;border-radius:0.5rem;
+    border:1px solid rgba(0,0,0,0.08);text-decoration:none;
+  ">Quality Checklist</a>
+</nav> -->
     <main id="main" tabindex="-1">
-
-      <!-- 1. HTML Validation -->
-      <section id="validation">
-        <h2><span class="num">1</span> Validation HTML</h2>
-        <p>
-          Le HTML doit être valide. Pas "à peu près". Zéro erreur, zéro warning non justifié.
-          Un document invalide casse le parsing, l'accessibilité, le SEO, et le rendu cross-browser.
-        </p>
-
-        <div class="tool">
-          <p class="tool-name">W3C Markup Validation Service</p>
-          <p class="tool-url"><a href="https://validator.w3.org/" target="_blank" rel="noopener">validator.w3.org</a></p>
-          <p class="tool-desc">
-            Validateur officiel du W3C. Accepte une URL, un upload, ou du code collé.
-            Utilisez "validate by direct input" pour les pages locales.
-          </p>
-          <ul class="thresholds">
-            <li class="th th--ok">✓ 0 erreur, 0 warning</li>
-            <li class="th th--warn">⚠ 0 erreur, warnings mineurs</li>
-            <li class="th th--fail">✗ Toute erreur = à corriger</li>
-          </ul>
-        </div>
-
-        <div class="tool">
-          <p class="tool-name">HTMLHint (CLI)</p>
-          <p class="tool-url"><a href="https://htmlhint.com/" target="_blank" rel="noopener">htmlhint.com</a></p>
-          <p class="tool-desc">
-            Linter HTML en ligne de commande. Vérifie les attributs manquants, les balises non fermées,
-            les <code>id</code> dupliqués.
-          </p>
-          <pre><code>npx htmlhint "**/*.html"</code></pre>
-        </div>
-
-        <h3>Vérifications manuelles</h3>
-        <table>
-          <thead><tr><th>Point</th><th>Attendu</th></tr></thead>
-          <tbody>
-            <tr><td>Doctype</td><td><code>&lt;!doctype html&gt;</code> en première ligne</td></tr>
-            <tr><td>Attribut <code>lang</code></td><td>Présent sur <code>&lt;html&gt;</code>, valeur correcte (<code>fr</code>, <code>nl</code>, <code>en</code>)</td></tr>
-            <tr><td>Charset</td><td><code>&lt;meta charset="UTF-8"&gt;</code> avant tout texte</td></tr>
-            <tr><td>Viewport</td><td><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></td></tr>
-            <tr><td><code>&lt;title&gt;</code></td><td>Présent, unique, descriptif (pas vide, pas "Document")</td></tr>
-            <tr><td>Sémantique</td><td><code>header</code>, <code>main</code>, <code>nav</code>, <code>footer</code>, <code>article</code>, <code>section</code> utilisés correctement</td></tr>
-            <tr><td>Headings</td><td>Hiérarchie logique (<code>h1</code> unique, pas de saut <code>h1→h3</code>)</td></tr>
-            <tr><td>Images</td><td><code>alt</code> sur chaque <code>&lt;img&gt;</code>. Vide (<code>alt=""</code>) uniquement si décoratif</td></tr>
-          </tbody>
-        </table>
-
-        <a href="#main" class="top-link">↑ haut</a>
-      </section>
-
-      <!-- 2. Accessibility -->
-      <section id="a11y">
-        <h2><span class="num">2</span> Accessibilité</h2>
-        <p>
-          WCAG 2.1 niveau AA minimum. L'accessibilité n'est pas un bonus — c'est un critère d'évaluation.
-        </p>
-
-        <div class="tool">
-          <p class="tool-name">WAVE — Web Accessibility Evaluation Tool</p>
-          <p class="tool-url"><a href="https://wave.webaim.org/" target="_blank" rel="noopener">wave.webaim.org</a></p>
-          <p class="tool-desc">
-            Extension navigateur (Chrome/Firefox) ou URL directe.
-            Affiche erreurs, alertes, et structure ARIA directement sur la page.
-          </p>
-          <ul class="thresholds">
-            <li class="th th--ok">✓ 0 erreur</li>
-            <li class="th th--warn">⚠ Alertes = à vérifier manuellement</li>
-            <li class="th th--fail">✗ Toute erreur = à corriger</li>
-          </ul>
-        </div>
-
-        <div class="tool">
-          <p class="tool-name">axe DevTools</p>
-          <p class="tool-url"><a href="https://www.deque.com/axe/devtools/" target="_blank" rel="noopener">deque.com/axe/devtools</a></p>
-          <p class="tool-desc">
-            Extension Chrome. Audit WCAG automatisé dans les DevTools.
-            Plus précis que WAVE sur certains cas ARIA.
-            Utilisez les deux — ils ne détectent pas les mêmes problèmes.
-          </p>
-          <ul class="thresholds">
-            <li class="th th--ok">✓ 0 violation "critical" et "serious"</li>
-            <li class="th th--warn">⚠ Violations "moderate" = à traiter si possible</li>
-          </ul>
-        </div>
-
-        <div class="tool">
-          <p class="tool-name">WebAIM Contrast Checker</p>
-          <p class="tool-url"><a href="https://webaim.org/resources/contrastchecker/" target="_blank" rel="noopener">webaim.org/resources/contrastchecker</a></p>
-          <p class="tool-desc">
-            Vérification rapide du ratio de contraste entre deux couleurs.
-          </p>
-          <ul class="thresholds">
-            <li class="th th--ok">✓ ≥ 4.5:1 texte normal, ≥ 3:1 texte large (≥18px bold ou ≥24px)</li>
-            <li class="th th--fail">✗ En dessous = non conforme AA</li>
-          </ul>
-        </div>
-
-        <h3>Tests manuels</h3>
-        <table>
-          <thead><tr><th>Test</th><th>Comment</th></tr></thead>
-          <tbody>
-            <tr><td>Navigation clavier</td><td><kbd>Tab</kbd> sur toute la page. Chaque élément interactif doit être atteignable et avoir un <code>:focus-visible</code> visible</td></tr>
-            <tr><td>Skip link</td><td>Premier <kbd>Tab</kbd> = lien "Aller au contenu" (ou équivalent)</td></tr>
-            <tr><td>Zoom 200%</td><td>Aucun contenu tronqué, pas de scroll horizontal</td></tr>
-            <tr><td>Lecteur d'écran</td><td>Au minimum : tester landmarks, headings, et formulaires avec VoiceOver (macOS) ou NVDA (Windows)</td></tr>
-          </tbody>
-        </table>
-
-        <a href="#main" class="top-link">↑ haut</a>
-      </section>
-
-      <!-- 3. Performance -->
-      <section id="perf">
-        <h2><span class="num">3</span> Performance</h2>
-        <p>
-          Vanilla HTML/CSS/JS = aucune raison d'avoir un Lighthouse &lt; 90.
-        </p>
-
-        <div class="tool">
-          <p class="tool-name">Lighthouse (Chrome DevTools)</p>
-          <p class="tool-url">DevTools → Lighthouse → cocher Performance, Accessibility, Best Practices, SEO</p>
-          <p class="tool-desc">
-            Exécutez en mode <strong>mobile</strong> (throttled), en navigation privée (pas d'extensions).
-            Lancez au moins 3 fois, gardez le score médian.
-          </p>
-          <ul class="thresholds">
-            <li class="th th--ok">✓ Perf ≥ 90 · A11y ≥ 95 · BP ≥ 90 · SEO ≥ 90</li>
-            <li class="th th--warn">⚠ Performance 70–89 = optimisable</li>
-            <li class="th th--fail">✗ Tout score &lt; 70 = problème sérieux</li>
-          </ul>
-        </div>
-
-        <div class="tool">
-          <p class="tool-name">PageSpeed Insights</p>
-          <p class="tool-url"><a href="https://pagespeed.web.dev/" target="_blank" rel="noopener">pagespeed.web.dev</a></p>
-          <p class="tool-desc">Lighthouse distant (données réelles + simulées). Utile si le site est déployé.</p>
-        </div>
-
-        <h3>Métriques à surveiller</h3>
-        <table>
-          <thead><tr><th>Métrique</th><th>Seuil "bon"</th><th>Signification</th></tr></thead>
-          <tbody>
-            <tr><td>LCP</td><td>≤ 2.5s</td><td>Temps d'affichage du plus gros élément visible</td></tr>
-            <tr><td>INP</td><td>≤ 200ms</td><td>Réactivité aux interactions</td></tr>
-            <tr><td>CLS</td><td>≤ 0.1</td><td>Stabilité visuelle (pas de sauts de layout)</td></tr>
-            <tr><td>Poids total page</td><td>≤ 500 KB</td><td>HTML + CSS + JS + images, tout compris</td></tr>
-          </tbody>
-        </table>
-
-        <h3>Checklist images</h3>
-        <table>
-          <thead><tr><th>Point</th><th>Attendu</th></tr></thead>
-          <tbody>
-            <tr><td>Format</td><td>WebP ou AVIF. PNG/JPEG en fallback uniquement</td></tr>
-            <tr><td>Dimensionnement</td><td>Pas d'image 4000px affichée à 400px. <code>srcset</code> + <code>sizes</code> si pertinent</td></tr>
-            <tr><td>Lazy loading</td><td><code>loading="lazy"</code> sur toutes les images hors viewport initial</td></tr>
-            <tr><td>Dimensions explicites</td><td><code>width</code> et <code>height</code> en attributs pour éviter le CLS</td></tr>
-            <tr><td><code>decoding</code></td><td><code>decoding="async"</code> sur les images non critiques</td></tr>
-          </tbody>
-        </table>
-
-        <a href="#main" class="top-link">↑ haut</a>
-      </section>
-
-      <!-- 4. SEO -->
-      <section id="seo">
-        <h2><span class="num">4</span> SEO technique</h2>
-        <p>
-          Pas de "stratégie SEO" — juste les fondamentaux techniques pour un site indexable et bien décrit.
-        </p>
-
-        <div class="tool">
-          <p class="tool-name">Lighthouse SEO audit</p>
-          <p class="tool-desc">Déjà inclus dans Lighthouse (section 3). Score ≥ 90 attendu.</p>
-        </div>
-
-        <div class="tool">
-          <p class="tool-name">metatags.io</p>
-          <p class="tool-url"><a href="https://metatags.io/" target="_blank" rel="noopener">metatags.io</a></p>
-          <p class="tool-desc">Prévisualisation des balises Open Graph / meta.</p>
-        </div>
-
-        <h3>Vérifications</h3>
-        <table>
-          <thead><tr><th>Point</th><th>Attendu</th></tr></thead>
-          <tbody>
-            <tr><td><code>&lt;title&gt;</code></td><td>Unique par page, 30–60 caractères, descriptif</td></tr>
-            <tr><td><code>meta description</code></td><td>Unique par page, 120–160 caractères</td></tr>
-            <tr><td>Open Graph</td><td><code>og:title</code>, <code>og:description</code>, <code>og:image</code>, <code>og:url</code></td></tr>
-            <tr><td><code>rel="canonical"</code></td><td>Présent si le contenu est accessible via plusieurs URLs</td></tr>
-            <tr><td>Liens</td><td>Pas de liens cassés. <code>rel="noopener noreferrer"</code> sur <code>target="_blank"</code></td></tr>
-            <tr><td>Structure</td><td>Un seul <code>&lt;h1&gt;</code>. Headings ordonnés logiquement</td></tr>
-          </tbody>
-        </table>
-
-        <a href="#main" class="top-link">↑ haut</a>
-      </section>
-
-      <!-- 5. i18n (mandatory) -->
-      <section id="i18n">
-        <h2><span class="num">5</span> Internationalisation</h2>
-
-        <div class="callout callout--pass">
-          Chaque projet doit livrer un système de traduction fonctionnel,
-          activable en incluant deux balises <code>&lt;script&gt;</code> en fin de document.
-        </div>
-
-        <h3>Architecture requise</h3>
-        <p>
-          Le système repose sur deux fichiers distincts, avec des responsabilités séparées.
-          Les noms de fichiers, le format de stockage, et le mécanisme de sélection de langue sont libres —
-          mais la séparation en deux scripts et le contrat d'intégration sont imposés.
-        </p>
-
-        <table>
-          <thead><tr><th>Script</th><th>Responsabilité</th><th>Contenu type</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><strong>Script 1 — stockage des traductions</strong></td>
-              <td>
-                Déclare toutes les chaînes traduites pour toutes les langues supportées.
-                Ne contient aucune logique de comportement.
-              </td>
-              <td>
-                Un objet JS (ou JSON chargé) structuré par langue et par clé.
-                Exemple&nbsp;: <code>{ "fr": { "nav.home": "Accueil" }, "nl": { "nav.home": "Home" } }</code>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>Script 2 — comportement de traduction</strong></td>
-              <td>
-                Lit les traductions du script 1, détecte ou reçoit la langue cible,
-                et applique les traductions au DOM. Gère le sélecteur de langue.
-              </td>
-              <td>
-                Parcourt les éléments marqués (par attribut <code>data-i18n</code>, par convention de classe,
-                ou toute autre méthode), remplace le contenu texte, met à jour l'attribut <code>lang</code>
-                sur <code>&lt;html&gt;</code>, et persiste le choix utilisateur.
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3>Contrat d'intégration</h3>
-        <p>
-          Depuis n'importe quelle page HTML du projet, l'ajout de ces deux lignes avant <code>&lt;/body&gt;</code>
-          doit suffire à activer la traduction, sans autre modification du document&nbsp;:
-        </p>
-
-        <pre><code>&lt;script src="js/i18n-data.js"&gt;&lt;/script&gt;
-&lt;script src="js/i18n.js"&gt;&lt;/script&gt;</code></pre>
-
-        <p>
-          Les noms de fichiers ci-dessus sont un exemple. Chaque groupe choisit ses noms.
-          L'essentiel&nbsp;: deux includes, et ça fonctionne.
-        </p>
-
-        <h3>Critères d'évaluation</h3>
-        <table>
-          <thead><tr><th>Point</th><th>Attendu</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>Activation par inclusion</td>
-              <td>Deux <code>&lt;script&gt;</code> en fin de document = traduction opérationnelle. Pas de configuration supplémentaire</td>
-            </tr>
-            <tr>
-              <td>Séparation données / logique</td>
-              <td>Les traductions vivent dans un fichier, le comportement dans un autre. Ajouter une langue = modifier uniquement le fichier de données</td>
-            </tr>
-            <tr>
-              <td>Sélecteur de langue</td>
-              <td>Un contrôle accessible (bouton, <code>&lt;select&gt;</code>, ou liens) permet de changer de langue. Le choix persiste (session ou <code>localStorage</code>)</td>
-            </tr>
-            <tr>
-              <td>Mise à jour du DOM</td>
-              <td>Le changement de langue s'applique sans rechargement de page. L'attribut <code>lang</code> sur <code>&lt;html&gt;</code> est mis à jour</td>
-            </tr>
-            <tr>
-              <td>Minimum 2 langues</td>
-              <td>Le site doit être traduit dans au moins 2 langues (français + une autre pertinente pour le projet)</td>
-            </tr>
-            <tr>
-              <td>Attribut <code>lang</code></td>
-              <td><code>&lt;html lang="…"&gt;</code> reflète toujours la langue active</td>
-            </tr>
-            <tr>
-              <td>Passages dans une autre langue</td>
-              <td>Si du contenu reste dans une langue fixe (nom propre, citation), il porte un <code>lang</code> explicite</td>
-            </tr>
-            <tr>
-              <td>Pas de contenu "oublié"</td>
-              <td>Tous les textes visibles sont traduits. Les <code>alt</code>, <code>title</code>, <code>aria-label</code>, et <code>placeholder</code> aussi</td>
-            </tr>
-            <tr>
-              <td>Fallback</td>
-              <td>Si une clé est absente pour une langue, le système affiche la langue par défaut, pas une clé brute</td>
-            </tr>
-            <tr>
-              <td>Progressive enhancement</td>
-              <td>Sans JS, le contenu s'affiche dans la langue par défaut du HTML. Le site reste lisible</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3>Balisage HTML</h3>
-        <table>
-          <thead><tr><th>Point</th><th>Attendu</th></tr></thead>
-          <tbody>
-            <tr><td>Encodage</td><td>UTF-8 partout. Pas d'entités HTML inutiles — écrire <code>é</code>, pas <code>&amp;eacute;</code></td></tr>
-            <tr><td>Dates</td><td>Format européen (<code>jj/mm/aaaa</code>) ou ISO. Pas de format US</td></tr>
-            <tr><td><code>hreflang</code></td><td>Si les langues ont des URLs distinctes, déclarer les alternatives via <code>&lt;link rel="alternate" hreflang="…"&gt;</code></td></tr>
-          </tbody>
-        </table>
-
-        <a href="#main" class="top-link">↑ haut</a>
-      </section>
-
-      <!-- 6. CSS & Layout -->
-      <section id="css">
-        <h2><span class="num">6</span> CSS &amp; layout</h2>
-        <p>
-          Deux approches de layout existent. Choisissez-en une et tenez-la.
-          Les deux sont valides. Elles ne se mélangent pas bien.
-        </p>
-
-        <h3>Choisissez votre approche</h3>
-
-        <div class="approach-grid">
-          <div class="tool" style="border-left-color:var(--ok);">
-            <p class="tool-name">A — Intrinsic design</p>
-            <p class="tool-desc">
-              Le layout s'adapte au contenu et à l'espace disponible, sans breakpoints.
-              Les composants décident eux-mêmes comment se comporter.
-            </p>
-            <p class="tool-desc" style="margin-top:0.75rem;"><strong>Outils CSS&nbsp;:</strong></p>
-            <p class="tool-desc">
-              <code>clamp()</code>, <code>min()</code>, <code>max()</code> pour les tailles fluides.
-              <code>grid</code> avec <code>auto-fit</code>/<code>auto-fill</code> + <code>minmax()</code>.
-              <code>flex-wrap</code> avec des <code>flex-basis</code> en <code>ch</code> ou <code>rem</code>.
-              Container queries (<code>@container</code>) pour les composants qui réagissent à leur conteneur.
-              Unités viewport fluides (<code>vi</code>, <code>vb</code>, <code>dvh</code>).
-            </p>
-            <p class="tool-desc" style="margin-top:0.75rem;"><strong>Quand choisir&nbsp;:</strong>
-              sites à contenu variable (articles, galeries, catalogues), composants réutilisables,
-              quand les breakpoints arbitraires cassent plus qu'ils n'aident.
-            </p>
-          </div>
-
-          <div class="tool" style="border-left-color:var(--accent);">
-            <p class="tool-name">B — Responsive design (breakpoints)</p>
-            <p class="tool-desc">
-              Le layout change à des largeurs de viewport définies.
-              Mobile-first&nbsp;: on part du petit écran, on ajoute des règles via <code>min-width</code>.
-            </p>
-            <p class="tool-desc" style="margin-top:0.75rem;"><strong>Outils CSS&nbsp;:</strong></p>
-            <p class="tool-desc">
-              <code>@media (min-width: …)</code> avec des breakpoints explicites.
-              Grilles et flex reconfigurés par breakpoint.
-              Unités relatives (<code>rem</code>, <code>em</code>, <code>%</code>).
-            </p>
-            <p class="tool-desc" style="margin-top:0.75rem;"><strong>Quand choisir&nbsp;:</strong>
-              layouts très contrôlés (landing pages), quand le design impose
-              des changements structurels nets entre mobile et desktop.
-            </p>
-          </div>
-        </div>
-
-        <h3>Outils</h3>
-
-        <div class="tool">
-          <p class="tool-name">Stylelint (CLI)</p>
-          <p class="tool-url"><a href="https://stylelint.io/" target="_blank" rel="noopener">stylelint.io</a></p>
-          <pre><code>npx stylelint "**/*.css"</code></pre>
-        </div>
-
-        <div class="tool">
-          <p class="tool-name">Can I Use</p>
-          <p class="tool-url"><a href="https://caniuse.com/" target="_blank" rel="noopener">caniuse.com</a></p>
-          <p class="tool-desc">Cible minimale&nbsp;: 2 dernières versions de Chrome, Firefox, Safari, Edge.</p>
-        </div>
-
-        <div class="tool">
-          <p class="tool-name">Utopia — Fluid Type &amp; Space Calculator</p>
-          <p class="tool-url"><a href="https://utopia.fyi/" target="_blank" rel="noopener">utopia.fyi</a></p>
-          <p class="tool-desc">
-            Génère des échelles typographiques et d'espacement fluides en <code>clamp()</code>.
-            Utile quelle que soit l'approche.
-          </p>
-        </div>
-
-        <h3>Vérifications communes</h3>
-        <table>
-          <thead><tr><th>Point</th><th>Attendu</th></tr></thead>
-          <tbody>
-            <tr><td>Pas de scroll horizontal</td><td>À aucune largeur, de 320px à 2560px. Redimensionnez en continu</td></tr>
-            <tr><td>Unités de texte</td><td><code>rem</code>/<code>em</code> pour <code>font-size</code>. Pas de <code>px</code> (empêche le zoom utilisateur)</td></tr>
-            <tr><td>Custom properties</td><td>Couleurs, espacements et tailles centralisés dans <code>:root</code></td></tr>
-            <tr><td><code>prefers-reduced-motion</code></td><td>Toutes les animations/transitions désactivées si l'utilisateur le demande</td></tr>
-            <tr><td><code>prefers-color-scheme</code></td><td>Si dark mode implémenté&nbsp;: les deux thèmes doivent passer le contraste AA</td></tr>
-            <tr><td><code>forced-colors</code></td><td>Le site reste lisible en mode contraste élevé (Windows)</td></tr>
-            <tr><td>Print</td><td><code>@media print</code> minimal&nbsp;: masquer nav, masquer décorations, texte noir sur blanc</td></tr>
-          </tbody>
-        </table>
-
-        <h3>Vérifications spécifiques par approche</h3>
-        <table>
-          <thead><tr><th>Point</th><th>Intrinsic (A)</th><th>Responsive (B)</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>Media queries viewport</td>
-              <td>Aucune ou presque. Plus de 2–3 = vous n'êtes plus en intrinsic</td>
-              <td>Mobile-first (<code>min-width</code>). Breakpoints cohérents et documentés</td>
-            </tr>
-            <tr>
-              <td>Container queries</td>
-              <td>Encouragées pour les composants réutilisables</td>
-              <td>Optionnelles</td>
-            </tr>
-            <tr>
-              <td>Tailles fluides</td>
-              <td><code>clamp()</code> obligatoire sur <code>font-size</code>, <code>padding</code>, <code>gap</code></td>
-              <td>Valeurs fixes par breakpoint acceptées</td>
-            </tr>
-            <tr>
-              <td>Grilles</td>
-              <td><code>auto-fit</code>/<code>auto-fill</code> + <code>minmax()</code>. Pas de colonnes fixes</td>
-              <td>Colonnes redéfinies par breakpoint</td>
-            </tr>
-            <tr>
-              <td>Test</td>
-              <td>Redimensionner en continu — aucun "saut" visible</td>
-              <td>Tester chaque breakpoint + les largeurs intermédiaires</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <a href="#main" class="top-link">↑ haut</a>
-      </section>
-
-      <!-- 7. JavaScript -->
-      <section id="js">
-        <h2><span class="num">7</span> JavaScript</h2>
-        <p>
-          JS est un outil de progressive enhancement. Il ajoute du confort, pas de l'accès.
-          Le contenu doit être lisible sans JS.
-        </p>
-
-        <div class="tool">
-          <p class="tool-name">ESLint (CLI)</p>
-          <p class="tool-url"><a href="https://eslint.org/" target="_blank" rel="noopener">eslint.org</a></p>
-          <pre><code>npx eslint "**/*.js"</code></pre>
-        </div>
-
-        <h3>Vérifications</h3>
-        <table>
-          <thead><tr><th>Point</th><th>Attendu</th></tr></thead>
-          <tbody>
-            <tr><td>Progressive enhancement</td><td>Contenu lisible et navigable sans JS</td></tr>
-            <tr><td>Chargement</td><td><code>defer</code> ou <code>type="module"</code>. Jamais de <code>&lt;script&gt;</code> bloquant dans <code>&lt;head&gt;</code></td></tr>
-            <tr><td><code>"use strict"</code></td><td>Présent (ou modules ES qui l'impliquent)</td></tr>
-            <tr><td>Console</td><td>Aucun <code>console.log</code> oublié. Aucune erreur dans la console</td></tr>
-            <tr><td>Event listeners</td><td>Pas de <code>onclick</code> inline. <code>addEventListener</code> uniquement</td></tr>
-            <tr><td>Pas de librairies lourdes</td><td>Pas de jQuery, pas de framework. Vanilla JS ou micro-librairie justifiée (&lt; 10 KB)</td></tr>
-            <tr><td>Pas de <code>localStorage</code> abusif</td><td>Préférence thème/langue = OK. Données personnelles = NON</td></tr>
-          </tbody>
-        </table>
-
-        <a href="#main" class="top-link">↑ haut</a>
-      </section>
-
-      <!-- 8. Final Checklist -->
-      <section id="checklist">
-        <h2><span class="num">8</span> Checklist finale (avant soumission)</h2>
-
-        <div class="callout callout--pass">
-          <strong>Obligatoire (bloquant)</strong>
-          HTML valide (0 erreur W3C)&ensp;·&ensp;
-          WAVE 0 erreur&ensp;·&ensp;
-          Lighthouse Perf ≥ 90, A11y ≥ 95&ensp;·&ensp;
-          <code>lang</code> correct et dynamique&ensp;·&ensp;
-          Navigation clavier fonctionnelle&ensp;·&ensp;
-          320px→2560px sans scroll horizontal&ensp;·&ensp;
-          Contenu lisible sans JS&ensp;·&ensp;
-          0 erreur console
-        </div>
-
-        <div class="callout callout--target">
-          <strong>Attendu (évalué)</strong>
-          Lighthouse BP ≥ 90, SEO ≥ 90&ensp;·&ensp;
-          <code>prefers-reduced-motion</code> respecté&ensp;·&ensp;
-          Images optimisées (WebP, lazy, dimensions)&ensp;·&ensp;
-          Skip link&ensp;·&ensp;
-          Open Graph complet&ensp;·&ensp;
-          CSS custom properties&ensp;·&ensp;
-          Poids page ≤ 500 KB&ensp;·&ensp;
-          i18n fonctionnel (2 scripts, ≥ 2 langues, sans rechargement)&ensp;·&ensp;
-
-          Approche layout documentée (intrinsic ou responsive)
-        </div>
-
-        <div class="callout callout--warn">
-          <strong>Bonus (apprécié)</strong>
-          Lighthouse 4× 100&ensp;·&ensp;
-          Dark mode fonctionnel&ensp;·&ensp;
-          <code>forced-colors</code> testé&ensp;·&ensp;
-          <code>@media print</code>&ensp;·&ensp;
-          <code>hreflang</code>&ensp;·&ensp;
-          axe DevTools 0 violation&ensp;·&ensp;
-          Container queries&ensp;·&ensp;
-          i18n <code>alt</code>, <code>aria-label</code>, <code>placeholder</code> traduits&ensp;·&ensp;
-          3+ langues
-        </div>
-
-        <h3>Résumé des outils</h3>
-        <table>
-          <thead><tr><th>Outil</th><th>Cible</th><th>Type</th></tr></thead>
-          <tbody>
-            <tr><td><a href="https://validator.w3.org/">W3C Validator</a></td><td>HTML</td><td>Web</td></tr>
-            <tr><td><a href="https://htmlhint.com/">HTMLHint</a></td><td>HTML</td><td>CLI</td></tr>
-            <tr><td><a href="https://wave.webaim.org/">WAVE</a></td><td>Accessibilité</td><td>Extension / Web</td></tr>
-            <tr><td><a href="https://www.deque.com/axe/devtools/">axe DevTools</a></td><td>Accessibilité</td><td>Extension</td></tr>
-            <tr><td><a href="https://webaim.org/resources/contrastchecker/">Contrast Checker</a></td><td>Contraste</td><td>Web</td></tr>
-            <tr><td>Lighthouse</td><td>Perf / A11y / SEO / BP</td><td>DevTools</td></tr>
-            <tr><td><a href="https://pagespeed.web.dev/">PageSpeed Insights</a></td><td>Perf (données réelles)</td><td>Web</td></tr>
-            <tr><td><a href="https://metatags.io/">metatags.io</a></td><td>SEO / OG preview</td><td>Web</td></tr>
-            <tr><td><a href="https://stylelint.io/">Stylelint</a></td><td>CSS</td><td>CLI</td></tr>
-            <tr><td><a href="https://caniuse.com/">Can I Use</a></td><td>Compatibilité</td><td>Web</td></tr>
-            <tr><td><a href="https://utopia.fyi/">Utopia</a></td><td>Fluid scales</td><td>Web</td></tr>
-            <tr><td><a href="https://eslint.org/">ESLint</a></td><td>JavaScript</td><td>CLI</td></tr>
-          </tbody>
-        </table>
-
-        <a href="#main" class="top-link">↑ haut</a>
-      </section>
-
-       <!-- 9. Coordination guide -->
-      <section id="coordination">
-        <h2><span class="num">9</span> Guide de coordination Dev ↔ Designer UX/UI</h2>
-
-        <p>
-          Ce guide définit un “contrat d’interface” minimal, stable et testable pour permettre au designer et au
-          développeur frontend d’avancer en parallèle dès le premier jour. Il ne s’agit pas de figer toutes les décisions,
-          mais de verrouiller tôt ce qui coûte cher à changer tard&nbsp;: la structure sémantique, les choix visuels qui
-          impactent l’accessibilité, les composants et leurs comportements, et le contenu (copie + traductions).
-        </p>
-
-        <div class="callout callout--target">
-          <strong>Principe</strong>
-          Le designer livre des décisions versionnables (structure, tokens, composants, copie) et le dev les implémente
-          avec des garanties techniques (HTML sémantique, navigation clavier, perf, progressive enhancement). Quand une
-          décision impacte l’a11y ou la perf, elle se valide au moment où elle est prise, pas en fin de projet.
-        </div>
-
-        <h3>Structure des pages et hiérarchie des titres</h3>
-        <p>
-          Le premier verrou est l’ossature sémantique. Décidez des pages (ou des sections si c’est une page unique), de
-          l’ordre de lecture, et de la hiérarchie des titres. Chaque page doit avoir un seul <code>&lt;h1&gt;</code>,
-          puis des <code>&lt;h2&gt;</code> pour les grandes sections, et des <code>&lt;h3&gt;</code> seulement si une
-          section se subdivise. Cette structure sert à l’accessibilité (navigation par headings, lecteurs d’écran), au
-          SEO technique de base, et à la stabilité du layout.
-        </p>
-        <p>
-          Le designer peut livrer cette structure avant les maquettes finales. Le dev peut, dès ce moment, coder un
-          squelette HTML durable (landmarks <code>header</code>/<code>nav</code>/<code>main</code>/<code>footer</code>,
-          sections, titres) qui restera stable même si la mise en page évolue.
-        </p>
-
-        <h3>Tokens de design et contrastes</h3>
-        <p>
-          Le second verrou est un système de style basé sur des tokens. Le designer définit une palette restreinte
-          (fond, surface, texte principal/secondaire, accent, bordures, états éventuels) et une échelle cohérente
-          d’espacements/typographie. Le dev les implémente via des variables CSS dans <code>:root</code>. Cette approche
-          limite les dérives, accélère les itérations et réduit les non-conformités de contraste.
-        </p>
-        <p>
-          Le focus visible doit être traité comme un élément de design à part entière. Il doit rester perceptible sur
-          tous les fonds et dans tous les états. Les états <em>hover</em>, <em>active</em>, <em>disabled</em>,
-          <em>focus-visible</em> et <em>error</em> doivent être définis tôt, car ils touchent directement la conformité
-          a11y et la cohérence UI.
-        </p>
-
-        <h3>Composants et comportements</h3>
-        <p>
-          Le troisième verrou est la bibliothèque minimale de composants. Un projet échoue rarement faute d’écrans&nbsp;;
-          il échoue parce que les composants interactifs sont incohérents (focus absent, menu mobile impraticable au
-          clavier, champs sans labels clairs, erreurs de formulaire invisibles). Le designer fournit les variantes et les
-          états, et le dev fixe l’implémentation accessible (éléments natifs quand possible, activation clavier, ordre de
-          tabulation logique, gestion des cas “menu/modale/accordion” si présents).
-        </p>
-        <p>
-          Règle de coordination&nbsp;: pas de composant “inventé” dans le code sans repasser par cette spécification. Si
-          un nouveau besoin apparaît, on l’ajoute au contrat plutôt que de créer un comportement ad hoc.
-        </p>
-
-        <h3>Copie et internationalisation en progressive enhancement</h3>
-        <p>
-          Le quatrième verrou est le contenu, livré dans un format exploitable par le système i18n. Dans ce modèle
-          “progressive enhancement”, le contenu doit exister dans le HTML en langue par défaut afin que le site reste
-          lisible sans JavaScript. Le texte est donc volontairement présent “en dur” dans le document.
-        </p>
-        <p>
-          Le système i18n ne supprime pas ce rendu initial&nbsp;: quand JS est disponible, il applique une autre langue
-          en remplaçant le texte et certains attributs sur des éléments explicitement marqués (par exemple
-          <code>data-i18n</code> pour le texte et une convention équivalente pour <code>aria-label</code>,
-          <code>placeholder</code>, <code>title</code>, <code>alt</code>). Cette discipline rend la couverture
-          vérifiable et limite les oublis, tout en conservant un fallback propre&nbsp;: si une clé manque, l’utilisateur
-          voit la langue par défaut du HTML, jamais une clé brute.
-        </p>
-
-        <div class="callout callout--pass">
-          <strong>Critère clé</strong>
-          Sans JS, la page doit rester complète et lisible. Avec JS, la langue peut changer sans rechargement, le choix
-          persiste, et <code>&lt;html lang="…"&gt;</code> reflète la langue active.
-        </div>
-
-        <h3>Rythme de travail (pour débloquer le parallèle)</h3>
-        <p>
-          Jour 1, l’objectif est d’obtenir un socle stable plutôt qu’un rendu final. Le designer commence par l’architecture
-          (pages/sections/titres) et les tokens. En parallèle, le dev met en place le squelette HTML sémantique, les styles
-          de base branchés sur tokens, la navigation clavier (dont le focus visible et la skip-link), et le module i18n
-          (données + logique, deux scripts). Dès que les composants noyau sont définis, le dev les implémente avec leurs
-          états et comportements, pendant que le designer finalise les écrans.
-        </p>
-        <p>
-          Jour 2, on itère sur la qualité (contrastes, zoom 200%, absence de scroll horizontal, optimisation des images,
-          audits WAVE/axe, scores Lighthouse). Plus ces contrôles arrivent tôt, moins ils coûtent.
-        </p>
-
-        <h3>Responsabilités et critères d’acceptation</h3>
-        <p>
-          Le designer est responsable de la cohérence visuelle, des tokens, de la lisibilité, des états, et de l’impact
-          multi-langues (longueurs de labels, débordements). Le dev est responsable de la structure HTML, de l’a11y clavier
-          et ARIA, de la performance (images, scripts, CLS), et du mécanisme i18n. Les deux partagent la responsabilité du
-          focus visible et des contrastes, ainsi que la prévention des régressions.
-        </p>
-        <p>
-          Le contrat est “accepté” quand le squelette respecte la hiérarchie des titres, que les tokens sont en place et
-          réellement utilisés, que les composants noyau sont navigables au clavier avec un focus visible, et que l’i18n
-          fonctionne via deux scripts avec fallback sur la langue par défaut du HTML.
-        </p>
-
-        <a href="#main" class="top-link">↑ haut</a>
-      </section>
+      <ul class="projects" aria-label="Liste des projets">
+        <!-- Spokenword -->
+        <li class="project">
+          <article aria-labelledby="p-spokenword-title">
+            <h2 id="p-spokenword-title">Dans! Dichter! Dans!</h2>
+
+            <ul class="meta" aria-label="Liens et documents">
+              <li class="badge">
+                <span class="badge-label">Site:</span>
+                <a href="https://www.spokenword.be/" target="_blank" rel="noopener noreferrer">
+                  spokenword.be<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                </a>
+              </li>
+              <li class="badge">
+                <span class="badge-label">Brief:</span>
+                <a href="./spokenword.be.html">spokenword.be.md</a>
+              </li>
+            </ul>
+
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Plateforme d’événements spoken word (poésie, musique, performances). Objectif hackathon : rendre le site plus cohérent et plus simple à maintenir, avec des gabarits réutilisables (événements, médias, archives).
+            </div>
+
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Cohérence globale : header/footer cohérents (logo + newsletter + réseaux sociaux visibles partout).</li>
+                <li>Nouveau gabarit “Événement” (pré-événement sans line-up + version avec line-up).</li>
+                <li>Homepage “conditionnelle” : mode événement à venir / mode hors événement.</li>
+                <li>Pages médias (aftermovies/teasers/testimonials) : structure claire et ajout simple.</li>
+              </ul>
+            </div>
+
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Typo et hiérarchie strictes (titres vs texte) + cohérence de palette.</li>
+                  <li>Bonus : “Past editions”, “Alle deelnemers”, page “Interview/Gesprekken” structurée.</li>
+                </ul>
+              </div>
+            </details>
+
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Templates</li><li class="tag">Événements</li><li class="tag">Médias</li><li class="tag">Cohérence UI</li>
+            </ul>
+          </article>
+        </li>
+
+        <!-- LaReponse -->
+        <li class="project">
+          <article aria-labelledby="p-lareponse-title">
+            <h2 id="p-lareponse-title">LaReponse.org</h2>
+
+            <ul class="meta" aria-label="Liens et documents">
+              <li class="badge">
+                <span class="badge-label">Site:</span>
+                <a href="https://lareponse.org/" target="_blank" rel="noopener noreferrer">
+                  lareponse.org<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                </a>
+              </li>
+              <li class="badge">
+                <span class="badge-label">Brief:</span>
+                <a href="./lareponse.org.html">lareponse.org.md</a>
+              </li>
+            </ul>
+
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Site professionnel “double lecture” : une entrée business très rapide (20–40s) + une lecture plus profonde (principes / méthode). L’objectif est d’être clair, lisible, léger, et cohérent.
+            </div>
+
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Structure one-page (ou multi-pages simple) avec navigation claire.</li>
+                <li>Sections indispensables : Offre, Méthode, Principes (index minimal), Contact.</li>
+                <li>Micro design system (typographie, espacements, composants réutilisables).</li>
+                <li>Contenu géré proprement (HTML + données/Markdown, sans dépendances lourdes).</li>
+              </ul>
+            </div>
+
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Éviter le jargon : lisible et actionnable en lecture rapide.</li>
+                  <li>Bonus : “Preuves / outputs” (mini cas), glossaire, pages “Principes” détaillées.</li>
+                </ul>
+              </div>
+            </details>
+
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Manifeste</li><li class="tag">Lecture rapide</li><li class="tag">Design system</li><li class="tag">Sans dépendances</li>
+            </ul>
+          </article>
+        </li>
+
+        <!-- Cinergie -->
+        <li class="project">
+          <article aria-labelledby="p-cinergie-title">
+            <h2 id="p-cinergie-title">Cinergie.be</h2>
+
+            <ul class="meta" aria-label="Liens et documents">
+              <li class="badge">
+                <span class="badge-label">Site:</span>
+                <a href="https://www.cinergie.be/" target="_blank" rel="noopener noreferrer">
+                  cinergie.be<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                </a>
+              </li>
+              <li class="badge">
+                <span class="badge-label">Brief:</span>
+                <a href="./cinergie.be.html">cinergie.be.md</a>
+              </li>
+            </ul>
+
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Amélioration mobile-first d’un site existant, avec une contrainte forte : ne pas déclencher une refonte globale. On vise des gains UX ciblés (agenda, article, boutique/panier, pages statiques).
+            </div>
+
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Agenda : grille avec images + navigation mois précédent/suivant (sans FullCalendar).</li>
+                <li>Article “single” : refonte du gabarit lecture mobile (propre, sémantique, maintenable).</li>
+                <li>Boutique/panier : feedback “ajout au panier” visible + page confirmation + email de confirmation (si dans le scope).</li>
+              </ul>
+            </div>
+
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Respecter la charte existante + impact structurel minimal (modifs localisées).</li>
+                  <li>Bonus : structuration “Prix Cinergie” et design “Notre histoire”.</li>
+                </ul>
+              </div>
+            </details>
+
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Mobile-first</li><li class="tag">Refonte gabarit</li><li class="tag">Agenda</li><li class="tag">E-commerce UX</li>
+            </ul>
+          </article>
+        </li>
+
+        <!-- Dogitech -->
+        <li class="project">
+          <article aria-labelledby="p-dogitech-title">
+            <h2 id="p-dogitech-title">Dogitech.be</h2>
+
+            <ul class="meta" aria-label="Liens et documents">
+              <li class="badge"><span class="badge-label">Site:</span> <span>dogitech.be</span></li>
+              <li class="badge"><span class="badge-label">Brief:</span> <a href="./dogitech.be.html">dogitech.be.md</a></li>
+            </ul>
+
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Site vitrine artisan (plomberie/électricité/petits travaux). L’enjeu : conversion et confiance sur mobile (souvent en contexte d’urgence), avec un ton direct et des preuves.
+            </div>
+
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Homepage mobile-first : accès immédiat “Urgence / Dépannage” + CTA appeler/devis.</li>
+                <li>Gabarit “Service” réutilisable + 3 pages (plomberie, électricité, petits travaux).</li>
+                <li>Contact : formulaire court, validation, anti-spam simple, confirmation.</li>
+                <li>Transparence tarifaire (page ou sections) + “preuves” (réalisations/avant-après si dispo).</li>
+              </ul>
+            </div>
+
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Microcopy court, utile, sans marketing.</li>
+                  <li>Bonus : module interactif “cheap / fast / good”.</li>
+                </ul>
+              </div>
+            </details>
+
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Artisan</li><li class="tag">Conversion</li><li class="tag">Mobile-first</li><li class="tag">Formulaire</li>
+            </ul>
+          </article>
+        </li>
+
+        <!-- Le Lion Pacifique -->
+        <li class="project">
+          <article aria-labelledby="p-lion-title">
+            <h2 id="p-lion-title">Le Lion Pacifique</h2>
+
+            <ul class="meta" aria-label="Liens et documents">
+              <li class="badge">
+                <span class="badge-label">Réf:</span>
+                <a href="https://www.instagram.com/alpha_lion_pacifique/" target="_blank" rel="noopener noreferrer">
+                  Instagram<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                </a>
+              </li>
+              <li class="badge"><span class="badge-label">Brief:</span> <a href="./lelionpacifique.html">lelionpacifique.md</a></li>
+              <li class="badge"><span class="badge-label">URL site:</span> <span>TBD</span></li>
+            </ul>
+
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Galerie en ligne “œuvre d’abord” pour un artiste de rue. Priorité : images, respiration, crédibilité, récit factuel. Le site sert de vitrine culturelle et de point de contact (pas un e-commerce agressif).
+            </div>
+
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Accueil : une œuvre forte + accès Galerie + accès Demande de projet.</li>
+                <li>Galerie responsive (grille simple, titres robustes).</li>
+                <li>Fiche œuvre : détails + disponibilité + CTA discret.</li>
+                <li>Demande de projet : formulaire clair (upload optionnel) + confirmation.</li>
+              </ul>
+            </div>
+
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Accessibilité + optimisation images (mobile-first strict).</li>
+                  <li>Bonus : page Parcours structurée (version courte + repères + texte long attribué).</li>
+                </ul>
+              </div>
+            </details>
+
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Galerie</li><li class="tag">Art</li><li class="tag">Mobile-first</li><li class="tag">Formulaire</li>
+            </ul>
+          </article>
+        </li>
+
+        <!-- BadHat -->
+        <li class="project">
+          <article aria-labelledby="p-badhat-title">
+            <h2 id="p-badhat-title">BadHat.dev</h2>
+
+            <ul class="meta" aria-label="Liens et documents">
+              <li class="badge">
+                <span class="badge-label">Site:</span>
+                <a href="https://badhat.dev/" target="_blank" rel="noopener noreferrer">
+                  badhat.dev<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                </a>
+              </li>
+              <li class="badge"><span class="badge-label">Brief:</span> <a href="./badhat.dev.html">badhat.dev.md</a></li>
+            </ul>
+
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Site de documentation (pas marketing) pour un micro-toolkit PHP. Le site doit incarner la philosophie : sobriété, performance, lisibilité, zéro dépendance externe, et IA très prévisible.
+            </div>
+
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Landing claire + liens directs vers docs + quickstart.</li>
+                <li>Index /docs + 2–4 pages modules (format homogène).</li>
+                <li>Navigation solide (URLs réelles, ancres, repères).</li>
+                <li>Performance/accessibilité comme contraintes de base.</li>
+              </ul>
+            </div>
+
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Pas de fonts/CDN/analytics externes. Lisible sans JS.</li>
+                  <li>Bonus : dark mode, copie de code, pages restantes + /examples.</li>
+                </ul>
+              </div>
+            </details>
+
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Docs</li><li class="tag">Statique</li><li class="tag">Perf</li><li class="tag">Accessibilité</li>
+            </ul>
+          </article>
+        </li>
+
+        <!-- JBR -->
+        <li class="project">
+          <article aria-labelledby="p-jbr-title">
+            <h2 id="p-jbr-title">JBR Management</h2>
+
+            <ul class="meta" aria-label="Liens et documents">
+              <li class="badge">
+                <span class="badge-label">Domaine:</span>
+                <a href="https://jbrmanagement.be/" target="_blank" rel="noopener noreferrer">
+                  jbrmanagement.be<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                </a>
+              </li>
+              <li class="badge">
+                <span class="badge-label">Prototype:</span>
+                <a href="https://amstram-creation.github.io/jbrmanagement.be/" target="_blank" rel="noopener noreferrer">
+                  GitHub Pages<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                </a>
+              </li>
+              <li class="badge"><span class="badge-label">Brief:</span> <a href="./jbrmanagement.be.html">jbrmanagement.be.md</a></li>
+            </ul>
+
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Site institutionnel de référence (expert copropriété), servant aussi de porte d’entrée vers Copro Academy. Objectif : crédibilité, clarté, et maillage vers la plateforme de formation.
+            </div>
+
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Structure claire (vitrine pro + CTA vers Copro Academy).</li>
+                <li>Sections : profil/parcours, services, ressources (format simple), contact.</li>
+                <li>Navigation + contenus scannables (mobile-first).</li>
+              </ul>
+            </div>
+
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Ton institutionnel sobre, SEO de base, liens propres.</li>
+                  <li>Bonus : timeline, bibliothèque filtrable (si données disponibles), page publications.</li>
+                </ul>
+              </div>
+            </details>
+
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Institutionnel</li><li class="tag">Autorité</li><li class="tag">Ressources</li><li class="tag">Maillage</li>
+            </ul>
+          </article>
+        </li>
+
+        <!-- Cléa Vincent -->
+        <li class="project">
+          <article aria-labelledby="p-clea-title">
+            <h2 id="p-clea-title">Cléa Vincent</h2>
+
+            <ul class="meta" aria-label="Liens et documents">
+              <li class="badge"><span class="badge-label">URL site:</span> <span>TBD</span></li>
+              <li class="badge"><span class="badge-label">Brief:</span> <a href="./cleavincent.fr.html">cleavincent.fr.md</a></li>
+            </ul>
+
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Site artiste (vitrine officielle) : présenter l’univers, donner accès à la musique/vidéos, annoncer le live, et fournir un point de contact (booking/presse). Le brief fournit une base éditoriale structurée.
+            </div>
+
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Accueil immersif + accès direct Musique / Clips / Live / Contact.</li>
+                <li>Discographie simple (cards) + liens streaming.</li>
+                <li>Section Live (dates) + Contact (booking/presse).</li>
+              </ul>
+            </div>
+
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Mobile-first, embeds légers (lazy-load), performance.</li>
+                  <li>Bonus : presse/EPK téléchargeable, galerie photos, animations très légères.</li>
+                </ul>
+              </div>
+            </details>
+
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Artiste</li><li class="tag">Discographie</li><li class="tag">Médias</li><li class="tag">Booking</li>
+            </ul>
+          </article>
+        </li>
+
+        <!-- ApiWilder -->
+        <li class="project">
+          <article aria-labelledby="p-apiwilder-title">
+            <h2 id="p-apiwilder-title">ASBL ApiWilder</h2>
+
+            <ul class="meta" aria-label="Liens et documents">
+              <li class="badge"><span class="badge-label">URL site:</span> <span>TBD</span></li>
+              <li class="badge"><span class="badge-label">Brief:</span> <a href="./apiwilder.html">apiwilder.md</a></li>
+            </ul>
+
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Page de dons pour un rucher collectif. Priorité : confiance, transparence, et parcours de don simple. Style “Kickstarter-like” : jauge, paliers, projets, historique simplifié.
+            </div>
+
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Landing orientée don : pitch + CTA + jauge + paliers.</li>
+                <li>Projets : liste + page détail (template).</li>
+                <li>Transparence : à quoi sert l’argent + où en est la collecte + repères.</li>
+                <li>Données pilotées par une source unique (JSON ou mini backoffice léger).</li>
+              </ul>
+            </div>
+
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Mobile-first strict, réassurance (projet réel, local, sérieux).</li>
+                  <li>Bonus : “paiement réel” si faisable, sinon simulation crédible + historique anonymisé.</li>
+                </ul>
+              </div>
+            </details>
+
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Dons</li><li class="tag">Transparence</li><li class="tag">Jauge</li><li class="tag">Projets</li>
+            </ul>
+          </article>
+        </li>
+
+        <!-- Be Chill -->
+        <li class="project">
+          <article aria-labelledby="p-bechill-title">
+            <h2 id="p-bechill-title">Be Chill</h2>
+
+            <ul class="meta" aria-label="Liens et documents">
+              <li class="badge"><span class="badge-label">URL site:</span> <span>TBD</span></li>
+              <li class="badge"><span class="badge-label">Brief:</span> <a href="./bechill.be.html">bechill.be.md</a></li>
+            </ul>
+
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Landing page mobile-first pour un salon esthétique à Uccle. Objectif : page rapide, rassurante, orientée conversion vers la réservation (Salonkee), avec infos pratiques immédiatement accessibles.
+            </div>
+
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>One-page : hero + CTA “Réserver”, services phares, tarifs indicatifs, avis, galerie, infos pratiques.</li>
+                <li>CTA persistants mobile : Réserver / Appeler / Itinéraire.</li>
+                <li>Performance (images optimisées, peu de JS, lazy-loading).</li>
+              </ul>
+            </div>
+
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Intégration Instagram discrète (ou simple lien), éviter widgets lourds.</li>
+                  <li>Bonus : formulaire de contact (si back-end), SEO local de base.</li>
+                </ul>
+              </div>
+            </details>
+
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Landing</li><li class="tag">Mobile-first</li><li class="tag">Conversion</li><li class="tag">Performance</li>
+            </ul>
+          </article>
+        </li>
+      </ul>
     </main>
   </div>
 </body>
