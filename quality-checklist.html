@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Quality Checklist — Hackathon Frontend</title>
+
+  <style>
+    :root{
+      --bg: #f0f2f5;
+      --surface: #ffffff;
+      --text: #1f2937;
+      --muted: #374151;
+
+      --accent: #004a99;
+      --accent-ink: #003f7f;
+
+      --soft: #e8f0f8;
+      --border: #b6c6da;
+
+      --ok: #166534;
+      --ok-bg: #dcfce7;
+      --warn: #92400e;
+      --warn-bg: #fef3c7;
+      --fail: #991b1b;
+      --fail-bg: #fee2e2;
+
+      --focus-outline: #111827;
+      --focus-bg: #fffbcc;
+
+      --shadow: 0 2px 12px rgba(0,0,0,0.10);
+      --radius: 12px;
+
+      --space-1: 0.5rem;
+      --space-2: 0.75rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2rem;
+
+      --maxw: 900px;
+      --reading: 70ch;
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 2.5rem 1.25rem;
+      line-height: 1.6;
+    }
+
+    .container { max-width: var(--maxw); margin: 0 auto; }
+
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.14em;
+    }
+    a:hover { text-decoration-thickness: 3px; }
+    a:focus-visible {
+      outline: 3px solid var(--focus-outline);
+      outline-offset: 3px;
+      background: var(--focus-bg);
+      border-radius: 0.25rem;
+    }
+
+    .skip-link {
+      position: absolute; top: 0.5rem; left: 0.5rem;
+      padding: 0.75rem 1rem; background: var(--focus-bg); color: var(--text);
+      border: 2px solid var(--focus-outline); border-radius: 0.5rem; z-index: 1000;
+      transform: translateY(-200%); transition: transform 120ms linear;
+    }
+    .skip-link:focus, .skip-link:focus-visible { transform: translateY(0); outline: none; }
+
+    header.page-header { margin-bottom: 2rem; }
+    h1 {
+      margin: 0 0 var(--space-1);
+      font-size: clamp(1.75rem, 2.8vw, 2.25rem);
+      line-height: 1.2;
+      color: var(--accent);
+    }
+    .intro {
+      margin: 0;
+      max-width: var(--reading);
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    /* Navigation */
+    nav { margin: var(--space-4) 0; }
+    nav ol {
+      margin: 0; padding: 0; list-style: none;
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+    nav li a {
+      display: inline-block;
+      font-size: 0.875rem; font-weight: 700;
+      color: var(--accent-ink); background: var(--soft);
+      padding: 0.45rem 0.75rem; border-radius: 0.5rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      text-decoration: none;
+    }
+    nav li a:hover { background: var(--border); }
+
+    /* Sections */
+    main { margin-top: var(--space-4); }
+
+    section {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: var(--space-5);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 1.75rem;
+    }
+
+    h2 {
+      margin: 0 0 var(--space-2);
+      font-size: 1.375rem;
+      line-height: 1.25;
+      color: var(--accent);
+    }
+    h2 .num {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.8rem;
+      width: 1.6rem; height: 1.6rem;
+      line-height: 1.6rem;
+      text-align: center;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    h3 {
+      margin: 1.25rem 0 0.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      font-size: 0.875rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    p, li { max-width: var(--reading); }
+
+    /* Tool cards */
+    .tool {
+      margin: var(--space-3) 0;
+      padding: var(--space-3) var(--space-4);
+      border-left: 4px solid var(--accent);
+      background: var(--soft);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .tool-name {
+      font-weight: 800;
+      font-size: 1rem;
+      margin: 0 0 0.25rem;
+    }
+    .tool-url {
+      font-size: 0.875rem;
+      word-break: break-all;
+    }
+    .tool-desc {
+      margin: 0.5rem 0 0;
+      font-size: 0.9375rem;
+    }
+
+    /* Thresholds */
+    .thresholds {
+      margin: var(--space-3) 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .th {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      padding: 0.35rem 0.65rem;
+      border-radius: 0.5rem;
+      border: 1px solid transparent;
+    }
+    .th--ok   { background: var(--ok-bg);   color: var(--ok);   border-color: var(--ok); }
+    .th--warn { background: var(--warn-bg); color: var(--warn); border-color: var(--warn); }
+    .th--fail { background: var(--fail-bg); color: var(--fail); border-color: var(--fail); }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9375rem;
+      margin: var(--space-3) 0;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      font-weight: 800;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      background: var(--soft);
+    }
+    td code {
+      font-size: 0.8125rem;
+      background: var(--soft);
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.25rem;
+    }
+
+    /* Code */
+    code {
+      font-family: "Fira Code", "SF Mono", "Cascadia Code", monospace;
+      font-size: 0.875rem;
+    }
+    pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: var(--space-3);
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      font-size: 0.8125rem;
+      line-height: 1.5;
+    }
+    pre code { background: none; padding: 0; color: inherit; }
+
+    /* Callouts */
+    .callout {
+      margin: var(--space-3) 0;
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius);
+      font-size: 0.9375rem;
+    }
+    .callout--pass  { background: var(--ok-bg);   border-left: 4px solid var(--ok); }
+    .callout--target { background: var(--soft);    border-left: 4px solid var(--accent); }
+    .callout--warn  { background: var(--warn-bg); border-left: 4px solid var(--warn); }
+
+    .callout strong { display: block; margin-bottom: 0.25rem; }
+
+    /* Back to top */
+    .top-link {
+      display: inline-block;
+      margin-top: var(--space-3);
+      font-size: 0.8125rem;
+      text-decoration: none;
+      color: var(--muted);
+    }
+    .top-link:hover { color: var(--accent); }
+
+    @media (max-width: 420px) {
+      body { padding: 1.5rem 0.875rem; }
+      section { padding: 1.25rem; }
+      .tool { padding: var(--space-2) var(--space-3); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; transition: none !important; }
+    }
+
+    @media (forced-colors: active) {
+      section, .tool, .badge, .tag, .th, .callout {
+        forced-color-adjust: auto;
+        border: 1px solid CanvasText;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+  <div class="container">
+    <header class="page-header">
+      <h1>Quality Checklist</h1>
+      <p class="intro">
+        Outils et seuils à respecter pour évaluer la qualité frontend de chaque projet du hackathon.
+        Chaque groupe doit exécuter ces vérifications <strong>avant la soumission</strong>.
+        Pas de backend, pas d'excuses&nbsp;: tout se teste côté client.
+      </p>
+    </header>
+
+    <nav aria-label="Sommaire">
+      <ol>
+        <li><a href="#validation">Validation HTML</a></li>
+        <li><a href="#a11y">Accessibilité</a></li>
+        <li><a href="#perf">Performance</a></li>
+        <li><a href="#seo">SEO technique</a></li>
+        <li><a href="#i18n">i18n &amp; lang</a></li>
+        <li><a href="#css">CSS &amp; responsive</a></li>
+        <li><a href="#js">JavaScript</a></li>
+        <li><a href="#checklist">Checklist finale</a></li>
+      </ol>
+    </nav>
+
+    <main id="main" tabindex="-1">
+
+      <!-- 1. HTML Validation -->
+      <section id="validation">
+        <h2><span class="num">1</span> Validation HTML</h2>
+        <p>
+          Le HTML doit être valide. Pas "à peu près". Zéro erreur, zéro warning non justifié.
+          Un document invalide casse le parsing, l'accessibilité, le SEO, et le rendu cross-browser.
+        </p>
+
+        <div class="tool">
+          <p class="tool-name">W3C Markup Validation Service</p>
+          <p class="tool-url"><a href="https://validator.w3.org/" target="_blank" rel="noopener">validator.w3.org</a></p>
+          <p class="tool-desc">
+            Validateur officiel du W3C. Accepte une URL, un upload, ou du code collé.
+            Utilisez le mode "validate by direct input" pour les pages locales.
+          </p>
+          <ul class="thresholds">
+            <li class="th th--ok">✓ 0 erreur, 0 warning</li>
+            <li class="th th--warn">⚠ 0 erreur, warnings mineurs</li>
+            <li class="th th--fail">✗ Toute erreur = à corriger</li>
+          </ul>
+        </div>
+
+        <div class="tool">
+          <p class="tool-name">HTMLHint (CLI)</p>
+          <p class="tool-url"><a href="https://htmlhint.com/" target="_blank" rel="noopener">htmlhint.com</a></p>
+          <p class="tool-desc">
+            Linter HTML en ligne de commande. Vérifie les attributs manquants, les balises non fermées,
+            les <code>id</code> dupliqués, etc. Intégrable dans un script npm.
+          </p>
+          <pre><code>npx htmlhint "**/*.html"</code></pre>
+        </div>
+
+        <h3>Vérifications manuelles</h3>
+        <table>
+          <thead><tr><th>Point</th><th>Attendu</th></tr></thead>
+          <tbody>
+            <tr><td>Doctype</td><td><code>&lt;!doctype html&gt;</code> en première ligne</td></tr>
+            <tr><td>Attribut <code>lang</code></td><td>Présent sur <code>&lt;html&gt;</code>, valeur correcte (<code>fr</code>, <code>nl</code>, <code>en</code>)</td></tr>
+            <tr><td>Charset</td><td><code>&lt;meta charset="UTF-8"&gt;</code> avant tout texte</td></tr>
+            <tr><td>Viewport</td><td><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></td></tr>
+            <tr><td><code>&lt;title&gt;</code></td><td>Présent, unique, descriptif (pas vide, pas "Document")</td></tr>
+            <tr><td>Sémantique</td><td><code>header</code>, <code>main</code>, <code>nav</code>, <code>footer</code>, <code>article</code>, <code>section</code> utilisés correctement</td></tr>
+            <tr><td>Headings</td><td>Hiérarchie logique (<code>h1</code> unique, pas de saut <code>h1→h3</code>)</td></tr>
+            <tr><td>Images</td><td><code>alt</code> sur chaque <code>&lt;img&gt;</code>. Vide (<code>alt=""</code>) uniquement si décoratif</td></tr>
+          </tbody>
+        </table>
+
+        <a href="#main" class="top-link">↑ haut</a>
+      </section>
+
+      <!-- 2. Accessibility -->
+      <section id="a11y">
+        <h2><span class="num">2</span> Accessibilité</h2>
+        <p>
+          WCAG 2.1 niveau AA minimum. L'accessibilité n'est pas un bonus — c'est un critère d'évaluation.
+        </p>
+
+        <div class="tool">
+          <p class="tool-name">WAVE — Web Accessibility Evaluation Tool</p>
+          <p class="tool-url"><a href="https://wave.webaim.org/" target="_blank" rel="noopener">wave.webaim.org</a></p>
+          <p class="tool-desc">
+            Extension navigateur (Chrome/Firefox) ou URL directe.
+            Affiche erreurs, alertes, et structure ARIA directement sur la page.
+          </p>
+          <ul class="thresholds">
+            <li class="th th--ok">✓ 0 erreur</li>
+            <li class="th th--warn">⚠ Alertes = à vérifier manuellement</li>
+            <li class="th th--fail">✗ Toute erreur (contraste, alt manquant, label manquant) = à corriger</li>
+          </ul>
+        </div>
+
+        <div class="tool">
+          <p class="tool-name">axe DevTools</p>
+          <p class="tool-url"><a href="https://www.deque.com/axe/devtools/" target="_blank" rel="noopener">deque.com/axe/devtools</a></p>
+          <p class="tool-desc">
+            Extension Chrome. Audit WCAG automatisé dans les DevTools.
+            Plus précis que WAVE sur certains cas ARIA.
+            Utilisez les deux — ils ne détectent pas les mêmes problèmes.
+          </p>
+          <ul class="thresholds">
+            <li class="th th--ok">✓ 0 violation "critical" et "serious"</li>
+            <li class="th th--warn">⚠ Violations "moderate" = à traiter si possible</li>
+          </ul>
+        </div>
+
+        <div class="tool">
+          <p class="tool-name">WebAIM Contrast Checker</p>
+          <p class="tool-url"><a href="https://webaim.org/resources/contrastchecker/" target="_blank" rel="noopener">webaim.org/resources/contrastchecker</a></p>
+          <p class="tool-desc">
+            Vérification rapide du ratio de contraste entre deux couleurs.
+          </p>
+          <ul class="thresholds">
+            <li class="th th--ok">✓ ≥ 4.5:1 texte normal, ≥ 3:1 texte large (≥18px bold ou ≥24px)</li>
+            <li class="th th--fail">✗ En dessous = non conforme AA</li>
+          </ul>
+        </div>
+
+        <h3>Tests manuels obligatoires</h3>
+        <table>
+          <thead><tr><th>Test</th><th>Comment</th></tr></thead>
+          <tbody>
+            <tr><td>Navigation clavier</td><td><kbd>Tab</kbd> sur toute la page. Chaque élément interactif doit être atteignable et avoir un <code>:focus-visible</code> visible</td></tr>
+            <tr><td>Skip link</td><td>Premier <kbd>Tab</kbd> = lien "Aller au contenu" (ou équivalent)</td></tr>
+            <tr><td>Zoom 200%</td><td>Aucun contenu tronqué, pas de scroll horizontal</td></tr>
+            <tr><td>Lecteur d'écran</td><td>Au minimum : tester les landmarks, les headings, et les formulaires avec VoiceOver (macOS) ou NVDA (Windows)</td></tr>
+          </tbody>
+        </table>
+
+        <a href="#main" class="top-link">↑ haut</a>
+      </section>
+
+      <!-- 3. Performance -->
+      <section id="perf">
+        <h2><span class="num">3</span> Performance</h2>
+        <p>
+          Pas de framework lourd, pas de CDN douteux, pas de bundle de 2 Mo.
+          Vanilla HTML/CSS/JS = aucune raison d'avoir un Lighthouse &lt; 90.
+        </p>
+
+        <div class="tool">
+          <p class="tool-name">Lighthouse (Chrome DevTools)</p>
+          <p class="tool-url">DevTools → Lighthouse tab → cocher Performance, Accessibility, Best Practices, SEO</p>
+          <p class="tool-desc">
+            Exécutez en mode <strong>mobile</strong> (throttled), en navigation privée (pas d'extensions).
+            Lancez au moins 3 fois, gardez le score médian.
+          </p>
+          <ul class="thresholds">
+            <li class="th th--ok">✓ Performance ≥ 90 — Accessibility ≥ 95 — Best Practices ≥ 90 — SEO ≥ 90</li>
+            <li class="th th--warn">⚠ Performance 70–89 = optimisable</li>
+            <li class="th th--fail">✗ Tout score &lt; 70 = problème sérieux</li>
+          </ul>
+        </div>
+
+        <div class="tool">
+          <p class="tool-name">PageSpeed Insights</p>
+          <p class="tool-url"><a href="https://pagespeed.web.dev/" target="_blank" rel="noopener">pagespeed.web.dev</a></p>
+          <p class="tool-desc">
+            Lighthouse distant (données réelles + données simulées).
+            Utile si le site est déployé (GitHub Pages, Netlify, etc.).
+          </p>
+        </div>
+
+        <h3>Métriques à surveiller</h3>
+        <table>
+          <thead><tr><th>Métrique</th><th>Seuil "bon"</th><th>Signification</th></tr></thead>
+          <tbody>
+            <tr><td>LCP (Largest Contentful Paint)</td><td>≤ 2.5s</td><td>Temps d'affichage du plus gros élément visible</td></tr>
+            <tr><td>FID / INP (Interaction to Next Paint)</td><td>≤ 200ms</td><td>Réactivité à la première interaction</td></tr>
+            <tr><td>CLS (Cumulative Layout Shift)</td><td>≤ 0.1</td><td>Stabilité visuelle (pas de sauts de layout)</td></tr>
+            <tr><td>TTFB (Time to First Byte)</td><td>≤ 800ms</td><td>Temps de réponse serveur (moins pertinent en statique)</td></tr>
+            <tr><td>Poids total page</td><td>≤ 500 KB</td><td>HTML + CSS + JS + images (tout compris)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Checklist images</h3>
+        <table>
+          <thead><tr><th>Point</th><th>Attendu</th></tr></thead>
+          <tbody>
+            <tr><td>Format</td><td>WebP ou AVIF. PNG/JPEG en fallback uniquement</td></tr>
+            <tr><td>Dimensionnement</td><td>Pas d'image 4000px affichée à 400px. <code>srcset</code> + <code>sizes</code> si pertinent</td></tr>
+            <tr><td>Lazy loading</td><td><code>loading="lazy"</code> sur toutes les images hors viewport initial</td></tr>
+            <tr><td>Dimensions explicites</td><td><code>width</code> et <code>height</code> en attributs pour éviter le CLS</td></tr>
+            <tr><td><code>decoding</code></td><td><code>decoding="async"</code> sur les images non critiques</td></tr>
+          </tbody>
+        </table>
+
+        <a href="#main" class="top-link">↑ haut</a>
+      </section>
+
+      <!-- 4. SEO -->
+      <section id="seo">
+        <h2><span class="num">4</span> SEO technique</h2>
+        <p>
+          Pas de "stratégie SEO" complexe — juste les fondamentaux techniques pour un site indexable et bien décrit.
+        </p>
+
+        <div class="tool">
+          <p class="tool-name">Lighthouse SEO audit</p>
+          <p class="tool-desc">Déjà inclus dans Lighthouse (section 3). Score ≥ 90 attendu.</p>
+        </div>
+
+        <div class="tool">
+          <p class="tool-name">metatags.io</p>
+          <p class="tool-url"><a href="https://metatags.io/" target="_blank" rel="noopener">metatags.io</a></p>
+          <p class="tool-desc">
+            Prévisualisation des balises Open Graph / meta. Vérifiez le rendu avant de partager.
+          </p>
+        </div>
+
+        <h3>Vérifications</h3>
+        <table>
+          <thead><tr><th>Point</th><th>Attendu</th></tr></thead>
+          <tbody>
+            <tr><td><code>&lt;title&gt;</code></td><td>Unique par page, 30–60 caractères, descriptif</td></tr>
+            <tr><td><code>meta description</code></td><td>Unique par page, 120–160 caractères</td></tr>
+            <tr><td>Open Graph</td><td><code>og:title</code>, <code>og:description</code>, <code>og:image</code>, <code>og:url</code></td></tr>
+            <tr><td><code>rel="canonical"</code></td><td>Présent si le contenu est accessible via plusieurs URLs</td></tr>
+            <tr><td>Liens</td><td>Pas de liens cassés. <code>rel="noopener noreferrer"</code> sur <code>target="_blank"</code></td></tr>
+            <tr><td>Structure</td><td>Un seul <code>&lt;h1&gt;</code> par page. Headings ordonnés logiquement</td></tr>
+            <tr><td>robots</td><td>Pas de <code>noindex</code> accidentel sur les pages publiques</td></tr>
+          </tbody>
+        </table>
+
+        <a href="#main" class="top-link">↑ haut</a>
+      </section>
+
+      <!-- 5. i18n -->
+      <section id="i18n">
+        <h2><span class="num">5</span> Internationalisation &amp; langue</h2>
+        <p>
+          Certains projets sont en français, d'autres en néerlandais, d'autres bilingues.
+          Le minimum est un balisage correct de la langue.
+        </p>
+
+        <h3>Règles</h3>
+        <table>
+          <thead><tr><th>Point</th><th>Attendu</th></tr></thead>
+          <tbody>
+            <tr><td><code>lang</code> sur <code>&lt;html&gt;</code></td><td>Langue principale du document (<code>fr</code>, <code>nl</code>, <code>en</code>)</td></tr>
+            <tr><td>Passages dans une autre langue</td><td>Attribut <code>lang</code> sur l'élément englobant (ex. <code>&lt;span lang="en"&gt;…&lt;/span&gt;</code>)</td></tr>
+            <tr><td>Direction du texte</td><td><code>dir="ltr"</code> par défaut (pas de RTL dans ce hackathon, mais <code>dir</code> doit être explicite si du contenu arabe/hébreu apparaît)</td></tr>
+            <tr><td>Encodage</td><td>UTF-8 partout. Pas d'entités HTML inutiles (<code>&amp;eacute;</code> → écrire <code>é</code> directement)</td></tr>
+            <tr><td>Dates</td><td>Format européen (<code>jj/mm/aaaa</code>) ou ISO (<code>aaaa-mm-jj</code>). Pas de format US</td></tr>
+            <tr><td><code>hreflang</code></td><td>Si le site a un sélecteur de langue, chaque version linguistique doit déclarer ses alternatives via <code>&lt;link rel="alternate" hreflang="…"&gt;</code></td></tr>
+          </tbody>
+        </table>
+
+        <a href="#main" class="top-link">↑ haut</a>
+      </section>
+
+      <!-- 6. CSS -->
+      <section id="css">
+        <h2><span class="num">6</span> CSS &amp; responsive</h2>
+
+        <div class="tool">
+          <p class="tool-name">Stylelint (CLI)</p>
+          <p class="tool-url"><a href="https://stylelint.io/" target="_blank" rel="noopener">stylelint.io</a></p>
+          <p class="tool-desc">
+            Linter CSS. Détecte les propriétés inconnues, les sélecteurs trop spécifiques, et les incohérences.
+          </p>
+          <pre><code>npx stylelint "**/*.css"</code></pre>
+        </div>
+
+        <div class="tool">
+          <p class="tool-name">Can I Use</p>
+          <p class="tool-url"><a href="https://caniuse.com/" target="_blank" rel="noopener">caniuse.com</a></p>
+          <p class="tool-desc">
+            Vérifiez la compatibilité navigateur de toute propriété CSS ou API JS que vous utilisez.
+            Cible minimale : 2 dernières versions de Chrome, Firefox, Safari, Edge.
+          </p>
+        </div>
+
+        <h3>Vérifications</h3>
+        <table>
+          <thead><tr><th>Point</th><th>Attendu</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile-first</td><td>Les media queries partent du mobile et ajoutent des règles pour écrans larges (<code>min-width</code>)</td></tr>
+            <tr><td>Breakpoints testés</td><td>320px, 375px, 768px, 1024px, 1440px. Pas de scroll horizontal à aucune largeur</td></tr>
+            <tr><td>Unités</td><td><code>rem</code>/<code>em</code> pour les tailles de texte. Pas de <code>px</code> sur <code>font-size</code> (empêche le zoom utilisateur)</td></tr>
+            <tr><td>Custom properties</td><td>Couleurs, espacements et tailles centralisés dans <code>:root</code></td></tr>
+            <tr><td><code>prefers-reduced-motion</code></td><td>Toutes les animations/transitions désactivées si l'utilisateur le demande</td></tr>
+            <tr><td><code>prefers-color-scheme</code></td><td>Si dark mode implémenté : les deux thèmes doivent passer le contraste AA</td></tr>
+            <tr><td><code>forced-colors</code></td><td>Le site reste lisible en mode contraste élevé (Windows). Testez avec les DevTools</td></tr>
+            <tr><td>Print</td><td><code>@media print</code> minimal : masquer nav, masquer décorations, texte noir sur blanc</td></tr>
+          </tbody>
+        </table>
+
+        <a href="#main" class="top-link">↑ haut</a>
+      </section>
+
+      <!-- 7. JavaScript -->
+      <section id="js">
+        <h2><span class="num">7</span> JavaScript</h2>
+        <p>
+          JS est optionnel (progressive enhancement). Si utilisé, il doit être sobre, maintenable,
+          et ne jamais bloquer l'affichage du contenu.
+        </p>
+
+        <div class="tool">
+          <p class="tool-name">ESLint (CLI)</p>
+          <p class="tool-url"><a href="https://eslint.org/" target="_blank" rel="noopener">eslint.org</a></p>
+          <p class="tool-desc">Linter JS standard. Détecte les erreurs, les variables inutilisées, et les mauvaises pratiques.</p>
+          <pre><code>npx eslint "**/*.js"</code></pre>
+        </div>
+
+        <h3>Vérifications</h3>
+        <table>
+          <thead><tr><th>Point</th><th>Attendu</th></tr></thead>
+          <tbody>
+            <tr><td>Progressive enhancement</td><td>Le contenu est lisible et navigable sans JS. JS ajoute du confort, pas de l'accès</td></tr>
+            <tr><td>Chargement</td><td><code>defer</code> ou <code>type="module"</code> sur tous les <code>&lt;script&gt;</code>. Jamais de <code>&lt;script&gt;</code> bloquant dans <code>&lt;head&gt;</code></td></tr>
+            <tr><td><code>"use strict"</code></td><td>Présent (ou modules ES qui l'impliquent)</td></tr>
+            <tr><td>Console</td><td>Aucun <code>console.log</code> oublié en production. Aucune erreur dans la console</td></tr>
+            <tr><td>Event listeners</td><td>Pas de <code>onclick</code> inline. <code>addEventListener</code> uniquement</td></tr>
+            <tr><td>Pas de librairies lourdes</td><td>Pas de jQuery, pas de framework inutile. Vanilla JS ou micro-librairie justifiée (&lt; 10 KB)</td></tr>
+            <tr><td>Pas de <code>localStorage</code> abusif</td><td>Pas de données sensibles en <code>localStorage</code>. Préférence thème = OK. Données personnelles = NON</td></tr>
+          </tbody>
+        </table>
+
+        <a href="#main" class="top-link">↑ haut</a>
+      </section>
+
+      <!-- 8. Final Checklist -->
+      <section id="checklist">
+        <h2><span class="num">8</span> Checklist finale (avant soumission)</h2>
+        <p>
+          À cocher par chaque groupe. Chaque ligne est un point d'évaluation.
+        </p>
+
+        <div class="callout callout--pass">
+          <strong>Obligatoire (bloquant)</strong>
+          HTML valide (0 erreur W3C)&ensp;·&ensp;
+          WAVE 0 erreur&ensp;·&ensp;
+          Lighthouse Perf ≥ 90, A11y ≥ 95&ensp;·&ensp;
+          <code>lang</code> correct&ensp;·&ensp;
+          Navigation clavier fonctionnelle&ensp;·&ensp;
+          Mobile 320px sans scroll horizontal&ensp;·&ensp;
+          Contenu lisible sans JS&ensp;·&ensp;
+          0 erreur console
+        </div>
+
+        <div class="callout callout--target">
+          <strong>Attendu (évalué)</strong>
+          Lighthouse Best Practices ≥ 90, SEO ≥ 90&ensp;·&ensp;
+          <code>prefers-reduced-motion</code> respecté&ensp;·&ensp;
+          Images optimisées (WebP, lazy, dimensions)&ensp;·&ensp;
+          Skip link&ensp;·&ensp;
+          Open Graph complet&ensp;·&ensp;
+          CSS custom properties&ensp;·&ensp;
+          Poids page ≤ 500 KB
+        </div>
+
+        <div class="callout callout--warn">
+          <strong>Bonus (apprécié)</strong>
+          Lighthouse 4× 100&ensp;·&ensp;
+          Dark mode fonctionnel&ensp;·&ensp;
+          <code>forced-colors</code> testé&ensp;·&ensp;
+          <code>@media print</code>&ensp;·&ensp;
+          <code>hreflang</code> si multilingue&ensp;·&ensp;
+          Axe DevTools 0 violation
+        </div>
+
+        <h3>Résumé des outils</h3>
+        <table>
+          <thead><tr><th>Outil</th><th>Cible</th><th>Type</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://validator.w3.org/">W3C Validator</a></td><td>HTML</td><td>Web</td></tr>
+            <tr><td><a href="https://htmlhint.com/">HTMLHint</a></td><td>HTML</td><td>CLI</td></tr>
+            <tr><td><a href="https://wave.webaim.org/">WAVE</a></td><td>Accessibilité</td><td>Extension / Web</td></tr>
+            <tr><td><a href="https://www.deque.com/axe/devtools/">axe DevTools</a></td><td>Accessibilité</td><td>Extension</td></tr>
+            <tr><td><a href="https://webaim.org/resources/contrastchecker/">Contrast Checker</a></td><td>Contraste</td><td>Web</td></tr>
+            <tr><td>Lighthouse</td><td>Perf / A11y / SEO / BP</td><td>DevTools</td></tr>
+            <tr><td><a href="https://pagespeed.web.dev/">PageSpeed Insights</a></td><td>Perf (données réelles)</td><td>Web</td></tr>
+            <tr><td><a href="https://metatags.io/">metatags.io</a></td><td>SEO / OG preview</td><td>Web</td></tr>
+            <tr><td><a href="https://stylelint.io/">Stylelint</a></td><td>CSS</td><td>CLI</td></tr>
+            <tr><td><a href="https://caniuse.com/">Can I Use</a></td><td>Compatibilité</td><td>Web</td></tr>
+            <tr><td><a href="https://eslint.org/">ESLint</a></td><td>JavaScript</td><td>CLI</td></tr>
+          </tbody>
+        </table>
+
+        <a href="#main" class="top-link">↑ haut</a>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
