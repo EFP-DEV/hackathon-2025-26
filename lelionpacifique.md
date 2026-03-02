@@ -1,3 +1,5 @@
+# hackathon-2025-26 — le lion pacifique
+
 ## Contexte du site actuel
 
 Le contenu disponible provient d’un article long (type “actualité / portrait”) et d’une présence officielle sur Instagram. L’enjeu du site “Le Lion Pacifique” est de transformer ce contenu en une galerie en ligne durable, lisible, et respectueuse : montrer l’art sans pousser à l’achat, raconter le parcours sans dramatisation ni romantisation, et donner des repères concrets (œuvres, expositions, demandes de projets).
