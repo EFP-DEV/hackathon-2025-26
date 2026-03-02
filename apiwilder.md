@@ -1,3 +1,5 @@
+# hackathon-2025-26 — apiwilder
+
 ## Contexte du site actuel
 
 ApiWilder est une ASBL qui porte un rucher collectif installé au bois du Wilder, sur d’anciens terrains potagers en lisière du bois, réaffectés à l’apiculture avec l’appui de Bruxelles-Environnement. Le projet existe depuis 2011, produit des essaims pour des apiculteurs isolés ainsi qu’un miel reconnu pour sa qualité, et mène un travail de sensibilisation lors d’événements communaux.
