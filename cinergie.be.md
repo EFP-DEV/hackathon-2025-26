@@ -1,3 +1,4 @@
+# hackathon-2025-26 — Cinergie
 ## Contexte du site actuel
 
 Le hackathon porte sur Cinergie.be, avec un site déjà en production et une charte graphique existante à respecter. L’équipe a une marge de proposition sur certaines pages (notamment la homepage), mais le cadre impose de limiter les répercussions structurelles sur les autres pages du site : on évite les refontes globales de gabarits ou de composants partagés.
