@@ -1,3 +1,5 @@
+# hackathon-2025-26 — bechill.be
+
 ## Contexte du site actuel
 
 Be Chill est un salon esthétique / bien-être situé à Uccle (Chaussée d’Alsemberg 842, 1180). Aujourd’hui, la présence en ligne se fait essentiellement via Instagram et une page de réservation (Salonkee), avec des informations déjà riches (services, prix, horaires, avis vérifiés, accès, ambiance). Le besoin n’est pas de “refaire une marque”, mais de créer une page web mobile-first, rapide et rassurante, qui centralise l’essentiel, met en valeur l’expérience (calme, premium, chaleureux) et augmente la conversion vers la prise de rendez-vous.
