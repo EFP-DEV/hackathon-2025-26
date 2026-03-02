@@ -1,21 +1,20 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light dark" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
   <title>Hackathon Projects</title>
 
   <style>
     :root{
-      /* WCAG AAA-oriented palette (>= 7:1 for normal text where used) */
       --bg: #f0f2f5;
       --surface: #ffffff;
       --text: #1f2937;
       --muted: #374151;
 
-      --accent: #004a99;      /* contrast 8.6:1 on white */
-      --accent-ink: #003f7f;  /* very dark blue */
+      --accent: #004a99;
+      --accent-ink: #003f7f;
 
       --soft: #e8f0f8;
       --border: #b6c6da;
@@ -49,7 +48,6 @@
 
     .container { max-width: var(--maxw); margin: 0 auto; }
 
-    /* Skip link (keyboard) */
     .skip-link {
       position: absolute;
       top: 0.5rem;
@@ -85,7 +83,6 @@
 
     main { margin-top: var(--space-4); }
 
-    /* Project grid: robust on narrow viewports (no forced 360px overflow) */
     .projects {
       margin: 0;
       padding: 0;
@@ -110,7 +107,6 @@
       color: var(--accent);
     }
 
-    /* Meta badges */
     .meta {
       margin: 0 0 var(--space-3);
       padding: 0;
@@ -124,7 +120,7 @@
       display: inline-flex;
       align-items: baseline;
       gap: 0.4rem;
-      font-size: 0.875rem; /* 14px */
+      font-size: 0.875rem;
       color: var(--accent-ink);
       background: var(--soft);
       padding: 0.45rem 0.65rem;
@@ -134,7 +130,6 @@
     }
     .badge-label { font-weight: 700; }
 
-    /* Links: never color-only (always underlined), strong focus indicator */
     a {
       color: var(--accent);
       text-decoration: underline;
@@ -153,20 +148,19 @@
       margin: 1.125rem 0 0.5rem;
       font-weight: 800;
       color: var(--accent);
-      font-size: 0.875rem; /* 14px */
+      font-size: 0.875rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
     .block {
-      font-size: 1rem; /* 16px */
+      font-size: 1rem;
       color: var(--text);
     }
 
     .block ul { margin: 0.5rem 0 0; padding-left: 1.125rem; }
     .block li { margin: 0.4rem 0; }
 
-    /* Details / summary: visible affordance, keyboard focus */
     details { margin-top: var(--space-3); }
     summary {
       cursor: pointer;
@@ -183,9 +177,7 @@
       margin-right: 0.5rem;
       transform: translateY(-1px);
     }
-    details[open] summary::before{
-      content: "▾";
-    }
+    details[open] summary::before{ content: "▾"; }
 
     summary:focus-visible {
       outline: 3px solid var(--focus-outline);
@@ -197,7 +189,6 @@
     details[open] summary { margin-bottom: 0.25rem; }
     details .block { padding-top: 0.25rem; }
 
-    /* Tags */
     .tags {
       margin-top: var(--space-4);
       display: flex;
@@ -209,12 +200,11 @@
       color: var(--accent);
       padding: 0.35rem 0.65rem;
       border-radius: 0.5rem;
-      font-size: 0.875rem; /* 14px */
+      font-size: 0.875rem;
       font-weight: 700;
       border: 1px solid rgba(0,0,0,0.08);
     }
 
-    /* Visually hidden (screen-reader only) */
     .sr-only {
       position: absolute;
       width: 1px;
@@ -227,12 +217,10 @@
       border: 0;
     }
 
-    /* Reduce motion */
     @media (prefers-reduced-motion: reduce) {
       * { scroll-behavior: auto !important; transition: none !important; }
     }
 
-    /* Forced colors / Windows High Contrast */
     @media (forced-colors: active) {
       .project, .badge, .tag {
         forced-color-adjust: auto;
@@ -242,7 +230,6 @@
       a { forced-color-adjust: auto; }
     }
 
-    /* Small-screen padding */
     @media (max-width: 420px) {
       body { padding: 1.5rem 0.875rem; }
       .project { padding: 1.25rem; }
@@ -262,14 +249,14 @@
       </p>
     </header>
 
-    <main id="main" tabindex="-1" aria-label="Contenu principal">
-      <ul class="projects" role="list" aria-label="Liste des projets">
+    <main id="main" tabindex="-1">
+      <ul class="projects" aria-label="Liste des projets">
         <!-- Spokenword -->
         <li class="project">
           <article aria-labelledby="p-spokenword-title">
             <h2 id="p-spokenword-title">Dans! Dichter! Dans!</h2>
 
-            <ul class="meta" role="list" aria-label="Liens et documents">
+            <ul class="meta" aria-label="Liens et documents">
               <li class="badge">
                 <span class="badge-label">Site:</span>
                 <a href="https://www.spokenword.be/" target="_blank" rel="noopener noreferrer">
@@ -307,9 +294,9 @@
               </div>
             </details>
 
-            <div class="tags" aria-label="Mots-clés">
-              <span class="tag">Templates</span><span class="tag">Événements</span><span class="tag">Médias</span><span class="tag">Cohérence UI</span>
-            </div>
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Templates</li><li class="tag">Événements</li><li class="tag">Médias</li><li class="tag">Cohérence UI</li>
+            </ul>
           </article>
         </li>
 
@@ -318,7 +305,7 @@
           <article aria-labelledby="p-lareponse-title">
             <h2 id="p-lareponse-title">LaReponse.org</h2>
 
-            <ul class="meta" role="list" aria-label="Liens et documents">
+            <ul class="meta" aria-label="Liens et documents">
               <li class="badge">
                 <span class="badge-label">Site:</span>
                 <a href="https://lareponse.org/" target="_blank" rel="noopener noreferrer">
@@ -356,9 +343,9 @@
               </div>
             </details>
 
-            <div class="tags" aria-label="Mots-clés">
-              <span class="tag">Manifeste</span><span class="tag">Lecture rapide</span><span class="tag">Design system</span><span class="tag">Sans dépendances</span>
-            </div>
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Manifeste</li><li class="tag">Lecture rapide</li><li class="tag">Design system</li><li class="tag">Sans dépendances</li>
+            </ul>
           </article>
         </li>
 
@@ -367,7 +354,7 @@
           <article aria-labelledby="p-cinergie-title">
             <h2 id="p-cinergie-title">Cinergie.be</h2>
 
-            <ul class="meta" role="list" aria-label="Liens et documents">
+            <ul class="meta" aria-label="Liens et documents">
               <li class="badge">
                 <span class="badge-label">Site:</span>
                 <a href="https://www.cinergie.be/" target="_blank" rel="noopener noreferrer">
@@ -404,9 +391,9 @@
               </div>
             </details>
 
-            <div class="tags" aria-label="Mots-clés">
-              <span class="tag">Mobile-first</span><span class="tag">Refonte gabarit</span><span class="tag">Agenda</span><span class="tag">E-commerce UX</span>
-            </div>
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Mobile-first</li><li class="tag">Refonte gabarit</li><li class="tag">Agenda</li><li class="tag">E-commerce UX</li>
+            </ul>
           </article>
         </li>
 
@@ -415,15 +402,9 @@
           <article aria-labelledby="p-dogitech-title">
             <h2 id="p-dogitech-title">Dogitech.be</h2>
 
-            <ul class="meta" role="list" aria-label="Liens et documents">
-              <li class="badge">
-                <span class="badge-label">Site:</span>
-                <span>dogitech.be</span>
-              </li>
-              <li class="badge">
-                <span class="badge-label">Brief:</span>
-                <a href="./dogitech.be.html">dogitech.be.md</a>
-              </li>
+            <ul class="meta" aria-label="Liens et documents">
+              <li class="badge"><span class="badge-label">Site:</span> <span>dogitech.be</span></li>
+              <li class="badge"><span class="badge-label">Brief:</span> <a href="./dogitech.be.html">dogitech.be.md</a></li>
             </ul>
 
             <h3 class="section-title">Pitch</h3>
@@ -451,9 +432,9 @@
               </div>
             </details>
 
-            <div class="tags" aria-label="Mots-clés">
-              <span class="tag">Artisan</span><span class="tag">Conversion</span><span class="tag">Mobile-first</span><span class="tag">Formulaire</span>
-            </div>
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Artisan</li><li class="tag">Conversion</li><li class="tag">Mobile-first</li><li class="tag">Formulaire</li>
+            </ul>
           </article>
         </li>
 
@@ -462,21 +443,15 @@
           <article aria-labelledby="p-lion-title">
             <h2 id="p-lion-title">Le Lion Pacifique</h2>
 
-            <ul class="meta" role="list" aria-label="Liens et documents">
+            <ul class="meta" aria-label="Liens et documents">
               <li class="badge">
                 <span class="badge-label">Réf:</span>
                 <a href="https://www.instagram.com/alpha_lion_pacifique/" target="_blank" rel="noopener noreferrer">
                   Instagram<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
                 </a>
               </li>
-              <li class="badge">
-                <span class="badge-label">Brief:</span>
-                <a href="./lelionpacifique.html">lelionpacifique.md</a>
-              </li>
-              <li class="badge">
-                <span class="badge-label">URL site:</span>
-                <span>TBD</span>
-              </li>
+              <li class="badge"><span class="badge-label">Brief:</span> <a href="./lelionpacifique.html">lelionpacifique.md</a></li>
+              <li class="badge"><span class="badge-label">URL site:</span> <span>TBD</span></li>
             </ul>
 
             <h3 class="section-title">Pitch</h3>
@@ -504,9 +479,9 @@
               </div>
             </details>
 
-            <div class="tags" aria-label="Mots-clés">
-              <span class="tag">Galerie</span><span class="tag">Art</span><span class="tag">Mobile-first</span><span class="tag">Formulaire</span>
-            </div>
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Galerie</li><li class="tag">Art</li><li class="tag">Mobile-first</li><li class="tag">Formulaire</li>
+            </ul>
           </article>
         </li>
 
@@ -515,17 +490,14 @@
           <article aria-labelledby="p-badhat-title">
             <h2 id="p-badhat-title">BadHat.dev</h2>
 
-            <ul class="meta" role="list" aria-label="Liens et documents">
+            <ul class="meta" aria-label="Liens et documents">
               <li class="badge">
                 <span class="badge-label">Site:</span>
                 <a href="https://badhat.dev/" target="_blank" rel="noopener noreferrer">
                   badhat.dev<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
                 </a>
               </li>
-              <li class="badge">
-                <span class="badge-label">Brief:</span>
-                <a href="./badhat.dev.html">badhat.dev.md</a>
-              </li>
+              <li class="badge"><span class="badge-label">Brief:</span> <a href="./badhat.dev.html">badhat.dev.md</a></li>
             </ul>
 
             <h3 class="section-title">Pitch</h3>
@@ -553,9 +525,9 @@
               </div>
             </details>
 
-            <div class="tags" aria-label="Mots-clés">
-              <span class="tag">Docs</span><span class="tag">Statique</span><span class="tag">Perf</span><span class="tag">Accessibilité</span>
-            </div>
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Docs</li><li class="tag">Statique</li><li class="tag">Perf</li><li class="tag">Accessibilité</li>
+            </ul>
           </article>
         </li>
 
@@ -564,7 +536,7 @@
           <article aria-labelledby="p-jbr-title">
             <h2 id="p-jbr-title">JBR Management</h2>
 
-            <ul class="meta" role="list" aria-label="Liens et documents">
+            <ul class="meta" aria-label="Liens et documents">
               <li class="badge">
                 <span class="badge-label">Domaine:</span>
                 <a href="https://jbrmanagement.be/" target="_blank" rel="noopener noreferrer">
@@ -577,10 +549,7 @@
                   GitHub Pages<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
                 </a>
               </li>
-              <li class="badge">
-                <span class="badge-label">Brief:</span>
-                <a href="./jbrmanagement.be.html">jbrmanagement.be.md</a>
-              </li>
+              <li class="badge"><span class="badge-label">Brief:</span> <a href="./jbrmanagement.be.html">jbrmanagement.be.md</a></li>
             </ul>
 
             <h3 class="section-title">Pitch</h3>
@@ -607,9 +576,9 @@
               </div>
             </details>
 
-            <div class="tags" aria-label="Mots-clés">
-              <span class="tag">Institutionnel</span><span class="tag">Autorité</span><span class="tag">Ressources</span><span class="tag">Maillage</span>
-            </div>
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Institutionnel</li><li class="tag">Autorité</li><li class="tag">Ressources</li><li class="tag">Maillage</li>
+            </ul>
           </article>
         </li>
 
@@ -618,7 +587,7 @@
           <article aria-labelledby="p-clea-title">
             <h2 id="p-clea-title">Cléa Vincent</h2>
 
-            <ul class="meta" role="list" aria-label="Liens et documents">
+            <ul class="meta" aria-label="Liens et documents">
               <li class="badge"><span class="badge-label">URL site:</span> <span>TBD</span></li>
               <li class="badge"><span class="badge-label">Brief:</span> <a href="./cleavincent.fr.html">cleavincent.fr.md</a></li>
             </ul>
@@ -647,9 +616,9 @@
               </div>
             </details>
 
-            <div class="tags" aria-label="Mots-clés">
-              <span class="tag">Artiste</span><span class="tag">Discographie</span><span class="tag">Médias</span><span class="tag">Booking</span>
-            </div>
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Artiste</li><li class="tag">Discographie</li><li class="tag">Médias</li><li class="tag">Booking</li>
+            </ul>
           </article>
         </li>
 
@@ -658,7 +627,7 @@
           <article aria-labelledby="p-apiwilder-title">
             <h2 id="p-apiwilder-title">ASBL ApiWilder</h2>
 
-            <ul class="meta" role="list" aria-label="Liens et documents">
+            <ul class="meta" aria-label="Liens et documents">
               <li class="badge"><span class="badge-label">URL site:</span> <span>TBD</span></li>
               <li class="badge"><span class="badge-label">Brief:</span> <a href="./apiwilder.html">apiwilder.md</a></li>
             </ul>
@@ -688,9 +657,9 @@
               </div>
             </details>
 
-            <div class="tags" aria-label="Mots-clés">
-              <span class="tag">Dons</span><span class="tag">Transparence</span><span class="tag">Jauge</span><span class="tag">Projets</span>
-            </div>
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Dons</li><li class="tag">Transparence</li><li class="tag">Jauge</li><li class="tag">Projets</li>
+            </ul>
           </article>
         </li>
 
@@ -699,7 +668,7 @@
           <article aria-labelledby="p-bechill-title">
             <h2 id="p-bechill-title">Be Chill</h2>
 
-            <ul class="meta" role="list" aria-label="Liens et documents">
+            <ul class="meta" aria-label="Liens et documents">
               <li class="badge"><span class="badge-label">URL site:</span> <span>TBD</span></li>
               <li class="badge"><span class="badge-label">Brief:</span> <a href="./bechill.be.html">bechill.be.md</a></li>
             </ul>
@@ -728,9 +697,9 @@
               </div>
             </details>
 
-            <div class="tags" aria-label="Mots-clés">
-              <span class="tag">Landing</span><span class="tag">Mobile-first</span><span class="tag">Conversion</span><span class="tag">Performance</span>
-            </div>
+            <ul class="tags" aria-label="Mots-clés">
+              <li class="tag">Landing</li><li class="tag">Mobile-first</li><li class="tag">Conversion</li><li class="tag">Performance</li>
+            </ul>
           </article>
         </li>
       </ul>
