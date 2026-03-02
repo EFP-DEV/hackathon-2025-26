@@ -1,465 +1,740 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
   <title>Hackathon Projects</title>
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: "Inter", Arial, sans-serif; background: #f0f2f5; padding: 40px 20px; }
-    .container { max-width: 1200px; margin: 0 auto; }
+    :root{
+      /* WCAG AAA-oriented palette (>= 7:1 for normal text where used) */
+      --bg: #f0f2f5;
+      --surface: #ffffff;
+      --text: #1f2937;
+      --muted: #374151;
 
-    h1 { color: #005BBB; margin-bottom: 12px; font-size: 32px; }
-    .intro { color: #555; margin-bottom: 40px; max-width: 700px; line-height: 1.6; }
+      --accent: #004a99;      /* contrast 8.6:1 on white */
+      --accent-ink: #003f7f;  /* very dark blue */
 
-    .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 28px; }
+      --soft: #e8f0f8;
+      --border: #b6c6da;
 
-    .project { background: #fff; border-radius: 10px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
-    .project h2 { font-size: 22px; color: #005BBB; margin-bottom: 10px; }
+      --focus-outline: #111827;
+      --focus-bg: #fffbcc;
 
-    /* Meta badges (missing in your original CSS) */
-    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+      --shadow: 0 2px 12px rgba(0,0,0,0.10);
+      --radius: 12px;
+
+      --space-1: 0.5rem;
+      --space-2: 0.75rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2rem;
+
+      --maxw: 1200px;
+      --reading: 70ch;
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 2.5rem 1.25rem;
+      line-height: 1.6;
+    }
+
+    .container { max-width: var(--maxw); margin: 0 auto; }
+
+    /* Skip link (keyboard) */
+    .skip-link {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--focus-bg);
+      color: var(--text);
+      border: 2px solid var(--focus-outline);
+      border-radius: 0.5rem;
+      z-index: 1000;
+      transform: translateY(-200%);
+      transition: transform 120ms linear;
+    }
+    .skip-link:focus,
+    .skip-link:focus-visible {
+      transform: translateY(0);
+      outline: none;
+    }
+
+    header.page-header { margin-bottom: 2rem; }
+    h1 {
+      margin: 0 0 var(--space-1);
+      font-size: clamp(1.75rem, 2.8vw, 2.25rem);
+      line-height: 1.2;
+      color: var(--accent);
+    }
+    .intro {
+      margin: 0;
+      max-width: var(--reading);
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    main { margin-top: var(--space-4); }
+
+    /* Project grid: robust on narrow viewports (no forced 360px overflow) */
+    .projects {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+      gap: 1.75rem;
+    }
+
+    .project {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: var(--space-5);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .project h2 {
+      margin: 0 0 var(--space-2);
+      font-size: 1.375rem;
+      line-height: 1.25;
+      color: var(--accent);
+    }
+
+    /* Meta badges */
+    .meta {
+      margin: 0 0 var(--space-3);
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
     .badge {
       display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      color: #003F7F;
-      background: #e8f0f8;
-      padding: 6px 10px;
-      border-radius: 6px;
-      line-height: 1.2;
+      align-items: baseline;
+      gap: 0.4rem;
+      font-size: 0.875rem; /* 14px */
+      color: var(--accent-ink);
+      background: var(--soft);
+      padding: 0.45rem 0.65rem;
+      border-radius: 0.5rem;
+      line-height: 1.35;
+      border: 1px solid rgba(0,0,0,0.08);
     }
-    .badge a { color: inherit; text-decoration: none; font-weight: 700; }
-    .badge a:hover { text-decoration: underline; }
+    .badge-label { font-weight: 700; }
+
+    /* Links: never color-only (always underlined), strong focus indicator */
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.14em;
+    }
+    a:hover { text-decoration-thickness: 3px; }
+    a:focus-visible {
+      outline: 3px solid var(--focus-outline);
+      outline-offset: 3px;
+      background: var(--focus-bg);
+      border-radius: 0.25rem;
+    }
 
     .section-title {
-      font-weight: 700;
-      color: #005BBB;
-      font-size: 12px;
+      margin: 1.125rem 0 0.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      font-size: 0.875rem; /* 14px */
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      margin: 18px 0 8px;
-      letter-spacing: 0.5px;
     }
 
-    .block { font-size: 14px; line-height: 1.6; color: #444; }
+    .block {
+      font-size: 1rem; /* 16px */
+      color: var(--text);
+    }
 
-    /* Lists were unstyled (no padding), so they looked broken */
-    .block ul { margin: 8px 0 0; padding-left: 18px; }
-    .block li { margin: 6px 0; }
+    .block ul { margin: 0.5rem 0 0; padding-left: 1.125rem; }
+    .block li { margin: 0.4rem 0; }
 
-    details { margin-top: 14px; }
+    /* Details / summary: visible affordance, keyboard focus */
+    details { margin-top: var(--space-3); }
     summary {
       cursor: pointer;
-      font-weight: 700;
-      color: #005BBB;
+      font-weight: 800;
+      color: var(--accent);
+      padding: 0.5rem 0;
       list-style: none;
-      user-select: none;
-      padding: 8px 0;
     }
     summary::-webkit-details-marker { display: none; }
-    details[open] summary { margin-bottom: 6px; }
-    details .block { padding-top: 4px; }
 
-    .tags { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 6px; }
-    .tag { background: #e8f0f8; color: #005BBB; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+    summary::before{
+      content: "▸";
+      display: inline-block;
+      margin-right: 0.5rem;
+      transform: translateY(-1px);
+    }
+    details[open] summary::before{
+      content: "▾";
+    }
 
-    /* Optional: small-screen padding */
+    summary:focus-visible {
+      outline: 3px solid var(--focus-outline);
+      outline-offset: 4px;
+      background: var(--focus-bg);
+      border-radius: 0.25rem;
+    }
+
+    details[open] summary { margin-bottom: 0.25rem; }
+    details .block { padding-top: 0.25rem; }
+
+    /* Tags */
+    .tags {
+      margin-top: var(--space-4);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tag {
+      background: var(--soft);
+      color: var(--accent);
+      padding: 0.35rem 0.65rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem; /* 14px */
+      font-weight: 700;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    /* Visually hidden (screen-reader only) */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; transition: none !important; }
+    }
+
+    /* Forced colors / Windows High Contrast */
+    @media (forced-colors: active) {
+      .project, .badge, .tag {
+        forced-color-adjust: auto;
+        border: 1px solid CanvasText;
+        box-shadow: none;
+      }
+      a { forced-color-adjust: auto; }
+    }
+
+    /* Small-screen padding */
     @media (max-width: 420px) {
-      body { padding: 24px 14px; }
-      .project { padding: 22px; }
-      .projects { grid-template-columns: 1fr; }
+      body { padding: 1.5rem 0.875rem; }
+      .project { padding: 1.25rem; }
     }
   </style>
 </head>
 
 <body>
+  <a class="skip-link" href="#main">Aller au contenu principal</a>
+
   <div class="container">
-    <h1>Hackathon Projects</h1>
-    <p class="intro">
-      Une collection de projets web variés : sites associatifs, portfolios d'artistes, outils professionnels et plateformes e-commerce.
-      Chaque projet combine design réfléchi et développement pragmatique.
-    </p>
+    <header class="page-header">
+      <h1>Hackathon Projects</h1>
+      <p class="intro">
+        Une collection de projets web variés : sites associatifs, portfolios d'artistes, outils professionnels et plateformes e-commerce.
+        Chaque projet combine design réfléchi et développement pragmatique.
+      </p>
+    </header>
 
-    <div class="projects">
-      <!-- Spokenword -->
-      <div class="project">
-        <h2>Dans! Dichter! Dans!</h2>
-        <div class="meta">
-          <span class="badge">Site: <a href="https://www.spokenword.be/" target="_blank" rel="noopener">spokenword.be</a></span>
-          <span class="badge">Brief: <a href="./spokenword.be.html">spokenword.be.md</a></span>
-        </div>
+    <main id="main" tabindex="-1" aria-label="Contenu principal">
+      <ul class="projects" role="list" aria-label="Liste des projets">
+        <!-- Spokenword -->
+        <li class="project">
+          <article aria-labelledby="p-spokenword-title">
+            <h2 id="p-spokenword-title">Dans! Dichter! Dans!</h2>
 
-        <div class="section-title">Pitch</div>
-        <div class="block">
-          Plateforme d’événements spoken word (poésie, musique, performances). Objectif hackathon : rendre le site plus cohérent et plus simple à maintenir, avec des gabarits réutilisables (événements, médias, archives).
-        </div>
-
-        <div class="section-title">MVP (3 jours)</div>
-        <div class="block">
-          <ul>
-            <li>Cohérence globale : header/footer cohérents (logo + newsletter + réseaux sociaux visibles partout).</li>
-            <li>Nouveau gabarit “Événement” (pré-événement sans line-up + version avec line-up).</li>
-            <li>Homepage “conditionnelle” : mode événement à venir / mode hors événement.</li>
-            <li>Pages médias (aftermovies/teasers/testimonials) : structure claire et ajout simple.</li>
-          </ul>
-        </div>
-
-        <details>
-          <summary>Contraintes &amp; Bonus</summary>
-          <div class="block">
-            <ul>
-              <li>Typo et hiérarchie strictes (titres vs texte) + cohérence de palette.</li>
-              <li>Bonus : “Past editions”, “Alle deelnemers”, page “Interview/Gesprekken” structurée.</li>
+            <ul class="meta" role="list" aria-label="Liens et documents">
+              <li class="badge">
+                <span class="badge-label">Site:</span>
+                <a href="https://www.spokenword.be/" target="_blank" rel="noopener noreferrer">
+                  spokenword.be<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                </a>
+              </li>
+              <li class="badge">
+                <span class="badge-label">Brief:</span>
+                <a href="./spokenword.be.html">spokenword.be.md</a>
+              </li>
             </ul>
-          </div>
-        </details>
 
-        <div class="tags">
-          <span class="tag">Templates</span><span class="tag">Événements</span><span class="tag">Médias</span><span class="tag">Cohérence UI</span>
-        </div>
-      </div>
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Plateforme d’événements spoken word (poésie, musique, performances). Objectif hackathon : rendre le site plus cohérent et plus simple à maintenir, avec des gabarits réutilisables (événements, médias, archives).
+            </div>
 
-      <!-- LaReponse -->
-      <div class="project">
-        <h2>LaReponse.org</h2>
-        <div class="meta">
-          <span class="badge">Site: <a href="https://lareponse.org/" target="_blank" rel="noopener">lareponse.org</a></span>
-          <span class="badge">Brief: <a href="./lareponse.org.html">lareponse.org.md</a></span>
-        </div>
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Cohérence globale : header/footer cohérents (logo + newsletter + réseaux sociaux visibles partout).</li>
+                <li>Nouveau gabarit “Événement” (pré-événement sans line-up + version avec line-up).</li>
+                <li>Homepage “conditionnelle” : mode événement à venir / mode hors événement.</li>
+                <li>Pages médias (aftermovies/teasers/testimonials) : structure claire et ajout simple.</li>
+              </ul>
+            </div>
 
-        <div class="section-title">Pitch</div>
-        <div class="block">
-          Site professionnel “double lecture” : une entrée business très rapide (20–40s) + une lecture plus profonde (principes / méthode). L’objectif est d’être clair, lisible, léger, et cohérent.
-        </div>
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Typo et hiérarchie strictes (titres vs texte) + cohérence de palette.</li>
+                  <li>Bonus : “Past editions”, “Alle deelnemers”, page “Interview/Gesprekken” structurée.</li>
+                </ul>
+              </div>
+            </details>
 
-        <div class="section-title">MVP (3 jours)</div>
-        <div class="block">
-          <ul>
-            <li>Structure one-page (ou multi-pages simple) avec navigation claire.</li>
-            <li>Sections indispensables : Offre, Méthode, Principes (index minimal), Contact.</li>
-            <li>Micro design system (typographie, espacements, composants réutilisables).</li>
-            <li>Contenu géré proprement (HTML + données/Markdown, sans dépendances lourdes).</li>
-          </ul>
-        </div>
+            <div class="tags" aria-label="Mots-clés">
+              <span class="tag">Templates</span><span class="tag">Événements</span><span class="tag">Médias</span><span class="tag">Cohérence UI</span>
+            </div>
+          </article>
+        </li>
 
-        <details>
-          <summary>Contraintes &amp; Bonus</summary>
-          <div class="block">
-            <ul>
-              <li>Éviter le jargon : lisible et actionnable en lecture rapide.</li>
-              <li>Bonus : “Preuves / outputs” (mini cas), glossaire, pages “Principes” détaillées.</li>
+        <!-- LaReponse -->
+        <li class="project">
+          <article aria-labelledby="p-lareponse-title">
+            <h2 id="p-lareponse-title">LaReponse.org</h2>
+
+            <ul class="meta" role="list" aria-label="Liens et documents">
+              <li class="badge">
+                <span class="badge-label">Site:</span>
+                <a href="https://lareponse.org/" target="_blank" rel="noopener noreferrer">
+                  lareponse.org<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                </a>
+              </li>
+              <li class="badge">
+                <span class="badge-label">Brief:</span>
+                <a href="./lareponse.org.html">lareponse.org.md</a>
+              </li>
             </ul>
-          </div>
-        </details>
 
-        <div class="tags">
-          <span class="tag">Manifeste</span><span class="tag">Lecture rapide</span><span class="tag">Design system</span><span class="tag">Sans dépendances</span>
-        </div>
-      </div>
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Site professionnel “double lecture” : une entrée business très rapide (20–40s) + une lecture plus profonde (principes / méthode). L’objectif est d’être clair, lisible, léger, et cohérent.
+            </div>
 
-      <!-- Cinergie -->
-      <div class="project">
-        <h2>Cinergie.be</h2>
-        <div class="meta">
-          <span class="badge">Site: <a href="https://www.cinergie.be/" target="_blank" rel="noopener">cinergie.be</a></span>
-          <span class="badge">Brief: <a href="./cinergie.be.html">cinergie.be.md</a></span>
-        </div>
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Structure one-page (ou multi-pages simple) avec navigation claire.</li>
+                <li>Sections indispensables : Offre, Méthode, Principes (index minimal), Contact.</li>
+                <li>Micro design system (typographie, espacements, composants réutilisables).</li>
+                <li>Contenu géré proprement (HTML + données/Markdown, sans dépendances lourdes).</li>
+              </ul>
+            </div>
 
-        <div class="section-title">Pitch</div>
-        <div class="block">
-          Amélioration mobile-first d’un site existant, avec une contrainte forte : ne pas déclencher une refonte globale. On vise des gains UX ciblés (agenda, article, boutique/panier, pages statiques).
-        </div>
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Éviter le jargon : lisible et actionnable en lecture rapide.</li>
+                  <li>Bonus : “Preuves / outputs” (mini cas), glossaire, pages “Principes” détaillées.</li>
+                </ul>
+              </div>
+            </details>
 
-        <div class="section-title">MVP (3 jours)</div>
-        <div class="block">
-          <ul>
-            <li>Agenda : grille avec images + navigation mois précédent/suivant (sans FullCalendar).</li>
-            <li>Article “single” : refonte du gabarit lecture mobile (propre, sémantique, maintenable).</li>
-            <li>Boutique/panier : feedback “ajout au panier” visible + page confirmation + email de confirmation (si dans le scope).</li>
-          </ul>
-        </div>
+            <div class="tags" aria-label="Mots-clés">
+              <span class="tag">Manifeste</span><span class="tag">Lecture rapide</span><span class="tag">Design system</span><span class="tag">Sans dépendances</span>
+            </div>
+          </article>
+        </li>
 
-        <details>
-          <summary>Contraintes &amp; Bonus</summary>
-          <div class="block">
-            <ul>
-              <li>Respecter la charte existante + impact structurel minimal (modifs localisées).</li>
-              <li>Bonus : structuration “Prix Cinergie” et design “Notre histoire”.</li>
+        <!-- Cinergie -->
+        <li class="project">
+          <article aria-labelledby="p-cinergie-title">
+            <h2 id="p-cinergie-title">Cinergie.be</h2>
+
+            <ul class="meta" role="list" aria-label="Liens et documents">
+              <li class="badge">
+                <span class="badge-label">Site:</span>
+                <a href="https://www.cinergie.be/" target="_blank" rel="noopener noreferrer">
+                  cinergie.be<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                </a>
+              </li>
+              <li class="badge">
+                <span class="badge-label">Brief:</span>
+                <a href="./cinergie.be.html">cinergie.be.md</a>
+              </li>
             </ul>
-          </div>
-        </details>
 
-        <div class="tags">
-          <span class="tag">Mobile-first</span><span class="tag">Refonte gabarit</span><span class="tag">Agenda</span><span class="tag">E-commerce UX</span>
-        </div>
-      </div>
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Amélioration mobile-first d’un site existant, avec une contrainte forte : ne pas déclencher une refonte globale. On vise des gains UX ciblés (agenda, article, boutique/panier, pages statiques).
+            </div>
 
-      <!-- Dogitech -->
-      <div class="project">
-        <h2>Dogitech.be</h2>
-        <div class="meta">
-          <span class="badge">Site: <span title="URL de démo à définir">dogitech.be</span></span>
-          <span class="badge">Brief: <a href="./dogitech.be.html">dogitech.be.md</a></span>
-        </div>
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Agenda : grille avec images + navigation mois précédent/suivant (sans FullCalendar).</li>
+                <li>Article “single” : refonte du gabarit lecture mobile (propre, sémantique, maintenable).</li>
+                <li>Boutique/panier : feedback “ajout au panier” visible + page confirmation + email de confirmation (si dans le scope).</li>
+              </ul>
+            </div>
 
-        <div class="section-title">Pitch</div>
-        <div class="block">
-          Site vitrine artisan (plomberie/électricité/petits travaux). L’enjeu : conversion et confiance sur mobile (souvent en contexte d’urgence), avec un ton direct et des preuves.
-        </div>
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Respecter la charte existante + impact structurel minimal (modifs localisées).</li>
+                  <li>Bonus : structuration “Prix Cinergie” et design “Notre histoire”.</li>
+                </ul>
+              </div>
+            </details>
 
-        <div class="section-title">MVP (3 jours)</div>
-        <div class="block">
-          <ul>
-            <li>Homepage mobile-first : accès immédiat “Urgence / Dépannage” + CTA appeler/devis.</li>
-            <li>Gabarit “Service” réutilisable + 3 pages (plomberie, électricité, petits travaux).</li>
-            <li>Contact : formulaire court, validation, anti-spam simple, confirmation.</li>
-            <li>Transparence tarifaire (page ou sections) + “preuves” (réalisations/avant-après si dispo).</li>
-          </ul>
-        </div>
+            <div class="tags" aria-label="Mots-clés">
+              <span class="tag">Mobile-first</span><span class="tag">Refonte gabarit</span><span class="tag">Agenda</span><span class="tag">E-commerce UX</span>
+            </div>
+          </article>
+        </li>
 
-        <details>
-          <summary>Contraintes &amp; Bonus</summary>
-          <div class="block">
-            <ul>
-              <li>Microcopy court, utile, sans marketing.</li>
-              <li>Bonus : module interactif “cheap / fast / good”.</li>
+        <!-- Dogitech -->
+        <li class="project">
+          <article aria-labelledby="p-dogitech-title">
+            <h2 id="p-dogitech-title">Dogitech.be</h2>
+
+            <ul class="meta" role="list" aria-label="Liens et documents">
+              <li class="badge">
+                <span class="badge-label">Site:</span>
+                <span>dogitech.be</span>
+              </li>
+              <li class="badge">
+                <span class="badge-label">Brief:</span>
+                <a href="./dogitech.be.html">dogitech.be.md</a>
+              </li>
             </ul>
-          </div>
-        </details>
 
-        <div class="tags">
-          <span class="tag">Artisan</span><span class="tag">Conversion</span><span class="tag">Mobile-first</span><span class="tag">Formulaire</span>
-        </div>
-      </div>
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Site vitrine artisan (plomberie/électricité/petits travaux). L’enjeu : conversion et confiance sur mobile (souvent en contexte d’urgence), avec un ton direct et des preuves.
+            </div>
 
-      <!-- Le Lion Pacifique -->
-      <div class="project">
-        <h2>Le Lion Pacifique</h2>
-        <div class="meta">
-          <span class="badge">Réf: <a href="https://www.instagram.com/alpha_lion_pacifique/" target="_blank" rel="noopener">Instagram</a></span>
-          <span class="badge">Brief: <a href="./lelionpacifique.html">lelionpacifique.md</a></span>
-          <span class="badge">URL site: <span title="à définir">TBD</span></span>
-        </div>
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Homepage mobile-first : accès immédiat “Urgence / Dépannage” + CTA appeler/devis.</li>
+                <li>Gabarit “Service” réutilisable + 3 pages (plomberie, électricité, petits travaux).</li>
+                <li>Contact : formulaire court, validation, anti-spam simple, confirmation.</li>
+                <li>Transparence tarifaire (page ou sections) + “preuves” (réalisations/avant-après si dispo).</li>
+              </ul>
+            </div>
 
-        <div class="section-title">Pitch</div>
-        <div class="block">
-          Galerie en ligne “œuvre d’abord” pour un artiste de rue. Priorité : images, respiration, crédibilité, récit factuel. Le site sert de vitrine culturelle et de point de contact (pas un e-commerce agressif).
-        </div>
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Microcopy court, utile, sans marketing.</li>
+                  <li>Bonus : module interactif “cheap / fast / good”.</li>
+                </ul>
+              </div>
+            </details>
 
-        <div class="section-title">MVP (3 jours)</div>
-        <div class="block">
-          <ul>
-            <li>Accueil : une œuvre forte + accès Galerie + accès Demande de projet.</li>
-            <li>Galerie responsive (grille simple, titres robustes).</li>
-            <li>Fiche œuvre : détails + disponibilité + CTA discret.</li>
-            <li>Demande de projet : formulaire clair (upload optionnel) + confirmation.</li>
-          </ul>
-        </div>
+            <div class="tags" aria-label="Mots-clés">
+              <span class="tag">Artisan</span><span class="tag">Conversion</span><span class="tag">Mobile-first</span><span class="tag">Formulaire</span>
+            </div>
+          </article>
+        </li>
 
-        <details>
-          <summary>Contraintes &amp; Bonus</summary>
-          <div class="block">
-            <ul>
-              <li>Accessibilité + optimisation images (mobile-first strict).</li>
-              <li>Bonus : page Parcours structurée (version courte + repères + texte long attribué).</li>
+        <!-- Le Lion Pacifique -->
+        <li class="project">
+          <article aria-labelledby="p-lion-title">
+            <h2 id="p-lion-title">Le Lion Pacifique</h2>
+
+            <ul class="meta" role="list" aria-label="Liens et documents">
+              <li class="badge">
+                <span class="badge-label">Réf:</span>
+                <a href="https://www.instagram.com/alpha_lion_pacifique/" target="_blank" rel="noopener noreferrer">
+                  Instagram<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                </a>
+              </li>
+              <li class="badge">
+                <span class="badge-label">Brief:</span>
+                <a href="./lelionpacifique.html">lelionpacifique.md</a>
+              </li>
+              <li class="badge">
+                <span class="badge-label">URL site:</span>
+                <span>TBD</span>
+              </li>
             </ul>
-          </div>
-        </details>
 
-        <div class="tags">
-          <span class="tag">Galerie</span><span class="tag">Art</span><span class="tag">Mobile-first</span><span class="tag">Formulaire</span>
-        </div>
-      </div>
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Galerie en ligne “œuvre d’abord” pour un artiste de rue. Priorité : images, respiration, crédibilité, récit factuel. Le site sert de vitrine culturelle et de point de contact (pas un e-commerce agressif).
+            </div>
 
-      <!-- BadHat -->
-      <div class="project">
-        <h2>BadHat.dev</h2>
-        <div class="meta">
-          <span class="badge">Site: <a href="https://badhat.dev/" target="_blank" rel="noopener">badhat.dev</a></span>
-          <span class="badge">Brief: <a href="./badhat.dev.html">badhat.dev.md</a></span>
-        </div>
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Accueil : une œuvre forte + accès Galerie + accès Demande de projet.</li>
+                <li>Galerie responsive (grille simple, titres robustes).</li>
+                <li>Fiche œuvre : détails + disponibilité + CTA discret.</li>
+                <li>Demande de projet : formulaire clair (upload optionnel) + confirmation.</li>
+              </ul>
+            </div>
 
-        <div class="section-title">Pitch</div>
-        <div class="block">
-          Site de documentation (pas marketing) pour un micro-toolkit PHP. Le site doit incarner la philosophie : sobriété, performance, lisibilité, zéro dépendance externe, et IA très prévisible.
-        </div>
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Accessibilité + optimisation images (mobile-first strict).</li>
+                  <li>Bonus : page Parcours structurée (version courte + repères + texte long attribué).</li>
+                </ul>
+              </div>
+            </details>
 
-        <div class="section-title">MVP (3 jours)</div>
-        <div class="block">
-          <ul>
-            <li>Landing claire + liens directs vers docs + quickstart.</li>
-            <li>Index /docs + 2–4 pages modules (format homogène).</li>
-            <li>Navigation solide (URLs réelles, ancres, repères).</li>
-            <li>Performance/accessibilité comme contraintes de base.</li>
-          </ul>
-        </div>
+            <div class="tags" aria-label="Mots-clés">
+              <span class="tag">Galerie</span><span class="tag">Art</span><span class="tag">Mobile-first</span><span class="tag">Formulaire</span>
+            </div>
+          </article>
+        </li>
 
-        <details>
-          <summary>Contraintes &amp; Bonus</summary>
-          <div class="block">
-            <ul>
-              <li>Pas de fonts/CDN/analytics externes. Lisible sans JS.</li>
-              <li>Bonus : dark mode, copie de code, pages restantes + /examples.</li>
+        <!-- BadHat -->
+        <li class="project">
+          <article aria-labelledby="p-badhat-title">
+            <h2 id="p-badhat-title">BadHat.dev</h2>
+
+            <ul class="meta" role="list" aria-label="Liens et documents">
+              <li class="badge">
+                <span class="badge-label">Site:</span>
+                <a href="https://badhat.dev/" target="_blank" rel="noopener noreferrer">
+                  badhat.dev<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                </a>
+              </li>
+              <li class="badge">
+                <span class="badge-label">Brief:</span>
+                <a href="./badhat.dev.html">badhat.dev.md</a>
+              </li>
             </ul>
-          </div>
-        </details>
 
-        <div class="tags">
-          <span class="tag">Docs</span><span class="tag">Statique</span><span class="tag">Perf</span><span class="tag">Accessibilité</span>
-        </div>
-      </div>
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Site de documentation (pas marketing) pour un micro-toolkit PHP. Le site doit incarner la philosophie : sobriété, performance, lisibilité, zéro dépendance externe, et IA très prévisible.
+            </div>
 
-      <!-- JBR -->
-      <div class="project">
-        <h2>JBR Management</h2>
-        <div class="meta">
-          <span class="badge">Domaine: <a href="https://jbrmanagement.be/" target="_blank" rel="noopener">jbrmanagement.be</a></span>
-          <span class="badge">Prototype: <a href="https://amstram-creation.github.io/jbrmanagement.be/" target="_blank" rel="noopener">GitHub Pages</a></span>
-          <span class="badge">Brief: <a href="./jbrmanagement.be.html">jbrmanagement.be.md</a></span>
-        </div>
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Landing claire + liens directs vers docs + quickstart.</li>
+                <li>Index /docs + 2–4 pages modules (format homogène).</li>
+                <li>Navigation solide (URLs réelles, ancres, repères).</li>
+                <li>Performance/accessibilité comme contraintes de base.</li>
+              </ul>
+            </div>
 
-        <div class="section-title">Pitch</div>
-        <div class="block">
-          Site institutionnel de référence (expert copropriété), servant aussi de porte d’entrée vers Copro Academy. Objectif : crédibilité, clarté, et maillage vers la plateforme de formation.
-        </div>
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Pas de fonts/CDN/analytics externes. Lisible sans JS.</li>
+                  <li>Bonus : dark mode, copie de code, pages restantes + /examples.</li>
+                </ul>
+              </div>
+            </details>
 
-        <div class="section-title">MVP (3 jours)</div>
-        <div class="block">
-          <ul>
-            <li>Structure claire (vitrine pro + CTA vers Copro Academy).</li>
-            <li>Sections : profil/parcours, services, ressources (format simple), contact.</li>
-            <li>Navigation + contenus scannables (mobile-first).</li>
-          </ul>
-        </div>
+            <div class="tags" aria-label="Mots-clés">
+              <span class="tag">Docs</span><span class="tag">Statique</span><span class="tag">Perf</span><span class="tag">Accessibilité</span>
+            </div>
+          </article>
+        </li>
 
-        <details>
-          <summary>Contraintes &amp; Bonus</summary>
-          <div class="block">
-            <ul>
-              <li>Ton institutionnel sobre, SEO de base, liens propres.</li>
-              <li>Bonus : timeline, bibliothèque filtrable (si données disponibles), page publications.</li>
+        <!-- JBR -->
+        <li class="project">
+          <article aria-labelledby="p-jbr-title">
+            <h2 id="p-jbr-title">JBR Management</h2>
+
+            <ul class="meta" role="list" aria-label="Liens et documents">
+              <li class="badge">
+                <span class="badge-label">Domaine:</span>
+                <a href="https://jbrmanagement.be/" target="_blank" rel="noopener noreferrer">
+                  jbrmanagement.be<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                </a>
+              </li>
+              <li class="badge">
+                <span class="badge-label">Prototype:</span>
+                <a href="https://amstram-creation.github.io/jbrmanagement.be/" target="_blank" rel="noopener noreferrer">
+                  GitHub Pages<span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                </a>
+              </li>
+              <li class="badge">
+                <span class="badge-label">Brief:</span>
+                <a href="./jbrmanagement.be.html">jbrmanagement.be.md</a>
+              </li>
             </ul>
-          </div>
-        </details>
 
-        <div class="tags">
-          <span class="tag">Institutionnel</span><span class="tag">Autorité</span><span class="tag">Ressources</span><span class="tag">Maillage</span>
-        </div>
-      </div>
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Site institutionnel de référence (expert copropriété), servant aussi de porte d’entrée vers Copro Academy. Objectif : crédibilité, clarté, et maillage vers la plateforme de formation.
+            </div>
 
-      <!-- Cléa Vincent -->
-      <div class="project">
-        <h2>Cléa Vincent</h2>
-        <div class="meta">
-          <span class="badge">URL site: <span title="à définir">TBD</span></span>
-          <span class="badge">Brief: <a href="./cleavincent.fr.html">cleavincent.fr.md</a></span>
-        </div>
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Structure claire (vitrine pro + CTA vers Copro Academy).</li>
+                <li>Sections : profil/parcours, services, ressources (format simple), contact.</li>
+                <li>Navigation + contenus scannables (mobile-first).</li>
+              </ul>
+            </div>
 
-        <div class="section-title">Pitch</div>
-        <div class="block">
-          Site artiste (vitrine officielle) : présenter l’univers, donner accès à la musique/vidéos, annoncer le live, et fournir un point de contact (booking/presse). Le brief fournit une base éditoriale structurée.
-        </div>
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Ton institutionnel sobre, SEO de base, liens propres.</li>
+                  <li>Bonus : timeline, bibliothèque filtrable (si données disponibles), page publications.</li>
+                </ul>
+              </div>
+            </details>
 
-        <div class="section-title">MVP (3 jours)</div>
-        <div class="block">
-          <ul>
-            <li>Accueil immersif + accès direct Musique / Clips / Live / Contact.</li>
-            <li>Discographie simple (cards) + liens streaming.</li>
-            <li>Section Live (dates) + Contact (booking/presse).</li>
-          </ul>
-        </div>
+            <div class="tags" aria-label="Mots-clés">
+              <span class="tag">Institutionnel</span><span class="tag">Autorité</span><span class="tag">Ressources</span><span class="tag">Maillage</span>
+            </div>
+          </article>
+        </li>
 
-        <details>
-          <summary>Contraintes &amp; Bonus</summary>
-          <div class="block">
-            <ul>
-              <li>Mobile-first, embeds légers (lazy-load), performance.</li>
-              <li>Bonus : presse/EPK téléchargeable, galerie photos, animations très légères.</li>
+        <!-- Cléa Vincent -->
+        <li class="project">
+          <article aria-labelledby="p-clea-title">
+            <h2 id="p-clea-title">Cléa Vincent</h2>
+
+            <ul class="meta" role="list" aria-label="Liens et documents">
+              <li class="badge"><span class="badge-label">URL site:</span> <span>TBD</span></li>
+              <li class="badge"><span class="badge-label">Brief:</span> <a href="./cleavincent.fr.html">cleavincent.fr.md</a></li>
             </ul>
-          </div>
-        </details>
 
-        <div class="tags">
-          <span class="tag">Artiste</span><span class="tag">Discographie</span><span class="tag">Médias</span><span class="tag">Booking</span>
-        </div>
-      </div>
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Site artiste (vitrine officielle) : présenter l’univers, donner accès à la musique/vidéos, annoncer le live, et fournir un point de contact (booking/presse). Le brief fournit une base éditoriale structurée.
+            </div>
 
-      <!-- ApiWilder -->
-      <div class="project">
-        <h2>ASBL ApiWilder</h2>
-        <div class="meta">
-          <span class="badge">URL site: <span title="à définir">TBD</span></span>
-          <span class="badge">Brief: <a href="./apiwilder.html">apiwilder.md</a></span>
-        </div>
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Accueil immersif + accès direct Musique / Clips / Live / Contact.</li>
+                <li>Discographie simple (cards) + liens streaming.</li>
+                <li>Section Live (dates) + Contact (booking/presse).</li>
+              </ul>
+            </div>
 
-        <div class="section-title">Pitch</div>
-        <div class="block">
-          Page de dons pour un rucher collectif. Priorité : confiance, transparence, et parcours de don simple. Style “Kickstarter-like” : jauge, paliers, projets, historique simplifié.
-        </div>
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Mobile-first, embeds légers (lazy-load), performance.</li>
+                  <li>Bonus : presse/EPK téléchargeable, galerie photos, animations très légères.</li>
+                </ul>
+              </div>
+            </details>
 
-        <div class="section-title">MVP (3 jours)</div>
-        <div class="block">
-          <ul>
-            <li>Landing orientée don : pitch + CTA + jauge + paliers.</li>
-            <li>Projets : liste + page détail (template).</li>
-            <li>Transparence : à quoi sert l’argent + où en est la collecte + repères.</li>
-            <li>Données pilotées par une source unique (JSON ou mini backoffice léger).</li>
-          </ul>
-        </div>
+            <div class="tags" aria-label="Mots-clés">
+              <span class="tag">Artiste</span><span class="tag">Discographie</span><span class="tag">Médias</span><span class="tag">Booking</span>
+            </div>
+          </article>
+        </li>
 
-        <details>
-          <summary>Contraintes &amp; Bonus</summary>
-          <div class="block">
-            <ul>
-              <li>Mobile-first strict, réassurance (projet réel, local, sérieux).</li>
-              <li>Bonus : “paiement réel” si faisable, sinon simulation crédible + historique anonymisé.</li>
+        <!-- ApiWilder -->
+        <li class="project">
+          <article aria-labelledby="p-apiwilder-title">
+            <h2 id="p-apiwilder-title">ASBL ApiWilder</h2>
+
+            <ul class="meta" role="list" aria-label="Liens et documents">
+              <li class="badge"><span class="badge-label">URL site:</span> <span>TBD</span></li>
+              <li class="badge"><span class="badge-label">Brief:</span> <a href="./apiwilder.html">apiwilder.md</a></li>
             </ul>
-          </div>
-        </details>
 
-        <div class="tags">
-          <span class="tag">Dons</span><span class="tag">Transparence</span><span class="tag">Jauge</span><span class="tag">Projets</span>
-        </div>
-      </div>
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Page de dons pour un rucher collectif. Priorité : confiance, transparence, et parcours de don simple. Style “Kickstarter-like” : jauge, paliers, projets, historique simplifié.
+            </div>
 
-      <!-- Be Chill -->
-      <div class="project">
-        <h2>Be Chill</h2>
-        <div class="meta">
-          <span class="badge">URL site: <span title="à définir">TBD</span></span>
-          <span class="badge">Brief: <a href="./bechill.be.html">bechill.be.md</a></span>
-        </div>
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>Landing orientée don : pitch + CTA + jauge + paliers.</li>
+                <li>Projets : liste + page détail (template).</li>
+                <li>Transparence : à quoi sert l’argent + où en est la collecte + repères.</li>
+                <li>Données pilotées par une source unique (JSON ou mini backoffice léger).</li>
+              </ul>
+            </div>
 
-        <div class="section-title">Pitch</div>
-        <div class="block">
-          Landing page mobile-first pour un salon esthétique à Uccle. Objectif : page rapide, rassurante, orientée conversion vers la réservation (Salonkee), avec infos pratiques immédiatement accessibles.
-        </div>
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Mobile-first strict, réassurance (projet réel, local, sérieux).</li>
+                  <li>Bonus : “paiement réel” si faisable, sinon simulation crédible + historique anonymisé.</li>
+                </ul>
+              </div>
+            </details>
 
-        <div class="section-title">MVP (3 jours)</div>
-        <div class="block">
-          <ul>
-            <li>One-page : hero + CTA “Réserver”, services phares, tarifs indicatifs, avis, galerie, infos pratiques.</li>
-            <li>CTA persistants mobile : Réserver / Appeler / Itinéraire.</li>
-            <li>Performance (images optimisées, peu de JS, lazy-loading).</li>
-          </ul>
-        </div>
+            <div class="tags" aria-label="Mots-clés">
+              <span class="tag">Dons</span><span class="tag">Transparence</span><span class="tag">Jauge</span><span class="tag">Projets</span>
+            </div>
+          </article>
+        </li>
 
-        <details>
-          <summary>Contraintes &amp; Bonus</summary>
-          <div class="block">
-            <ul>
-              <li>Intégration Instagram discrète (ou simple lien), éviter widgets lourds.</li>
-              <li>Bonus : formulaire de contact (si back-end), SEO local de base.</li>
+        <!-- Be Chill -->
+        <li class="project">
+          <article aria-labelledby="p-bechill-title">
+            <h2 id="p-bechill-title">Be Chill</h2>
+
+            <ul class="meta" role="list" aria-label="Liens et documents">
+              <li class="badge"><span class="badge-label">URL site:</span> <span>TBD</span></li>
+              <li class="badge"><span class="badge-label">Brief:</span> <a href="./bechill.be.html">bechill.be.md</a></li>
             </ul>
-          </div>
-        </details>
 
-        <div class="tags">
-          <span class="tag">Landing</span><span class="tag">Mobile-first</span><span class="tag">Conversion</span><span class="tag">Performance</span>
-        </div>
-      </div>
-    </div>
+            <h3 class="section-title">Pitch</h3>
+            <div class="block">
+              Landing page mobile-first pour un salon esthétique à Uccle. Objectif : page rapide, rassurante, orientée conversion vers la réservation (Salonkee), avec infos pratiques immédiatement accessibles.
+            </div>
+
+            <h3 class="section-title">MVP (3 jours)</h3>
+            <div class="block">
+              <ul>
+                <li>One-page : hero + CTA “Réserver”, services phares, tarifs indicatifs, avis, galerie, infos pratiques.</li>
+                <li>CTA persistants mobile : Réserver / Appeler / Itinéraire.</li>
+                <li>Performance (images optimisées, peu de JS, lazy-loading).</li>
+              </ul>
+            </div>
+
+            <details>
+              <summary>Contraintes &amp; Bonus</summary>
+              <div class="block">
+                <ul>
+                  <li>Intégration Instagram discrète (ou simple lien), éviter widgets lourds.</li>
+                  <li>Bonus : formulaire de contact (si back-end), SEO local de base.</li>
+                </ul>
+              </div>
+            </details>
+
+            <div class="tags" aria-label="Mots-clés">
+              <span class="tag">Landing</span><span class="tag">Mobile-first</span><span class="tag">Conversion</span><span class="tag">Performance</span>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </main>
   </div>
 </body>
 </html>
