@@ -62,6 +62,62 @@ Traduire “What” en offres compréhensibles : sites vitrines, portails, e-com
 
 **Livrable attendu** : 6 cartes services maximum, orientées bénéfices.
 
+### Projets (écosystème, preuve de méthode)
+
+Section “inventaire” : montrer que LaRéponse fabrique des outils parce que le réel le demande. Objectif : crédibilité (ingénierie), cohérence (thèse), et projection (voici ce qu’on peut réutiliser / adapter).
+
+Format recommandé : 5 à 7 cartes, chacune avec **Pourquoi / Pour qui / Ce que c’est / Statut**, et une ligne **Étymologie** (le nom porte la thèse). Sur mobile : cartes empilées, intertitres courts, pas de pavés.
+
+**Livrable attendu** : une section Projets lisible et actionnable (CTA secondaire “Voir la méthode” / “Décrire mon besoin”).
+
+#### BADHAT
+
+* Pourquoi : ne plus travestir le réel derrière des abstractions commodes. BADHAT naît d’un métier pratiqué depuis vingt-cinq ans, entre contraintes corporate et exigences associatives : livrer, maintenir, répondre, sans ajouter de poids inutile. La thèse est simple : la complexité existe ; on peut la rendre visible, traçable, assumable.
+* Pour qui : développeurs qui privilégient la causalité à la doctrine, la lecture au “setup”, l’imputable au magique. Profils sensibles à la performance, à la stabilité et à l’architecture “à plat” ; équipes qui veulent un socle petit, maîtrisé, et compatible avec des outils standards (serveur web, OS, PDO, PHPUnit…).
+* Ce que c’est : un noyau PHP minimal qui fait trois gestes — fiabiliser un chemin (hook), le résoudre en fichier (seek), exécuter proprement (loot) — puis émettre une réponse HTTP. Le système de fichiers tient lieu de carte ; chaque route est un fichier ; un fichier peut retourner une valeur, mieux, une closure qui capture l’intention. Les décisions d’exécution sont portées par bitmasks (un entier lisible au call-site), et l’échec est explicite (pas de faux silencieux). Autour du noyau : modules “plomberie” (http, pdo, auth, csrf, rfc, trap) sans prétendre remplacer des briques mûres.
+* Statut : socle utilisable, volontairement réduit ; progression lente et disciplinée. Projet de terrain, affiné par itérations, destiné à servir de base à des livraisons réelles.
+* Étymologie : “Bits Are Decisive. HTTP As Terminal.” Le nom associe le bit (décision explicite, imputable) et HTTP (frontière réelle, sortie). “Hat” rappelle le trompe-l’œil : ce qui ressemble à un chapeau peut cacher un éléphant ; BADHAT refuse de masquer la masse sous une forme rassurante.
+
+#### Dashbored
+
+* Pourquoi : parce que beaucoup d’outils promettent une structure “déjà là”, puis finissent par figer le vivant. Les workflows changent, les mots glissent, les relations se recomposent ; l’outil, lui, durcit et devient obstacle. Dashbored part du doute : la structure se gagne par l’usage, et ce qui ne survit pas au réel ne mérite pas d’être permanent.
+* Pour qui : collectifs, associations, petites équipes, et travailleurs du savoir qui construisent en avançant. Contextes où l’on explore avant de conclure, où l’on doit garder l’ambiguïté visible, et où l’on refuse les systèmes qui “décident à votre place” au nom du confort.
+* Ce que c’est : un environnement de pensée, pas une surface de reporting. Il autorise les structures provisoires, les regroupements faibles, les liens inachevés. Les motifs ne sont promus que s’ils se répètent, se stabilisent, et résistent à plusieurs points de vue. Dashbored refuse d’être un CRUD/CMS/form-first, refuse les mutations silencieuses du modèle, et préfère l’intention explicite à l’automatisation opaque. Des contraintes assumées (vocabulaire limité d’actions/relations, charge visuelle contenue) servent d’hygiène cognitive : éviter l’entropie, forcer le sens à remonter.
+* Statut : manifeste solide et direction produit claire ; base conceptuelle prête à être prototypée dès qu’un cas d’usage “long” s’y prête.
+* Étymologie : mot-valise : “dashboard” retourné contre lui-même, et “bored” (lassé). Le “dash” reste (le trait, la poussée), mais la “board” cesse d’être un panneau de contrôle : c’est une planche de travail, provisoire et reconfigurable.
+
+#### DunDun
+
+* Pourquoi : rétablir une discipline d’exécution sans calendrier, sans tableaux culpabilisants, sans notifications qui fragmentent. DunDun traite le travail comme un rythme : un battement après l’autre, avec une structure minimale qui empêche la fuite en avant.
+* Pour qui : personnes qui veulent agir sur mobile sans se perdre dans l’arrière-plan, et équipes qui ont besoin de voir les ruptures plutôt que de les camoufler. Utile quand la friction principale n’est pas “manque d’outils”, mais surcharge cognitive et dispersion.
+* Ce que c’est : des séquences linéaires à pointeur, composées de tâches, chaque tâche générant trois slots obligatoires (Préparer → Faire → Clore). Une règle globale : un seul slot actif par utilisateur. Si un slot bloque, on l’éjecte vers l’Inbox — mais un ghost reste à sa place : la cassure est visible, donc analysable. Le téléphone est un “remote d’exécution” (un écran, un slot, timer, actions simples), sans vue backlog ; le desktop est le “métier à tisser” : Inbox (captures + éjectés), remaillage (rethread/split/fork/swap/defer), vue des fractures et de leurs causes (temps, personnes, dépendances, énergie), signaux de pression (surtemps, goulots, vieillissement).
+* Statut : spécification détaillée (objets, règles, états, UX phone/desktop) ; concept prêt pour un MVP fonctionnel.
+* Étymologie : “done and done”. Deux coups, deux clôtures. Le nom encode la mécanique centrale : terminer une unité, puis enchaîner la suivante sans backlog mental. Onomatopée de finition, pas de planification.
+
+#### tenpoken
+
+* Pourquoi : pratiquer le temps plutôt que le dompter. Tenpoken refuse la fiction de la maîtrise totale (agenda) comme celle du récit rétrospectif (journal). Il propose un geste : encoder le moment, puis le laisser respirer, afin que des patterns apparaissent sans contrainte. Le drift — l’écart entre plan et occurrence — devient instrument de vérité.
+* Pour qui : profils qui cherchent une précision calme : créatifs, indépendants, personnes sensibles au bruit, ou toute personne qui veut une discipline légère sans taxonomie, sans objectifs imposés, sans “productivité performative”.
+* Ce que c’est : une structure réduite à quelques couches (Event, Now, Window, Drift). Aucun projet, aucune catégorie, aucun tag : seulement des événements et des états (potentiel, attendu, planifié, survenu, résolu). Interaction doctrine stricte : navigation par fenêtres (heure/jour/semaine), pas de scroll infini, peu d’actions, peu de taps. Mobile pour encoder en mouvement ; desktop pour observer le drift, relire par fenêtres, et marquer la résolution (hygiène de clôture). Identité : géométrie sobre, neutrals + un accent signal, typographie mono/semi-mono, un symbole simple “temps en mouvement”.
+* Statut : doctrine d’usage et identité déjà posées ; base solide pour une application minimaliste.
+* Étymologie : dérive de *tenpo ken* (toki pona) : “temps possible”, “temps en puissance”. “Tenpo” pose le temps comme matière ; “ken” pose la possibilité. Le nom conserve une étrangeté utile : il appelle une pratique.
+
+#### JDAD (JSON Data And Directions)
+
+* Pourquoi : cesser de confondre donnée et navigation dans les APIs, et faire payer ce mélange en parsing, en mémoire, en latence, et en confusion. JDAD propose un geste net : séparer le plan dénotatif (records) du plan connotatif (affordances), pour que l’hypermedia redevienne optionnelle et proportionnée au besoin.
+* Pour qui : équipes API et clients mobiles/contraints (IoT, edge, réseaux lents) qui veulent un format prédictible, peu profond, et facilement validable. Contexte typique : beaucoup de lecture “simple” et, ponctuellement, besoin de navigation/permissions/transitions — sans devoir tout décoder à chaque réponse.
+* Ce que c’est : un format JSON où `_` est le signifiant de la connotation : soit une URI vers une hyperdoc (mode data-only), soit une table de liens/transitions (mode hyper-only), soit un document combiné. Les collections sont des buckets indexés par IDs, et les relations sont des références directes `["collection", id…]` traversables en temps constant. La grammaire est outillée par des schémas JSON-Schema, des routines de détection et de résolution, et un media type `application/jdad+json`.
+* Statut : spécification avancée (schémas, exemples, ébauche de client, évaluation de perf) ; draft sérieux, prêt à être consolidé en outillage (validateurs, CI, générateurs) si adopté.
+* Étymologie : triple lecture. (1) Acronyme : “JSON Data And Directions”. (2) Jeu “JSON / dad” : la discipline posée sur JSON, pour le rendre lisible, stable, validable. (3) Jeu “dad / son” : “data” comme parent (ce qui demeure), “directions” comme enfant (ce qui se propose) ; liés, mais non confondus.
+
+#### KORAL
+
+* Pourquoi : répondre à un besoin CRM concret, façonné par le terrain : suivi de clients, services rendus, sessions, notes, travailleurs, items, et la nécessité de relier ces éléments sans lourdeur. Koral vise l’utile avant le prestige, et l’adaptation avant le prêt-à-porter.
+* Pour qui : structures qui veulent un CRM sur mesure, maintenable en PHP, et aligné sur leurs pratiques — souvent petites organisations, métiers de service, et contextes associatifs où les processus réels ne rentrent pas dans une grille SaaS.
+* Ce que c’est : une application CRM construite sur Kadro (framework MVC interne) : routing (AltoRouter), templating (Smarty), container PSR-11, logs PSR-3, ORM PDO, auth/permissions/ACL, i18n. Koral apporte la couche métier : planification (journaliers/planners), suivi de sessions, gestion de notes avec associations client/item, affectation de travailleurs. L’architecture compose les comportements des contrôleurs via un système de traits (“Traitor”) qui injecte des étapes de détection de contexte (client, service, session, items). Le tout suit une approche convention-over-configuration (noms de classes ↔ routes ↔ tables).
+* Statut : application existante, sous licence MIT, en maintenance/évolution avec son socle Kadro.
+* Étymologie : KORAL est un nom court, mémorisable, et un acronyme opératoire : “KOLLECTO · RAPPORTO · LISTO”. Trois verbes-outils : collecter sans forcer, relier pour rendre imputable, tenir une liste praticable.
+
 ### Contact (conversion)
 
 Formulaire minimal (si possible) ou mailto propre. Micro-texte rassurant (ce qu’il faut fournir, délai de réponse). CTA final visible.
@@ -74,9 +130,9 @@ Si nécessaire, une section “Logo” reprenant le brief interrobang (‽) et d
 
 **Livrable attendu** : page courte utilisable par un graphiste et par l’équipe UI.
 
-## Contenu
+---
 
-# LaRéponse — Dossier (Hackathon) — Version GitHub
+# LaRéponse — Informations fournies par le client
 
 Ce dépôt regroupe les documents fournis par l’équipe **LaRéponse**, traduits intégralement en français et normalisés en **Markdown** pour une lecture et une utilisation sur GitHub.
 
