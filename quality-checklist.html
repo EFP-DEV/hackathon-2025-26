@@ -298,6 +298,8 @@
         <li><a href="#css">CSS &amp; layout</a></li>
         <li><a href="#js">JavaScript</a></li>
         <li><a href="#checklist">Checklist finale</a></li>
+        <li><a href="#coordination">Guide coordination</a></li>
+
       </ol>
     </nav>
 
@@ -400,7 +402,7 @@
           </ul>
         </div>
 
-        <h3>Tests manuels obligatoires</h3>
+        <h3>Tests manuels</h3>
         <table>
           <thead><tr><th>Test</th><th>Comment</th></tr></thead>
           <tbody>
@@ -503,12 +505,11 @@
 
       <!-- 5. i18n (mandatory) -->
       <section id="i18n">
-        <h2><span class="num">5</span> Internationalisation (obligatoire)</h2>
+        <h2><span class="num">5</span> Internationalisation</h2>
 
         <div class="callout callout--pass">
           Chaque projet doit livrer un système de traduction fonctionnel,
           activable en incluant deux balises <code>&lt;script&gt;</code> en fin de document.
-          Pas de librairie externe. Pas de rechargement de page. Vanilla JS.
         </div>
 
         <h3>Architecture requise</h3>
@@ -784,7 +785,6 @@
           WAVE 0 erreur&ensp;·&ensp;
           Lighthouse Perf ≥ 90, A11y ≥ 95&ensp;·&ensp;
           <code>lang</code> correct et dynamique&ensp;·&ensp;
-
           Navigation clavier fonctionnelle&ensp;·&ensp;
           320px→2560px sans scroll horizontal&ensp;·&ensp;
           Contenu lisible sans JS&ensp;·&ensp;
@@ -840,6 +840,114 @@
         <a href="#main" class="top-link">↑ haut</a>
       </section>
 
+       <!-- 9. Coordination guide -->
+      <section id="coordination">
+        <h2><span class="num">9</span> Guide de coordination Dev ↔ Designer UX/UI</h2>
+
+        <p>
+          Ce guide définit un “contrat d’interface” minimal, stable et testable pour permettre au designer et au
+          développeur frontend d’avancer en parallèle dès le premier jour. Il ne s’agit pas de figer toutes les décisions,
+          mais de verrouiller tôt ce qui coûte cher à changer tard&nbsp;: la structure sémantique, les choix visuels qui
+          impactent l’accessibilité, les composants et leurs comportements, et le contenu (copie + traductions).
+        </p>
+
+        <div class="callout callout--target">
+          <strong>Principe</strong>
+          Le designer livre des décisions versionnables (structure, tokens, composants, copie) et le dev les implémente
+          avec des garanties techniques (HTML sémantique, navigation clavier, perf, progressive enhancement). Quand une
+          décision impacte l’a11y ou la perf, elle se valide au moment où elle est prise, pas en fin de projet.
+        </div>
+
+        <h3>Structure des pages et hiérarchie des titres</h3>
+        <p>
+          Le premier verrou est l’ossature sémantique. Décidez des pages (ou des sections si c’est une page unique), de
+          l’ordre de lecture, et de la hiérarchie des titres. Chaque page doit avoir un seul <code>&lt;h1&gt;</code>,
+          puis des <code>&lt;h2&gt;</code> pour les grandes sections, et des <code>&lt;h3&gt;</code> seulement si une
+          section se subdivise. Cette structure sert à l’accessibilité (navigation par headings, lecteurs d’écran), au
+          SEO technique de base, et à la stabilité du layout.
+        </p>
+        <p>
+          Le designer peut livrer cette structure avant les maquettes finales. Le dev peut, dès ce moment, coder un
+          squelette HTML durable (landmarks <code>header</code>/<code>nav</code>/<code>main</code>/<code>footer</code>,
+          sections, titres) qui restera stable même si la mise en page évolue.
+        </p>
+
+        <h3>Tokens de design et contrastes</h3>
+        <p>
+          Le second verrou est un système de style basé sur des tokens. Le designer définit une palette restreinte
+          (fond, surface, texte principal/secondaire, accent, bordures, états éventuels) et une échelle cohérente
+          d’espacements/typographie. Le dev les implémente via des variables CSS dans <code>:root</code>. Cette approche
+          limite les dérives, accélère les itérations et réduit les non-conformités de contraste.
+        </p>
+        <p>
+          Le focus visible doit être traité comme un élément de design à part entière. Il doit rester perceptible sur
+          tous les fonds et dans tous les états. Les états <em>hover</em>, <em>active</em>, <em>disabled</em>,
+          <em>focus-visible</em> et <em>error</em> doivent être définis tôt, car ils touchent directement la conformité
+          a11y et la cohérence UI.
+        </p>
+
+        <h3>Composants et comportements</h3>
+        <p>
+          Le troisième verrou est la bibliothèque minimale de composants. Un projet échoue rarement faute d’écrans&nbsp;;
+          il échoue parce que les composants interactifs sont incohérents (focus absent, menu mobile impraticable au
+          clavier, champs sans labels clairs, erreurs de formulaire invisibles). Le designer fournit les variantes et les
+          états, et le dev fixe l’implémentation accessible (éléments natifs quand possible, activation clavier, ordre de
+          tabulation logique, gestion des cas “menu/modale/accordion” si présents).
+        </p>
+        <p>
+          Règle de coordination&nbsp;: pas de composant “inventé” dans le code sans repasser par cette spécification. Si
+          un nouveau besoin apparaît, on l’ajoute au contrat plutôt que de créer un comportement ad hoc.
+        </p>
+
+        <h3>Copie et internationalisation en progressive enhancement</h3>
+        <p>
+          Le quatrième verrou est le contenu, livré dans un format exploitable par le système i18n. Dans ce modèle
+          “progressive enhancement”, le contenu doit exister dans le HTML en langue par défaut afin que le site reste
+          lisible sans JavaScript. Le texte est donc volontairement présent “en dur” dans le document.
+        </p>
+        <p>
+          Le système i18n ne supprime pas ce rendu initial&nbsp;: quand JS est disponible, il applique une autre langue
+          en remplaçant le texte et certains attributs sur des éléments explicitement marqués (par exemple
+          <code>data-i18n</code> pour le texte et une convention équivalente pour <code>aria-label</code>,
+          <code>placeholder</code>, <code>title</code>, <code>alt</code>). Cette discipline rend la couverture
+          vérifiable et limite les oublis, tout en conservant un fallback propre&nbsp;: si une clé manque, l’utilisateur
+          voit la langue par défaut du HTML, jamais une clé brute.
+        </p>
+
+        <div class="callout callout--pass">
+          <strong>Critère clé</strong>
+          Sans JS, la page doit rester complète et lisible. Avec JS, la langue peut changer sans rechargement, le choix
+          persiste, et <code>&lt;html lang="…"&gt;</code> reflète la langue active.
+        </div>
+
+        <h3>Rythme de travail (pour débloquer le parallèle)</h3>
+        <p>
+          Jour 1, l’objectif est d’obtenir un socle stable plutôt qu’un rendu final. Le designer commence par l’architecture
+          (pages/sections/titres) et les tokens. En parallèle, le dev met en place le squelette HTML sémantique, les styles
+          de base branchés sur tokens, la navigation clavier (dont le focus visible et la skip-link), et le module i18n
+          (données + logique, deux scripts). Dès que les composants noyau sont définis, le dev les implémente avec leurs
+          états et comportements, pendant que le designer finalise les écrans.
+        </p>
+        <p>
+          Jour 2, on itère sur la qualité (contrastes, zoom 200%, absence de scroll horizontal, optimisation des images,
+          audits WAVE/axe, scores Lighthouse). Plus ces contrôles arrivent tôt, moins ils coûtent.
+        </p>
+
+        <h3>Responsabilités et critères d’acceptation</h3>
+        <p>
+          Le designer est responsable de la cohérence visuelle, des tokens, de la lisibilité, des états, et de l’impact
+          multi-langues (longueurs de labels, débordements). Le dev est responsable de la structure HTML, de l’a11y clavier
+          et ARIA, de la performance (images, scripts, CLS), et du mécanisme i18n. Les deux partagent la responsabilité du
+          focus visible et des contrastes, ainsi que la prévention des régressions.
+        </p>
+        <p>
+          Le contrat est “accepté” quand le squelette respecte la hiérarchie des titres, que les tokens sont en place et
+          réellement utilisés, que les composants noyau sont navigables au clavier avec un focus visible, et que l’i18n
+          fonctionne via deux scripts avec fallback sur la langue par défaut du HTML.
+        </p>
+
+        <a href="#main" class="top-link">↑ haut</a>
+      </section>
     </main>
   </div>
 </body>
