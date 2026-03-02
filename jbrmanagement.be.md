@@ -1,3 +1,4 @@
+# hackathon-2025-26 — jbrmanagement.be
 ## Contexte du site actuel
 
 JBR Management est le site “vitrine institutionnelle” de Jean-Pierre Lannoy : il sert à asseoir une crédibilité professionnelle (parcours, fonctions, réseaux), à présenter des services (gestion/syndic, formations, conseil), et à centraliser des informations de contact. Dans la trajectoire récente, ce site doit surtout jouer un rôle de “porte d’entrée” vers le dernier grand chantier structurant de Jean-Pierre Lannoy : Copro Academy, centre de formation spécialisé copropriété, avec catalogue, contenus éditoriaux et logique d’inscription/vente en ligne.
