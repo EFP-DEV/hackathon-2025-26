@@ -108,7 +108,7 @@ Format recommandé : 5 à 7 cartes, chacune avec **Pourquoi / Pour qui / Ce que 
 * Pour qui : équipes API et clients mobiles/contraints (IoT, edge, réseaux lents) qui veulent un format prédictible, peu profond, et facilement validable. Contexte typique : beaucoup de lecture “simple” et, ponctuellement, besoin de navigation/permissions/transitions — sans devoir tout décoder à chaque réponse.
 * Ce que c’est : un format JSON où `_` est le signifiant de la connotation : soit une URI vers une hyperdoc (mode data-only), soit une table de liens/transitions (mode hyper-only), soit un document combiné. Les collections sont des buckets indexés par IDs, et les relations sont des références directes `["collection", id…]` traversables en temps constant. La grammaire est outillée par des schémas JSON-Schema, des routines de détection et de résolution, et un media type `application/jdad+json`.
 * Statut : spécification avancée (schémas, exemples, ébauche de client, évaluation de perf) ; draft sérieux, prêt à être consolidé en outillage (validateurs, CI, générateurs) si adopté.
-* Étymologie : triple lecture. (1) Acronyme : “JSON Data And Directions”. (2) Jeu “JSON / dad” : la discipline posée sur JSON, pour le rendre lisible, stable, validable. (3) Jeu “dad / son” : “data” comme parent (ce qui demeure), “directions” comme enfant (ce qui se propose) ; liés, mais non confondus.
+* Étymologie : triple lecture. (1) Acronyme : “JSON Data And Directions”. (2) Jeu “dad / son” : “data” comme parent (ce qui demeure), “directions” comme enfant (ce qui se propose) ; liés, mais non confondus.
 
 #### KORAL
 
