@@ -1,166 +1,465 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hackathon Projects</title>
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: "Inter", Arial, sans-serif; background: #f0f2f5; padding: 40px 20px; }
-.container { max-width: 1200px; margin: 0 auto; }
-h1 { color: #005BBB; margin-bottom: 12px; font-size: 32px; }
-.intro { color: #555; margin-bottom: 40px; max-width: 700px; line-height: 1.6; }
-.projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 28px; }
-.project { background: white; border-radius: 10px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
-.project h2 { font-size: 22px; color: #005BBB; margin-bottom: 4px; }
-.url { font-size: 13px; color: #003F7F; margin-bottom: 20px; font-family: monospace; }
-.section-title { font-weight: 700; color: #005BBB; font-size: 12px; text-transform: uppercase; margin: 20px 0 8px; letter-spacing: 0.5px; }
-.block { font-size: 14px; line-height: 1.6; color: #444; }
-.tags { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 6px; }
-.tag { background: #e8f0f8; color: #005BBB; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hackathon Projects</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Inter", Arial, sans-serif; background: #f0f2f5; padding: 40px 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    h1 { color: #005BBB; margin-bottom: 12px; font-size: 32px; }
+    .intro { color: #555; margin-bottom: 40px; max-width: 700px; line-height: 1.6; }
+
+    .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 28px; }
+
+    .project { background: #fff; border-radius: 10px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+    .project h2 { font-size: 22px; color: #005BBB; margin-bottom: 10px; }
+
+    /* Meta badges (missing in your original CSS) */
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #003F7F;
+      background: #e8f0f8;
+      padding: 6px 10px;
+      border-radius: 6px;
+      line-height: 1.2;
+    }
+    .badge a { color: inherit; text-decoration: none; font-weight: 700; }
+    .badge a:hover { text-decoration: underline; }
+
+    .section-title {
+      font-weight: 700;
+      color: #005BBB;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin: 18px 0 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .block { font-size: 14px; line-height: 1.6; color: #444; }
+
+    /* Lists were unstyled (no padding), so they looked broken */
+    .block ul { margin: 8px 0 0; padding-left: 18px; }
+    .block li { margin: 6px 0; }
+
+    details { margin-top: 14px; }
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: #005BBB;
+      list-style: none;
+      user-select: none;
+      padding: 8px 0;
+    }
+    summary::-webkit-details-marker { display: none; }
+    details[open] summary { margin-bottom: 6px; }
+    details .block { padding-top: 4px; }
+
+    .tags { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { background: #e8f0f8; color: #005BBB; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+
+    /* Optional: small-screen padding */
+    @media (max-width: 420px) {
+      body { padding: 24px 14px; }
+      .project { padding: 22px; }
+      .projects { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
+
 <body>
-<div class="container">
-<h1>Hackathon Projects</h1>
-<p class="intro">Une collection de projets web variés : sites associatifs, portfolios d'artistes, outils professionnels et plateformes e-commerce. Chaque projet combine design réfléchi et développement pragmatique.</p>
+  <div class="container">
+    <h1>Hackathon Projects</h1>
+    <p class="intro">
+      Une collection de projets web variés : sites associatifs, portfolios d'artistes, outils professionnels et plateformes e-commerce.
+      Chaque projet combine design réfléchi et développement pragmatique.
+    </p>
 
-<div class="projects">
+    <div class="projects">
+      <!-- Spokenword -->
+      <div class="project">
+        <h2>Dans! Dichter! Dans!</h2>
+        <div class="meta">
+          <span class="badge">Site: <a href="https://www.spokenword.be/" target="_blank" rel="noopener">spokenword.be</a></span>
+          <span class="badge">Brief: <a href="./briefs/spokenword.be.md">spokenword.be.md</a></span>
+        </div>
 
-<div class="project">
-    <h2>Dans! Dichter! Dans!</h2>
-    <div class="url">spokenword.be</div>
-    <div class="section-title">Pitch</div>
-    <div class="block">Événement littéraire et musical belge réunissant poètes, musiciens et performeurs autour de créations originales. Le site doit capturer l'énergie scénique de ces soirées : la spontanéité des performances, la puissance des voix, l'émotion brute et les dynamiques collectives qui émergent entre artistes et public. C'est un espace de célébration de la parole vivante, du spoken word à la poésie chantée.</div>
-    <div class="section-title">Design</div>
-    <div class="block">Identité visuelle poétique et expressive avec des typographies contrastées, parfois manuscrites. Chaque page artiste présente un portrait, un poème signature et un extrait audio. L'ambiance générale évoque la scène : couleurs saturées sur fonds sombres, éclairages dramatiques suggérés. L'organisation du contenu s'inspire des programmes de festival avec une navigation par date, artiste ou genre.</div>
-    <div class="section-title">Dev</div>
-    <div class="block">Lecteur audio HTML5 minimaliste avec contrôles personnalisés. Système de templates pour générer les pages artistes de manière cohérente. Animations légères au scroll (fade-in progressif) pour accompagner la découverte sans alourdir l'expérience.</div>
-    <div class="tags"><span class="tag">Audio HTML5</span><span class="tag">Poésie</span><span class="tag">Festival</span><span class="tag">Bilingue</span></div>
-</div>
+        <div class="section-title">Pitch</div>
+        <div class="block">
+          Plateforme d’événements spoken word (poésie, musique, performances). Objectif hackathon : rendre le site plus cohérent et plus simple à maintenir, avec des gabarits réutilisables (événements, médias, archives).
+        </div>
 
-<div class="project">
-    <h2>LaReponse.org</h2>
-    <div class="url">lareponse.org</div>
-    <div class="section-title">Pitch</div>
-    <div class="block">Site professionnel personnel qui synthétise plusieurs domaines d'expertise : philosophie, pédagogie, technologie et art. La vocation est sociale et humaniste : transmettre des savoirs, enseigner avec clarté, accompagner des projets et créer des systèmes accessibles et intelligibles pour tous. Le site fonctionne comme un manifeste vivant et une vitrine de projets réalisés.</div>
-    <div class="section-title">Design</div>
-    <div class="block">Micro design system cohérent définissant couleurs, typographies et composants réutilisables. Les projets sont présentés dans des blocs modulaires avec image, description et liens. La mise en page adopte un format manifeste en long scroll, permettant une lecture continue et immersive. Style minimaliste avec lignes nettes et contraste élevé pour une lisibilité optimale.</div>
-    <div class="section-title">Dev</div>
-    <div class="block">Système de filtrage des projets en JavaScript pur avec catégories multiples. Pages construites de manière modulaire via templates HTML alimentés par données JSON. Navigation ancrée avec scroll fluide entre les sections. Architecture légère, sans dépendances externes.</div>
-    <div class="tags"><span class="tag">Portfolio</span><span class="tag">Design system</span><span class="tag">JSON data</span><span class="tag">Manifeste</span></div>
-</div>
+        <div class="section-title">MVP (3 jours)</div>
+        <div class="block">
+          <ul>
+            <li>Cohérence globale : header/footer cohérents (logo + newsletter + réseaux sociaux visibles partout).</li>
+            <li>Nouveau gabarit “Événement” (pré-événement sans line-up + version avec line-up).</li>
+            <li>Homepage “conditionnelle” : mode événement à venir / mode hors événement.</li>
+            <li>Pages médias (aftermovies/teasers/testimonials) : structure claire et ajout simple.</li>
+          </ul>
+        </div>
 
-<div class="project">
-    <h2>Cinergie.be</h2>
-    <div class="url">cinergie.be</div>
-    <div class="section-title">Pitch</div>
-    <div class="block">Refonte de la page d'accueil du site de critique cinématographique Cinergie, basée sur un concept fort : 24 images par minute (et non par seconde). Cette lenteur volontaire reflète l'approche analytique du travail critique — prendre le temps de regarder, de comprendre, de décortiquer chaque image. Le site devient une expérience de visionnage ralenti, invitant à la contemplation.</div>
-    <div class="section-title">Design</div>
-    <div class="block">Interface inspirée de la pellicule cinématographique : bandeau film-strip horizontal présentant des photogrammes extraits des films critiqués. Texture grain de pellicule et perforations latérales évoquant le 35mm. Typographie style sous-titres de cinéma. Cartes éditoriales élégantes pour les articles, avec mise en page magazine haut de gamme.</div>
-    <div class="section-title">Dev</div>
-    <div class="block">Carrousel automatique ultra-lent (une image toutes les 2.5 secondes) réalisé en CSS animations avec fallback JS. Pause automatique au survol pour permettre la lecture des informations. Chaque photogramme est cliquable et mène directement à l'article correspondant. Performance optimisée pour le chargement des images.</div>
-    <div class="tags"><span class="tag">Cinéma</span><span class="tag">Carrousel CSS</span><span class="tag">Editorial</span><span class="tag">Concept fort</span></div>
-</div>
+        <details>
+          <summary>Contraintes &amp; Bonus</summary>
+          <div class="block">
+            <ul>
+              <li>Typo et hiérarchie strictes (titres vs texte) + cohérence de palette.</li>
+              <li>Bonus : “Past editions”, “Alle deelnemers”, page “Interview/Gesprekken” structurée.</li>
+            </ul>
+          </div>
+        </details>
 
-<div class="project">
-    <h2>Dogitech.be</h2>
-    <div class="url">dogitech.be</div>
-    <div class="section-title">Pitch</div>
-    <div class="block">Site vitrine pour une entreprise locale de plomberie, électricité et petits travaux. DogiTech : interventions propres, solutions simples et durables, et explications claires avant d’agir. Le positionnement assume une approche pragmatique du dépannage et de l’installation — pas de promesses creuses, un devis transparent, le respect des normes de sécurité, et un travail soigné au prix juste.</div>
-    <div class="section-title">Design</div>
-    <div class="block">Esthétique atelier inspirée du travail manuel : textures bois et métal, outils suggérés, ambiance garage créatif. Typographie robuste et lisible, sans serif. Sections avant/après montrant des transformations concrètes de sites. Palette de couleurs industrielles (gris, orange, noir) évoquant la fiabilité et le savoir-faire.</div>
-    <div class="section-title">Dev</div>
-    <div class="block">Outil interactif "cheap / fast / good" illustrant le triangle des contraintes projet — l'utilisateur peut sélectionner deux options et voir laquelle est sacrifiée. Formulaire de contact ergonomique avec validation temps réel. Pages services épurées avec tarification transparente et exemples concrets.</div>
-    <div class="tags"><span class="tag">Artisan</span><span class="tag">Simulateur</span><span class="tag">Formulaire</span><span class="tag">Transparence</span></div>
-</div>
+        <div class="tags">
+          <span class="tag">Templates</span><span class="tag">Événements</span><span class="tag">Médias</span><span class="tag">Cohérence UI</span>
+        </div>
+      </div>
 
-<div class="project">
-    <h2>Le Lion Pacifique</h2>
-    <div class="url">URL à définir</div>
-    <div class="section-title">Pitch</div>
-    <div class="block">Galerie en ligne pour un artiste de rue au parcours singulier. Ses œuvres sont vibrantes, colorées, profondément humaines. Il vit en marge des circuits traditionnels mais enseigne la peinture aux enfants des quartiers et crée avec une générosité rare. Le site doit honorer cette démarche : montrer l'art sans le commercialiser de manière agressive, raconter l'histoire sans la romancer.</div>
-    <div class="section-title">Design</div>
-    <div class="block">Esthétique carnet d'artiste avec pages qui semblent dessinées, annotées, vivantes. La palette de couleurs est extraite directement de ses peintures : jaunes solaires, bleus profonds, rouges chaleureux. Le layout reste épuré pour laisser les œuvres respirer — grands espaces blancs, une œuvre à la fois quand possible.</div>
-    <div class="section-title">Dev</div>
-    <div class="block">Galerie responsive avec grille adaptative selon la taille d'écran. Fiches œuvres détaillées incluant dimensions, technique, histoire de création et disponibilité. Formulaire de commande personnalisée permettant de décrire un projet (fresque, portrait, atelier) avec upload de photos de référence.</div>
-    <div class="tags"><span class="tag">Galerie</span><span class="tag">Art de rue</span><span class="tag">Commandes</span><span class="tag">Responsive</span></div>
-</div>
+      <!-- LaReponse -->
+      <div class="project">
+        <h2>LaReponse.org</h2>
+        <div class="meta">
+          <span class="badge">Site: <a href="https://lareponse.org/" target="_blank" rel="noopener">lareponse.org</a></span>
+          <span class="badge">Brief: <a href="./briefs/lareponse.org.md">lareponse.org.md</a></span>
+        </div>
 
-<div class="project">
-    <h2>Doctor Louis Klus</h2>
-    <div class="url">URL à définir</div>
-    <div class="section-title">Pitch</div>
-    <div class="block">Site pour un artisan multi-services qui a fait de la polyvalence sa spécialité. Doctor Louis Klus intervient là où les autres refusent : petits travaux, dépannages urgents, missions inclassables. Sa philosophie repose sur l'efficacité, l'intelligence du terrain et l'honnêteté absolue. Pas de devis gonflés, pas de travaux inventés — juste le nécessaire, bien fait.</div>
-    <div class="section-title">Design</div>
-    <div class="block">Esthétique flyer bricolé des années 90, assumant un côté "fait maison" authentique. Palette primaire bleu/rouge/noir rappelant les prospectus de dépannage. Les listes de services sont ultra-visibles, presque criées. Pas de stock photos corporate — photos réelles de chantiers et interventions.</div>
-    <div class="section-title">Dev</div>
-    <div class="block">Formulaire de demande express en trois étapes : description du problème, upload photo optionnel, coordonnées. Génération automatique d'un résumé de demande envoyé par email. Compression d'image côté client en JavaScript pour réduire le poids des uploads sans perte visible de qualité.</div>
-    <div class="tags"><span class="tag">Multi-services</span><span class="tag">Upload image</span><span class="tag">Compression JS</span><span class="tag">Rétro</span></div>
-</div>
+        <div class="section-title">Pitch</div>
+        <div class="block">
+          Site professionnel “double lecture” : une entrée business très rapide (20–40s) + une lecture plus profonde (principes / méthode). L’objectif est d’être clair, lisible, léger, et cohérent.
+        </div>
 
-<div class="project">
-    <h2>BadHat.dev</h2>
-    <div class="url">badhat.dev</div>
-    <div class="section-title">Pitch</div>
-    <div class="block">Site-manifeste dédié au moteur BadHat, un framework développé avec une philosophie radicale : zéro superflu, performance maximale, vérité brute. L'objectif est de documenter sans décorer, d'expliquer sans embellir. Le site lui-même incarne ces principes : pas d'ornement inutile, juste l'information nécessaire présentée de manière directe et efficace.</div>
-    <div class="section-title">Design</div>
-    <div class="block">Esthétique brutaliste stricte en noir et blanc uniquement. Le contenu est organisé comme un manifeste numéroté (BADHAT/001, BADHAT/002...) évoquant une documentation technique ou un texte fondateur. Typographie monospace exclusive renforçant l'aspect code et terminal. Blocs de documentation structurés avec hiérarchie visuelle claire sans fioritures.</div>
-    <div class="section-title">Dev</div>
-    <div class="block">Navigation au clavier complète avec raccourcis (flèches ↑ ↓ pour naviguer entre sections). Génération automatique d'un sommaire interactif à partir des titres. Scroll fluide natif via CSS scroll-behavior. Code source minimal et lisible, servant lui-même d'exemple des principes BadHat.</div>
-    <div class="tags"><span class="tag">Brutaliste</span><span class="tag">Documentation</span><span class="tag">Clavier nav</span><span class="tag">Monospace</span></div>
-</div>
+        <div class="section-title">MVP (3 jours)</div>
+        <div class="block">
+          <ul>
+            <li>Structure one-page (ou multi-pages simple) avec navigation claire.</li>
+            <li>Sections indispensables : Offre, Méthode, Principes (index minimal), Contact.</li>
+            <li>Micro design system (typographie, espacements, composants réutilisables).</li>
+            <li>Contenu géré proprement (HTML + données/Markdown, sans dépendances lourdes).</li>
+          </ul>
+        </div>
 
-<div class="project">
-    <h2>JBR Management</h2>
-    <div class="url">jbrmanagement.be</div>
-    <div class="section-title">Pitch</div>
-    <div class="block">Site professionnel de Jean-Pierre Lannoy, expert reconnu de la copropriété en Belgique. Le site présente son parcours de plusieurs décennies, ses nombreux ouvrages de référence, ses ressources pédagogiques, ses formations et ses interventions en conférence. C'est à la fois un CV augmenté, une bibliothèque de ressources et une plateforme de contact professionnel.</div>
-    <div class="section-title">Design</div>
-    <div class="block">Style institutionnel sobre et élégant avec palette bleu marine et gris. Timeline biographique interactive retraçant les étapes clés de la carrière. Cartes publications présentant couvertures, résumés et liens d'achat des ouvrages. Mise en page inspirée des magazines professionnels avec colonnes et encadrés.</div>
-    <div class="section-title">Dev</div>
-    <div class="block">Bibliothèque de ressources filtrable par type (article, livre, vidéo), par thème et par année. Templates uniformisés pour les pages ressources garantissant cohérence et maintenabilité. Navigation claire avec structure hiérarchique simple. Optimisation SEO pour les recherches liées à la copropriété.</div>
-    <div class="tags"><span class="tag">Institutionnel</span><span class="tag">Bibliothèque</span><span class="tag">Timeline</span><span class="tag">Expert</span></div>
-</div>
+        <details>
+          <summary>Contraintes &amp; Bonus</summary>
+          <div class="block">
+            <ul>
+              <li>Éviter le jargon : lisible et actionnable en lecture rapide.</li>
+              <li>Bonus : “Preuves / outputs” (mini cas), glossaire, pages “Principes” détaillées.</li>
+            </ul>
+          </div>
+        </details>
 
-<div class="project">
-    <h2>Cléa Vincent</h2>
-    <div class="url">URL à définir</div>
-    <div class="section-title">Pitch</div>
-    <div class="block">Site officiel de Cléa Vincent, figure lumineuse de la pop française contemporaine. Son univers musical mêle électro-pop dansante, textes poétiques et esthétique rétro assumée. Les albums Tropi-Cléa et Nuits sans sommeil ont défini un style reconnaissable : pastel, rêveur, solaire même dans la mélancolie. Le site doit être une extension de cet univers.</div>
-    <div class="section-title">Design</div>
-    <div class="block">Palette pastel rétro inspirée des années 80/90 : roses poudrés, bleus lavande, jaunes doux. Typographies pop aux formes arrondies et friendly. Page artiste immersive avec portrait grand format, biographie narrative et accès aux clips. Iconographie cohérente avec les visuels des albums, notamment les motifs tropicaux et les couchers de soleil stylisés.</div>
-    <div class="section-title">Dev</div>
-    <div class="block">Discographie interactive présentée en cartes cliquables ouvrant des popups détaillés avec tracklist, crédits et liens streaming. Intégration propre des clips YouTube via API avec lazy-loading. Sections animées subtilement au scroll (fade, slide latéral) pour accompagner la navigation sans distraire.</div>
-    <div class="tags"><span class="tag">Artiste</span><span class="tag">Discographie</span><span class="tag">YouTube API</span><span class="tag">Pop française</span></div>
-</div>
+        <div class="tags">
+          <span class="tag">Manifeste</span><span class="tag">Lecture rapide</span><span class="tag">Design system</span><span class="tag">Sans dépendances</span>
+        </div>
+      </div>
 
+      <!-- Cinergie -->
+      <div class="project">
+        <h2>Cinergie.be</h2>
+        <div class="meta">
+          <span class="badge">Site: <a href="https://www.cinergie.be/" target="_blank" rel="noopener">cinergie.be</a></span>
+          <span class="badge">Brief: <a href="./briefs/cinergie.be.md">cinergie.be.md</a></span>
+        </div>
 
+        <div class="section-title">Pitch</div>
+        <div class="block">
+          Amélioration mobile-first d’un site existant, avec une contrainte forte : ne pas déclencher une refonte globale. On vise des gains UX ciblés (agenda, article, boutique/panier, pages statiques).
+        </div>
 
-    <div class="project">
-    <h2>ASBL ApiWilder</h2>
-    <div class="url">URL à définir</div>
-    <div class="section-title">Pitch</div>
-    <div class="block">Page de dons pour un rucher collectif porté par une ASBL. Objectif : rendre le soutien simple et motivant, montrer l'impact concret des contributions, et donner envie de rejoindre une dynamique locale autour des pollinisateurs. Le site doit inspirer confiance et transparence : pourquoi on récolte, à quoi sert l'argent, où en est la collecte.</div>
-    <div class="section-title">Design</div>
-    <div class="block">Ambiance nature, artisanale et pédagogique : photos du rucher, portraits des bénévoles, textures douces (papier, bois), iconographie simple (abeille, fleurs, calendrier des actions). Mise en page “Kickstarter-like” : barre de progression visible, paliers de financement, cartes projets avec médias (photos/vidéos) et objectifs clairs. Hiérarchie très lisible, mobile-first.</div>
-    <div class="section-title">Dev</div>
-    <div class="block">Module de dons avec affichage du total récolté et d'une jauge de progression. Pages projets en templates (liste + détail) avec galerie photo/vidéo. Mini backoffice (ou fichier JSON administrable) pour mettre à jour les projets, les paliers et les montants; affichage public d'un historique simplifié (derniers dons anonymisés si nécessaire).</div>
-    <div class="tags"><span class="tag">Dons</span><span class="tag">Jauge</span><span class="tag">Projets</span><span class="tag">Mobile-first</span></div>
-</div>
+        <div class="section-title">MVP (3 jours)</div>
+        <div class="block">
+          <ul>
+            <li>Agenda : grille avec images + navigation mois précédent/suivant (sans FullCalendar).</li>
+            <li>Article “single” : refonte du gabarit lecture mobile (propre, sémantique, maintenable).</li>
+            <li>Boutique/panier : feedback “ajout au panier” visible + page confirmation + email de confirmation (si dans le scope).</li>
+          </ul>
+        </div>
 
-<div class="project">
-    <h2>Be Chill</h2>
-    <div class="url">URL à définir</div>
-    <div class="section-title">Pitch</div>
-    <div class="block">Site vitrine mobile-first pour un salon esthétique à Uccle, actuellement présent via Instagram et Salonkee. Le besoin : une page claire et rassurante qui explique les services, montre l'ambiance, facilite la prise de rendez-vous et centralise les infos pratiques. Le site doit être rapide, simple, et orienté conversion.</div>
-    <div class="section-title">Design</div>
-    <div class="block">Identité “calme premium” : beaucoup d'air, typographie élégante, visuels pleine largeur, palette douce (neutres chauds ou pastels). Parcours mobile très direct : hero + CTA “Réserver”, sections courtes (services, tarifs indicatifs, avis, galerie, contact). Intégration esthétique des contenus Instagram (sans surcharger), et repères pratiques (adresse, horaires, accès).</div>
-    <div class="section-title">Dev</div>
-    <div class="block">Mobile-first strict, performance (lazy-loading images, CSS léger). Boutons CTA persistants (Réserver / Appeler / Itinéraire). Intégration de la réservation via lien Salonkee (ou embed si possible) et mise en avant des posts Instagram via widget léger. Formulaire de contact minimal avec validation basique et anti-spam simple.</div>
-    <div class="tags"><span class="tag">Mobile-first</span><span class="tag">Vitrine</span><span class="tag">Salonkee</span><span class="tag">Instagram</span></div>
-</div>
-</div>
-</div>
+        <details>
+          <summary>Contraintes &amp; Bonus</summary>
+          <div class="block">
+            <ul>
+              <li>Respecter la charte existante + impact structurel minimal (modifs localisées).</li>
+              <li>Bonus : structuration “Prix Cinergie” et design “Notre histoire”.</li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="tags">
+          <span class="tag">Mobile-first</span><span class="tag">Refonte gabarit</span><span class="tag">Agenda</span><span class="tag">E-commerce UX</span>
+        </div>
+      </div>
+
+      <!-- Dogitech -->
+      <div class="project">
+        <h2>Dogitech.be</h2>
+        <div class="meta">
+          <span class="badge">Site: <span title="URL de démo à définir">dogitech.be</span></span>
+          <span class="badge">Brief: <a href="./briefs/dogitech.be.md">dogitech.be.md</a></span>
+        </div>
+
+        <div class="section-title">Pitch</div>
+        <div class="block">
+          Site vitrine artisan (plomberie/électricité/petits travaux). L’enjeu : conversion et confiance sur mobile (souvent en contexte d’urgence), avec un ton direct et des preuves.
+        </div>
+
+        <div class="section-title">MVP (3 jours)</div>
+        <div class="block">
+          <ul>
+            <li>Homepage mobile-first : accès immédiat “Urgence / Dépannage” + CTA appeler/devis.</li>
+            <li>Gabarit “Service” réutilisable + 3 pages (plomberie, électricité, petits travaux).</li>
+            <li>Contact : formulaire court, validation, anti-spam simple, confirmation.</li>
+            <li>Transparence tarifaire (page ou sections) + “preuves” (réalisations/avant-après si dispo).</li>
+          </ul>
+        </div>
+
+        <details>
+          <summary>Contraintes &amp; Bonus</summary>
+          <div class="block">
+            <ul>
+              <li>Microcopy court, utile, sans marketing.</li>
+              <li>Bonus : module interactif “cheap / fast / good”.</li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="tags">
+          <span class="tag">Artisan</span><span class="tag">Conversion</span><span class="tag">Mobile-first</span><span class="tag">Formulaire</span>
+        </div>
+      </div>
+
+      <!-- Le Lion Pacifique -->
+      <div class="project">
+        <h2>Le Lion Pacifique</h2>
+        <div class="meta">
+          <span class="badge">Réf: <a href="https://www.instagram.com/alpha_lion_pacifique/" target="_blank" rel="noopener">Instagram</a></span>
+          <span class="badge">Brief: <a href="./briefs/lelionpacifique.md">lelionpacifique.md</a></span>
+          <span class="badge">URL site: <span title="à définir">TBD</span></span>
+        </div>
+
+        <div class="section-title">Pitch</div>
+        <div class="block">
+          Galerie en ligne “œuvre d’abord” pour un artiste de rue. Priorité : images, respiration, crédibilité, récit factuel. Le site sert de vitrine culturelle et de point de contact (pas un e-commerce agressif).
+        </div>
+
+        <div class="section-title">MVP (3 jours)</div>
+        <div class="block">
+          <ul>
+            <li>Accueil : une œuvre forte + accès Galerie + accès Demande de projet.</li>
+            <li>Galerie responsive (grille simple, titres robustes).</li>
+            <li>Fiche œuvre : détails + disponibilité + CTA discret.</li>
+            <li>Demande de projet : formulaire clair (upload optionnel) + confirmation.</li>
+          </ul>
+        </div>
+
+        <details>
+          <summary>Contraintes &amp; Bonus</summary>
+          <div class="block">
+            <ul>
+              <li>Accessibilité + optimisation images (mobile-first strict).</li>
+              <li>Bonus : page Parcours structurée (version courte + repères + texte long attribué).</li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="tags">
+          <span class="tag">Galerie</span><span class="tag">Art</span><span class="tag">Mobile-first</span><span class="tag">Formulaire</span>
+        </div>
+      </div>
+
+      <!-- BadHat -->
+      <div class="project">
+        <h2>BadHat.dev</h2>
+        <div class="meta">
+          <span class="badge">Site: <a href="https://badhat.dev/" target="_blank" rel="noopener">badhat.dev</a></span>
+          <span class="badge">Brief: <a href="./briefs/badhat.dev.md">badhat.dev.md</a></span>
+        </div>
+
+        <div class="section-title">Pitch</div>
+        <div class="block">
+          Site de documentation (pas marketing) pour un micro-toolkit PHP. Le site doit incarner la philosophie : sobriété, performance, lisibilité, zéro dépendance externe, et IA très prévisible.
+        </div>
+
+        <div class="section-title">MVP (3 jours)</div>
+        <div class="block">
+          <ul>
+            <li>Landing claire + liens directs vers docs + quickstart.</li>
+            <li>Index /docs + 2–4 pages modules (format homogène).</li>
+            <li>Navigation solide (URLs réelles, ancres, repères).</li>
+            <li>Performance/accessibilité comme contraintes de base.</li>
+          </ul>
+        </div>
+
+        <details>
+          <summary>Contraintes &amp; Bonus</summary>
+          <div class="block">
+            <ul>
+              <li>Pas de fonts/CDN/analytics externes. Lisible sans JS.</li>
+              <li>Bonus : dark mode, copie de code, pages restantes + /examples.</li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="tags">
+          <span class="tag">Docs</span><span class="tag">Statique</span><span class="tag">Perf</span><span class="tag">Accessibilité</span>
+        </div>
+      </div>
+
+      <!-- JBR -->
+      <div class="project">
+        <h2>JBR Management</h2>
+        <div class="meta">
+          <span class="badge">Domaine: <a href="https://jbrmanagement.be/" target="_blank" rel="noopener">jbrmanagement.be</a></span>
+          <span class="badge">Prototype: <a href="https://amstram-creation.github.io/jbrmanagement.be/" target="_blank" rel="noopener">GitHub Pages</a></span>
+          <span class="badge">Brief: <a href="./briefs/jbrmanagement.be.md">jbrmanagement.be.md</a></span>
+        </div>
+
+        <div class="section-title">Pitch</div>
+        <div class="block">
+          Site institutionnel de référence (expert copropriété), servant aussi de porte d’entrée vers Copro Academy. Objectif : crédibilité, clarté, et maillage vers la plateforme de formation.
+        </div>
+
+        <div class="section-title">MVP (3 jours)</div>
+        <div class="block">
+          <ul>
+            <li>Structure claire (vitrine pro + CTA vers Copro Academy).</li>
+            <li>Sections : profil/parcours, services, ressources (format simple), contact.</li>
+            <li>Navigation + contenus scannables (mobile-first).</li>
+          </ul>
+        </div>
+
+        <details>
+          <summary>Contraintes &amp; Bonus</summary>
+          <div class="block">
+            <ul>
+              <li>Ton institutionnel sobre, SEO de base, liens propres.</li>
+              <li>Bonus : timeline, bibliothèque filtrable (si données disponibles), page publications.</li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="tags">
+          <span class="tag">Institutionnel</span><span class="tag">Autorité</span><span class="tag">Ressources</span><span class="tag">Maillage</span>
+        </div>
+      </div>
+
+      <!-- Cléa Vincent -->
+      <div class="project">
+        <h2>Cléa Vincent</h2>
+        <div class="meta">
+          <span class="badge">URL site: <span title="à définir">TBD</span></span>
+          <span class="badge">Brief: <a href="./briefs/cleavincent.fr.md">cleavincent.fr.md</a></span>
+        </div>
+
+        <div class="section-title">Pitch</div>
+        <div class="block">
+          Site artiste (vitrine officielle) : présenter l’univers, donner accès à la musique/vidéos, annoncer le live, et fournir un point de contact (booking/presse). Le brief fournit une base éditoriale structurée.
+        </div>
+
+        <div class="section-title">MVP (3 jours)</div>
+        <div class="block">
+          <ul>
+            <li>Accueil immersif + accès direct Musique / Clips / Live / Contact.</li>
+            <li>Discographie simple (cards) + liens streaming.</li>
+            <li>Section Live (dates) + Contact (booking/presse).</li>
+          </ul>
+        </div>
+
+        <details>
+          <summary>Contraintes &amp; Bonus</summary>
+          <div class="block">
+            <ul>
+              <li>Mobile-first, embeds légers (lazy-load), performance.</li>
+              <li>Bonus : presse/EPK téléchargeable, galerie photos, animations très légères.</li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="tags">
+          <span class="tag">Artiste</span><span class="tag">Discographie</span><span class="tag">Médias</span><span class="tag">Booking</span>
+        </div>
+      </div>
+
+      <!-- ApiWilder -->
+      <div class="project">
+        <h2>ASBL ApiWilder</h2>
+        <div class="meta">
+          <span class="badge">URL site: <span title="à définir">TBD</span></span>
+          <span class="badge">Brief: <a href="./briefs/apiwilder.md">apiwilder.md</a></span>
+        </div>
+
+        <div class="section-title">Pitch</div>
+        <div class="block">
+          Page de dons pour un rucher collectif. Priorité : confiance, transparence, et parcours de don simple. Style “Kickstarter-like” : jauge, paliers, projets, historique simplifié.
+        </div>
+
+        <div class="section-title">MVP (3 jours)</div>
+        <div class="block">
+          <ul>
+            <li>Landing orientée don : pitch + CTA + jauge + paliers.</li>
+            <li>Projets : liste + page détail (template).</li>
+            <li>Transparence : à quoi sert l’argent + où en est la collecte + repères.</li>
+            <li>Données pilotées par une source unique (JSON ou mini backoffice léger).</li>
+          </ul>
+        </div>
+
+        <details>
+          <summary>Contraintes &amp; Bonus</summary>
+          <div class="block">
+            <ul>
+              <li>Mobile-first strict, réassurance (projet réel, local, sérieux).</li>
+              <li>Bonus : “paiement réel” si faisable, sinon simulation crédible + historique anonymisé.</li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="tags">
+          <span class="tag">Dons</span><span class="tag">Transparence</span><span class="tag">Jauge</span><span class="tag">Projets</span>
+        </div>
+      </div>
+
+      <!-- Be Chill -->
+      <div class="project">
+        <h2>Be Chill</h2>
+        <div class="meta">
+          <span class="badge">URL site: <span title="à définir">TBD</span></span>
+          <span class="badge">Brief: <a href="./briefs/bechill.be.md">bechill.be.md</a></span>
+        </div>
+
+        <div class="section-title">Pitch</div>
+        <div class="block">
+          Landing page mobile-first pour un salon esthétique à Uccle. Objectif : page rapide, rassurante, orientée conversion vers la réservation (Salonkee), avec infos pratiques immédiatement accessibles.
+        </div>
+
+        <div class="section-title">MVP (3 jours)</div>
+        <div class="block">
+          <ul>
+            <li>One-page : hero + CTA “Réserver”, services phares, tarifs indicatifs, avis, galerie, infos pratiques.</li>
+            <li>CTA persistants mobile : Réserver / Appeler / Itinéraire.</li>
+            <li>Performance (images optimisées, peu de JS, lazy-loading).</li>
+          </ul>
+        </div>
+
+        <details>
+          <summary>Contraintes &amp; Bonus</summary>
+          <div class="block">
+            <ul>
+              <li>Intégration Instagram discrète (ou simple lien), éviter widgets lourds.</li>
+              <li>Bonus : formulaire de contact (si back-end), SEO local de base.</li>
+            </ul>
+          </div>
+        </details>
+
+        <div class="tags">
+          <span class="tag">Landing</span><span class="tag">Mobile-first</span><span class="tag">Conversion</span><span class="tag">Performance</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
